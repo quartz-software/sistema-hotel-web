@@ -9,6 +9,10 @@ app.get("/api", (req, res) => {
   res.json({ message: "hola" });
 });
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
 app.listen(port, () => {
   console.log(`app listening in http://localhost:${port}`);
 });
