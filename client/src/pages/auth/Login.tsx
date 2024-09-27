@@ -3,7 +3,7 @@ import Google from "./assets/Google.svg"
 import Facebook from "./assets/Facebook.svg"
 import Twiter from "./assets/twiter.svg"
 
-import {Children, FC} from "react"
+import {FC} from "react"
 
 import "./Login.css"
 const Login = () => {
@@ -13,7 +13,7 @@ const Login = () => {
           <img src={Llamarada} alt="LLamarada" />
           <h2>Inicia Sesion</h2>
           <p>aun no tienes una cuenta?</p>
-          <a href="">Registrate</a>
+          <a href="./Signup">Registrate</a>
           <Input
             textInput={"Usuario"}
             textPlace={"Usuario"}
@@ -43,11 +43,10 @@ const Login = () => {
 
 type Props={textInput:string,textPlace:string}
 
-const Input:FC<Props>=({textInput,textPlace, children})=>{
+const Input:FC<Props>=({textInput,textPlace})=>{
   return(
     <div className="input">
       <p>{textInput}</p>
-      {children}
       <input type="text" placeholder={textPlace}/>
     </div>
   );
@@ -61,7 +60,7 @@ const BotonInicio=()=>{
   )
 }
 
-const Redes=({Red})=>{
+const Redes=({Red}:{Red:string})=>{
   return(
     <div>
       <a href="">
