@@ -2,11 +2,35 @@ import Llamarada from "./assets/LLamarada.svg"
 import Google from "./assets/Google.svg"
 import Facebook from "./assets/Facebook.svg"
 import Twiter from "./assets/twiter.svg"
+import Input from "../common/Input/Input"
+import Button from "../common/Button/Button"
 
-import {FC} from "react"
+import {FC, useState} from "react"
 
 import "./Login.css"
+import Redes from "../common/Redes/Redes"
 const Login = () => {
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+
+  function InicioSecion() {
+
+    console.log(username, password);
+    
+    var url="/api"
+    var cont={
+      method:'POST',
+      body:JSON.stringify({
+        User: username,
+        password:password
+
+      })
+    }
+    fetch(url,cont)
+      .then(respsoe=>respsoe.json())
+      .then(data=>console.log(data))
+      .catch(error=>console.error('Error:',error))
+  }
   return (
     <div className="contenedor">
       <div className="border">
@@ -17,57 +41,34 @@ const Login = () => {
           <Input
             textInput={"Usuario"}
             textPlace={"Usuario"}
-          />
+            setValue={setUsername}
+            inputType="text"
+            />
           <Input
             textInput={"Contraseña"}
             textPlace={"Contraseña"}
+            setValue={setPassword}
+            inputType="Password"
           />
           <a href="">olvidaste tu contraseña?</a>
-          <BotonInicio/>
+
+          <Button text="Iniciar Sesion" fun={InicioSecion}/>
+          
           <p>o <br /> ingresa con</p>
           <div className="RedesSociales">
             <Redes
-              Red={Google}
+            red={Google}
             />
                         <Redes
-              Red={Facebook}
+              red={Facebook}
             />
                         <Redes
-              Red={Twiter}
+              red={Twiter}
             />
           </div>
     </div>
     </div>    
   );
 };
-
-type Props={textInput:string,textPlace:string}
-
-const Input:FC<Props>=({textInput,textPlace})=>{
-  return(
-    <div className="input">
-      <p>{textInput}</p>
-      <input type="text" placeholder={textPlace}/>
-    </div>
-  );
-}
-
-const BotonInicio=()=>{
-  return(
-    <button className="botonInicio">
-      Iniciar Sesion
-    </button>
-  )
-}
-
-const Redes=({Red}:{Red:string})=>{
-  return(
-    <div>
-      <a href="">
-        <img src={Red} alt="Google" />
-      </a>
-    </div>
-  );
-}
 
 export default Login;

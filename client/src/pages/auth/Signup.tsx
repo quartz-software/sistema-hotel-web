@@ -1,52 +1,40 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import Llamarada from "./assets/LLamarada.svg"
+import Input from "../common/Input/input"
+import Button from "../common/Button/Button"
 import "./Signup.css"
 
 
 const Signup = () => {
+  //const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [mail, setMail] = useState("")
   return (
     <div className="contenedor">
       <div className="border">
-          <img src={Llamarada} alt="LLamarada" />
+          <img src={Llamarada} alt="LLamarada"/>
           <h2>Crear Cuenta</h2>
-          <Input
-            textInput={"User"}
-            textPlace={"User"}
-          />
 
           <Input
             textInput={"Mail"}
             textPlace={"Mail"}
+            setValue={setMail}
+            inputType="text"
           />
 
           <Input
             textInput={"Password"}
             textPlace={"Password"}
+            setValue={setPassword}
+            inputType="password"
           />
-          <BotonRegistrar/>
-    </div>
-    </div>
+          <Button
+          text="Registarte"
+          />
+
+          </div>
+  </div>
     
   );
 };
-
-const BotonRegistrar=()=>{
-  return(
-    <button className="botonRegistrar">
-      Registrar
-    </button>
-  )
-}
-
-type Props={textInput:string,textPlace:string}
-
-const Input:FC<Props>=({textInput,textPlace})=>{
-  return(
-    <div className="input">
-      <p>{textInput}</p>
-      <input type="text" placeholder={textPlace}/>
-    </div>
-  );
-}
-
 export default Signup;
