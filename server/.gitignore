@@ -1,2 +1,12 @@
+# carpeta estatica de frontend
+/dist
+
+# la carpeta de módulos de Node.js
 node_modules
-dist
+
+# archivos de logs
+*.log
+
+# archivos de sistema
+.DS_Store
+Thumbs.db
