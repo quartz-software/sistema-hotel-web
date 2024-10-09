@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import Llamarada from "./assets/LLamarada.svg"
-import Input from "../common/Input/input"
+import Input from "../common/Input/Input"
 import Button from "../common/Button/Button"
 import "./Signup.css"
 
@@ -9,8 +9,14 @@ const Signup = () => {
   //const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [mail, setMail] = useState("")
+  const[input,setInput]=useState(false)
+  function enviar(){
+    if(password!="" && mail!=""){
+      
+    }
+  }
   return (
-    <div className="contenedor">
+    <form className="contenedor">
       <div className="border">
           <img src={Llamarada} alt="LLamarada"/>
           <h2>Crear Cuenta</h2>
@@ -30,10 +36,11 @@ const Signup = () => {
           />
           <Button
           text="Registarte"
+          fun={enviar}
           />
 
           </div>
-  </div>
+  </form>
     
   );
 };
