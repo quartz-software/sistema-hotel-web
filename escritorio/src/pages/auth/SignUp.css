@@ -1,0 +1,85 @@
+.contenedor{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.border{
+    border: 0.2rem solid #017DB0 ;
+    border-radius: 0.5rem;
+    width: 30rem;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    justify-content: center;
+    color: #017DB0;
+    
+}
+.border h2{
+    margin: 1px;
+}
+.border img{
+    
+    align-self: center;
+}
+
+.input{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin: 0.01rem;
+}
+.input p{
+    margin:0.2rem;
+    color: black;
+}
+
+
+.input input{
+    width: 100%;
+    height: 2rem;
+    border-radius: 0.3rem;
+    margin-bottom: 1rem;
+    border: 0.1rem solid #017DB0;
+    background-color: transparent;
+    caret-color: #017DB0;
+    color: #017DB0;
+}
+.input input:focus{
+    outline: none;
+}
+
+.botonRegistrar{
+    background-color: #017DB0;
+    border-radius: 0.3rem;
+    border: 0;
+    height: 2rem;
+}
+.botonRegistrar:hover{
+    background-color: #005577;
+    cursor: pointer;
+}
+
+
+
+.inputEror p{
+    margin:0.2rem;
+    color: red;
+}
+
+
+.inputEror input{
+    width: 100%;
+    height: 2rem;
+    border-radius: 0.3rem;
+    margin-bottom: 1rem;
+    border: 0.1rem solid red;
+    background-color: transparent;
+    caret-color: red;
+    color: red;
+}
+.inputEror input:focus{
+    outline: none;
+}
