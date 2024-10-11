@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 
-const Habitacion = sequelize.define(
-  "Habitacion",
+const Room = sequelize.define(
+  "Room",
   {
     id: {
       type: DataTypes.BIGINT,
@@ -10,38 +10,34 @@ const Habitacion = sequelize.define(
       primaryKey: true,
     },
     numeroHabitacion: {
-      type: DataTypes.STRING(10), 
+      type: DataTypes.STRING(10),
       allowNull: false,
     },
     tipo: {
-      type: DataTypes.STRING(50), 
+      type: DataTypes.STRING(50),
       allowNull: false,
     },
     precioPorNoche: {
-      type: DataTypes.DECIMAL(10, 2), 
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
     estado: {
-      type: DataTypes.STRING(20), 
+      type: DataTypes.STRING(20),
       allowNull: false,
     },
     capacidad: {
-      type: DataTypes.INTEGER, 
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     descripcion: {
-      type: DataTypes.TEXT, 
+      type: DataTypes.TEXT,
       allowNull: true,
-    },
-    nivel: {
-      type: DataTypes.STRING(10), 
-      allowNull: false,
     },
   },
   {
-    tableName: "habitaciones", 
-    timestamps: false, 
+    tableName: "rooms",
+    timestamps: false,
   }
 );
 
-export default Habitacion;
+export default Room;
