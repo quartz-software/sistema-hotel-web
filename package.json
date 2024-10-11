@@ -5,9 +5,10 @@
   "scripts": {
     "dev:client": "cd ./client && npm run dev",
     "dev:server": "cd ./server && npm run dev",
+    "install:desktop": "cd ./escritorio && npm install",
     "install:client": "cd ./client && npm install",
     "install:server": "cd ./server && npm install",
-    "install": "npm run install:client && npm run install:server",
+    "install": "npm run install:client && npm run install:server && npm run install:desktop",
     "build:client": "cd ./client && npm run build",
     "build:server": "cd ./server",
     "build": "npm run install && npm run build:client && npm run build:server",
