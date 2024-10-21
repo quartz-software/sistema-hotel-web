@@ -1,83 +1,45 @@
-.contenedor{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.border{
-    border: 0.2rem solid #017DB0 ;
-    border-radius: 0.5rem;
-    width: 30rem;
-    height: max-content;
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    justify-content: center;
-    color: #017DB0;
-    
-}
-.border h2{
-    margin: 1px;
-}
-.border img{
-    width: 15rem;
-    align-self: center;
-}
-.border p{
-    color: black;
-    font-weight: bold;
-    margin: 0px;
-}
-.border a{
-    margin:0.2rem;
-    color: #017DB0;
-    text-decoration: underline;
+.form.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+
+  max-width: 400px;
+  width: 90%;
+  height: max-content;
+  margin: 0 auto;
+  padding: 1rem;
+
+  border-radius: 0.5rem;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.input{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    margin: 0.01rem;
+.login-form.form .login-form__img {
+  width: 90%;
+  max-width: 200px;
 }
-.input p{
-    margin:0.2rem;
-    color: black;
+.login-form.form .form-field {
+  width: 100%;
 }
 
-
-.input input{
-    width: 100%;
-    height: 2rem;
-    border-radius: 0.3rem;
-    margin-bottom: 1rem;
-    border: 0.1rem solid #017DB0;
-    background-color: transparent;
-    caret-color: #017DB0;
-    color: #017DB0;
-}
-.input input:focus{
-    outline: none;
+.login-form.form .login-form__register {
+  font-size: 0.9rem;
+  text-align: center;
 }
 
-.botonInicio{
-    background-color: #017DB0;
-    border-radius: 0.3rem;
-    border: 0;
-    height: 2rem;
-}
-.botonInicio:hover{
-    background-color: #005577;
-    cursor: pointer;
+.login-form .login-form__reset-password {
+  width: 100%;
+  text-align: left;
+  font-size: 0.9rem;
 }
 
-.RedesSociales{
-    display: flex;
-    justify-content: center;
-    margin: 0.2rem;
+.login-form .login-form__text {
+  width: 100%;
+  text-align: center;
 }
 
-.RedesSociales img{
-    width: 2rem;
+.login-form .login-form__social {
+  display: flex;
+  gap: 1rem;
 }

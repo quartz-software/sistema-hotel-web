@@ -5,17 +5,10 @@ type Props = {
   placeholder?: string;
   handleInput: Function;
   type: string;
-  onSuccess: Function;
-  onError: Function;
+  resetMessage: Function;
 };
 
-const Input: FC<Props> = ({
-  placeholder,
-  handleInput,
-  type,
-  onError,
-  onSuccess,
-}) => {
+const Input: FC<Props> = ({ placeholder, handleInput, type, resetMessage }) => {
   const [value, setValue] = useState("");
   return (
     <input
@@ -25,6 +18,7 @@ const Input: FC<Props> = ({
         const result = target.value.trim();
         setValue(result);
         handleInput(result);
+        resetMessage();
       }}
       type={type}
       placeholder={placeholder ? placeholder : ""}

@@ -8,26 +8,26 @@ import Button from "../common/components/Button";
 import { useState } from "react";
 
 import "./Login.css";
-import Redes from "../common/Redes/Redes";
+import Social from "./components/Social";
 import FormField from "../common/components/FormField";
+
 const Login = () => {
-  const [userData, setUserData] = useState({ username: "", password: "" });
+  const [userData, setUserData] = useState({ email: "", password: "" });
   const [isFetching, setIsFetching] = useState(false);
 
   function postData() {
-    console.log(userData);
     setIsFetching(true);
     let url = "/api/auth/login";
     let cont = {
       method: "POST",
       body: JSON.stringify({
-        email: userData.username,
+        email: userData.email,
         password: userData.password,
       }),
     };
     setTimeout(() => {
       fetch(url, cont)
-        .then((respsoe) => respsoe.json())
+        .then((res) => res.json())
         .then((data) => {
           setIsFetching(false);
 
@@ -39,51 +39,52 @@ const Login = () => {
         });
     }, 5000);
   }
+
   return (
-    <div className="contenedor">
-      <div className="border">
-        <img src={Llamarada} alt="LLamarada" />
-        <h2>Inicia Sesion</h2>
-        <p>aun no tienes una cuenta?</p>
-        <a href="./Signup">Registrate</a>
-        <FormField label="Usuario">
-          <Input
-            placeholder={"Usuario"}
-            handleInput={(value: string) => {
-              setUserData({ ...userData, username: value });
-            }}
-            type="text"
-            onSuccess={() => {}}
-            onError={() => {}}
-          />
-        </FormField>
-        <FormField label="Contraseña">
-          <Input
-            placeholder={"Contraseña"}
-            handleInput={(value: string) => {
-              setUserData({ ...userData, password: value });
-            }}
-            type="password"
-            onSuccess={() => {}}
-            onError={() => {}}
-          />
-        </FormField>
-        <a href="">¿Olvidaste tu contraseña?</a>
+    <form className="form login-form">
+      <img className="login-form__img" src={Llamarada} alt="LLamarada" />
+      <h2 className="login-form__title">Inicia Sesion</h2>
+      <p className="login-form__register">
+        ¿Aún no tienes una cuenta?
+        <br />
+        Registrate <a href="./Signup">aquí</a>
+      </p>
 
-        <Button handleClick={postData} disabled={isFetching}>
-          {isFetching ? "Cargando..." : "Iniciar Sesion"}
-        </Button>
+      <FormField label="Usuario">
+        <Input
+          placeholder={"Usuario"}
+          handleInput={(value: string) => {
+            setUserData({ ...userData, email: value });
+          }}
+          type="text"
+        />
+      </FormField>
+      <FormField label="Contraseña">
+        <Input
+          placeholder={"Contraseña"}
+          handleInput={(value: string) => {
+            setUserData({ ...userData, password: value });
+          }}
+          type="password"
+        />
+      </FormField>
+      <p className="login-form__reset-password">
+        <a>¿Olvidaste tu contraseña?</a>
+      </p>
 
-        <p>
-          o <br /> ingresa con
-        </p>
-        <div className="RedesSociales">
-          <Redes red={Google} />
-          <Redes red={Facebook} />
-          <Redes red={Twiter} />
-        </div>
+      <Button handleClick={postData} disabled={isFetching}>
+        {isFetching ? "Cargando..." : "Iniciar Sesion"}
+      </Button>
+
+      <p className="login-form__text">
+        o <br /> ingresa con
+      </p>
+      <div className="login-form__social">
+        <Social red={Google} />
+        <Social red={Facebook} />
+        <Social red={Twiter} />
       </div>
-    </div>
+    </form>
   );
 };
 

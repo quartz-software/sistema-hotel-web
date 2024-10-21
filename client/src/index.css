@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: white;
+  background-color: #242a2d;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,10 +14,6 @@
 }
 * {
   box-sizing: border-box;
-}
-#root {
-  margin: 0 auto;
-  text-align: center;
 }
 
 a {
@@ -35,9 +31,19 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+button,
+a {
+  cursor: pointer;
 }
 
 @media (prefers-color-scheme: light) {
@@ -47,8 +53,5 @@ h1 {
   }
   a:hover {
     color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
   }
 }

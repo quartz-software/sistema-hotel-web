@@ -6,7 +6,6 @@ const router = Router();
 
 router.post("/login", async (req, res) => {
   try {
-    console.log("conexion");
     const body = req.body;
     let user = await User.findOne({ email: body.email });
     if (!user) {
@@ -24,18 +23,24 @@ router.post("/login", async (req, res) => {
   }
 });
 router.post("/register", async (req, res) => {
-  console.log("conexion");
-  const body = req.body;
-  let user = await User.findOne({ email: body.email });
-  if (user) {
-    return res.status(400).json({ message: "Existente" });
+  try {
+    const body = req.body;
+    let user = await User.findOne({ email: body.email });
+    if (user) {
+      return res.status(400).send();
+    }
+    await auth.createUser(body);
+    res.status(200).send();
+  } catch (e) {
+    res.status(500).send();
   }
-
-  await auth.createUser(body);
-  res.json({ message: "registro exitoso" });
 });
 router.get("/data", (req, res) => {
-  const token = req.headers.authorization.split(" ")[1];
+  const headers = req.headers;
+  if (!headers.authorization) {
+    return res.status(400).send("No token provided");
+  }
+  const token = headers.authorization.split(" ")[1];
   if (token && auth.validateToken(token)) {
     return res.status(200).json({ message: "acceso permitido" });
   }

@@ -11,11 +11,9 @@ const __dirname = path.dirname(__filename);
 const app = Express();
 
 app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(cors());
 app.use(Express.static(path.join(__dirname, "dist")));
-app.get("/", (req, res) => {
-  res.json({ asd: "asd" });
-});
 app.use("/api", router);
 
 export default app;
