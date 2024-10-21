@@ -10,34 +10,55 @@ import { useState } from "react";
 import "./Login.css";
 import Social from "./components/Social";
 import FormField from "../common/components/FormField";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [userData, setUserData] = useState({ email: "", password: "" });
   const [isFetching, setIsFetching] = useState(false);
+  const [emailMessage, setEmailMessage] = useState("");
+  const [passwordMessage, setPasswordMessage] = useState("");
+  const navigate = useNavigate();
 
   function postData() {
+    let emailReg =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let passwordReg = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+
+    let validForm = true;
+    if (emailReg.test(userData.email) === false) {
+      validForm = false;
+      setEmailMessage("Ingrese un correo valido");
+    }
+    if (passwordReg.test(userData.password) === false) {
+      validForm = false;
+      setPasswordMessage(
+        "Tu contraseña debe tener entre 6 y 16 caracteres, incluir al menos un número y un carácter especial (!@#$%^&*)"
+      );
+    }
+    if (!validForm) return;
+
     setIsFetching(true);
     let url = "/api/auth/login";
     let cont = {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         email: userData.email,
         password: userData.password,
       }),
     };
-    setTimeout(() => {
-      fetch(url, cont)
-        .then((res) => res.json())
-        .then((data) => {
-          setIsFetching(false);
-
-          console.log(data);
-        })
-        .catch((error) => {
-          setIsFetching(false);
-          console.error("Error:", error);
-        });
-    }, 5000);
+    fetch(url, cont)
+      .then((res) => {
+        if (res.status == 200) {
+          navigate("/");
+        }
+        setIsFetching(false);
+      })
+      .catch((err) => {
+        setIsFetching(false);
+      });
   }
 
   return (
@@ -50,22 +71,30 @@ const Login = () => {
         Registrate <a href="./Signup">aquí</a>
       </p>
 
-      <FormField label="Usuario">
+      <FormField label="Usuario" errorMessage={emailMessage}>
         <Input
-          placeholder={"Usuario"}
+          autocomplete="email"
+          placeholder={"Correo"}
           handleInput={(value: string) => {
             setUserData({ ...userData, email: value });
           }}
           type="text"
+          resetMessage={() => {
+            setEmailMessage("");
+          }}
         />
       </FormField>
-      <FormField label="Contraseña">
+      <FormField label="Contraseña" errorMessage={passwordMessage}>
         <Input
+          autocomplete="current-password"
           placeholder={"Contraseña"}
           handleInput={(value: string) => {
             setUserData({ ...userData, password: value });
           }}
           type="password"
+          resetMessage={() => {
+            setPasswordMessage("");
+          }}
         />
       </FormField>
       <p className="login-form__reset-password">

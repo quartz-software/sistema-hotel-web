@@ -64,6 +64,7 @@ const Signup = () => {
       <h2 className="signup-form__title">Crear Cuenta</h2>
       <FormField label="Correo" errorMessage={emailMessage}>
         <Input
+          autocomplete="email"
           placeholder={"Correo"}
           type={"email"}
           handleInput={(value: string) => {
@@ -76,6 +77,7 @@ const Signup = () => {
       </FormField>
       <FormField label="Contraseña" errorMessage={passwordMessage}>
         <Input
+          autocomplete="new-password"
           placeholder={"Contraseña"}
           type={"password"}
           handleInput={(value: string) => {

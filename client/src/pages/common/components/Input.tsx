@@ -6,12 +6,20 @@ type Props = {
   handleInput: Function;
   type: string;
   resetMessage: Function;
+  autocomplete: "email" | "current-password" | "new-password";
 };
 
-const Input: FC<Props> = ({ placeholder, handleInput, type, resetMessage }) => {
+const Input: FC<Props> = ({
+  placeholder,
+  handleInput,
+  type,
+  resetMessage,
+  autocomplete,
+}) => {
   const [value, setValue] = useState("");
   return (
     <input
+      autoComplete={autocomplete}
       className="input"
       onInput={(e) => {
         const target = e.target as HTMLInputElement;
