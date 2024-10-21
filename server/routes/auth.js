@@ -9,17 +9,17 @@ router.post("/login", async (req, res) => {
     const body = req.body;
     let user = await User.findOne({ email: body.email });
     if (!user) {
-      return res.status(401).json({ message: "Acceso denegado" });
+      return res.status(401).send();
     }
-    if (auth.authUser(body.password, user.password)) {
-      let payload = { id: user.id, email: user.email };
-      let secret = process.env.SECRET;
-      let token = jwt.sign(payload, secret);
-
-      res.json({ token: token });
+    if (!auth.authUser(body.password, user.password)) {
+      return res.status(401).send();
     }
+    let payload = { id: user.id, email: user.email };
+    let secret = process.env.SECRET;
+    let token = jwt.sign(payload, secret);
+    return res.cookie("token", token).status(200).json({ token: token });
   } catch (e) {
-    console.log(e);
+    res.status(500).send();
   }
 });
 router.post("/register", async (req, res) => {
@@ -36,11 +36,12 @@ router.post("/register", async (req, res) => {
   }
 });
 router.get("/data", (req, res) => {
-  const headers = req.headers;
-  if (!headers.authorization) {
+  const token =
+    req.headers.authorization?.split(" ")[1] || req.cookies["token"];
+  if (!token) {
     return res.status(400).send("No token provided");
   }
-  const token = headers.authorization.split(" ")[1];
+
   if (token && auth.validateToken(token)) {
     return res.status(200).json({ message: "acceso permitido" });
   }
