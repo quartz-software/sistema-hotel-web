@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    if (!id) return res.status(404).send();
+    if (!id) return res.status(400).send();
 
     const room = await Room.findByPk(id);
     if (!room) return res.status(404).send();
@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    if (!id) return res.status(404).send();
+    if (!id) return res.status(400).send();
     const body = req.body;
     if (!body) return res.status(404).send();
     await Room.update(body, { where: { id } });
@@ -47,7 +47,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    if (!id) return res.status(404).send();
+    if (!id) return res.status(400).send();
     await Room.destroy({ where: { id } });
     res.status(200).send();
   } catch (e) {
