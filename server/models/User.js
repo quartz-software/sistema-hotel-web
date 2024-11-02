@@ -34,6 +34,7 @@ const User = sequelize.define(
       allowNull: false,
       validate: {
         notEmpty: true,
+        isIn: [['Administrador', 'Recepcionista', 'Limpieza','Mantenimiento']],
       },
     },
     status: {
@@ -41,6 +42,7 @@ const User = sequelize.define(
       allowNull: false,
       validate: {
         notEmpty: true,
+        isIn: [['Activo', 'Licencia Medica', 'Vacaciones','Inactivo']],
       },
     },
     createdAt: {

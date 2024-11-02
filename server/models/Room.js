@@ -38,7 +38,7 @@ const Room = sequelize.define(
       type: DataTypes.STRING(20),
       allowNull: false,
       validate: {
-       // isIn: [['disponible', 'ocupado', 'mantenimiento']],  podria funcionar?
+        isIn: [['Disponible', 'Ocupado', 'Mantenimiento','Limpieza']], 
       },
     },
     capacidad: {
