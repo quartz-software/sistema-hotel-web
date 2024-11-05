@@ -1,8 +1,31 @@
 import { Router } from "express";
 import auth from "./routes/auth.js";
+import addservices from "./routes/addservices.js";
+import availabilities from "./routes/availabilities.js";
+import bookings from "./routes/bookings.js";
+import clients from "./routes/clients.js";
+import employees from "./routes/employees.js";
+import images from "./routes/images.js";
+import promotions from "./routes/promotions.js";
+import rates from "./routes/rates.js";
 import rooms from "./routes/rooms.js";
+import services from "./routes/services.js";
+import stock from "./routes/stock.js";
+import tasks from "./routes/tasks.js";
 const router = Router();
 
 router.use("/auth", auth);
+router.use("/addservices", addservices);
+router.use("/availabilities", availabilities);
+router.use("/bookings", bookings);
+router.use("/clients", clients);
+router.use("/employees", employees);
+router.use("/images", images);
+router.use("/promotions", promotions);
+router.use("/rates", rates);
 router.use("/rooms", rooms);
+router.use("/services", services);
+router.use("/stock", stock);
+router.use("/tasks", tasks);
+
 export default router;
