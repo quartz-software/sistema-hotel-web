@@ -4,17 +4,17 @@ import FormField from "../common/components/FormField";
 import Input from "../common/components/Input";
 import "./Habitaciones_formulario.css"
 const Habitaciones_formulario=()=>{
-    const[userDate,setUserData]=useState({numeroHabitaciones:"",tipo:"",precioPorNoche:"",estado:"",capacidad:"",descripcion:""})
+    const[userDate,setUserData]=useState({numeroHabitacion:"",tipo:"",precioPorNoche:"",estado:"",capacidad:"",descripcion:""})
 
     function postData(){
-        let url=""
+        let url="http://localhost:8080/api/rooms/"
         let cont={
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
             },
             body:JSON.stringify({
-                numeroHabitacioines:userDate.numeroHabitaciones,
+                numeroHabitacion:userDate.numeroHabitacion,
                 tipo:userDate.tipo,       
                 precioPorNoche:userDate.precioPorNoche,
                 estado:userDate.estado,
@@ -46,7 +46,7 @@ const Habitaciones_formulario=()=>{
                     placeholder="Numero Habitacion"
                     type="text"
                     handleInput={(value:string)=>{
-                        setUserData({...userDate,numeroHabitaciones: value})
+                        setUserData({...userDate,numeroHabitacion: value})
                     }}
                     />
                 </FormField>
