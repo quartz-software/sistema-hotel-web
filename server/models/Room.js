@@ -24,6 +24,7 @@ const Room = sequelize.define(
       allowNull: false,
       validate: {
         notEmpty: true,
+        isIn: [["suite", "normal", "premium"]],
       },
     },
     pricePerNight: {
@@ -38,7 +39,7 @@ const Room = sequelize.define(
       type: DataTypes.STRING(20),
       allowNull: false,
       validate: {
-        isIn: [["Disponible", "Ocupado", "Mantenimiento", "Limpieza"]],
+        isIn: [["available", "occupied", "maintainance", "cleaning"]],
       },
     },
     capacity: {
