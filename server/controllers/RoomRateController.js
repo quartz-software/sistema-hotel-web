@@ -6,10 +6,20 @@ export default class RoomRateController {
    */
   static async findAll(req, res) {
     try {
-      const roomRates = await RoomRate.findAll();
+      const { startDate, endDate } = req.query;
+
+      if (!startDate || !endDate) {
+        return res.status(400).send();
+      }
+      const where = {
+        date: {
+          [Op.between]: [new Date(startDate), new Date(endDate)]
+        }
+      };
+      const roomRates = await RoomRate.findAll({ where });
       res.status(200).json(roomRates);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(500).send();
     }
   }
   
@@ -25,10 +35,10 @@ export default class RoomRateController {
       if (roomRate) {
         res.status(200).json(roomRate);
       } else {
-        res.status(404).json({ message: "Room rate not found" });
+        res.status(404).send();
       }
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(500).send();
     }
   }
   
@@ -42,7 +52,7 @@ export default class RoomRateController {
       const newRoomRate = await RoomRate.create(req.body);
       res.status(201).json(newRoomRate);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(500).send();
     }
   }
   
@@ -59,10 +69,10 @@ export default class RoomRateController {
         const updatedRoomRate = await RoomRate.findByPk(id);
         res.status(200).json(updatedRoomRate);
       } else {
-        res.status(404).json({ message: "Room rate not found" });
+        res.status(404).send();
       }
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(500).send();
     }
   }
   
@@ -73,16 +83,12 @@ export default class RoomRateController {
    */
   static async delete(req, res) {
     try {
-      const { id } = req.params;
-      const deleted = await RoomRate.destroy({ where: { id } });
-      if (deleted) {
-        res.status(204).send();
-      } else {
-        res.status(404).json({ message: "Room rate not found" });
-      }
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+      const id = req.params.id;
+      if (!id) return res.status(400).send();
+      await Room.destroy({ where: { id } });
+      res.status(200).send();
+    } catch (e) {
+      res.status(500).send();
     }
   }
-  
 }
