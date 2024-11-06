@@ -1,8 +1,31 @@
-import { faBed, faComments, faStar as StarSolid, faHotel } from "@fortawesome/free-solid-svg-icons";
+import { faBed, faComments, faHotel } from "@fortawesome/free-solid-svg-icons";
 import "./Home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { CardHab } from "./CardHab";
-import { CardTestimonio } from "./CardTestimonio";
+import CardTestimonio from "./CardTestimonio";
+
+const testimonios = [
+  {
+    contenido: "Excelente servicio y habitaciones muy cómodas. Definitivamente volveremos.",
+    persona: "Juan Pérez",
+    fecha: "12 de Agosto, 2024",
+    estrellas: 5
+  },
+  {
+    contenido: "La vista desde la habitación era increíble. El personal muy amable.",
+    persona: "María López",
+    fecha: "23 de Septiembre, 2024",
+    estrellas: 4
+  },
+  {
+    contenido: "Buena ubicación, pero la limpieza podría mejorar.",
+    persona: "Carlos Sánchez",
+    fecha: "5 de Octubre, 2024",
+    estrellas: 3
+  },
+  // Agrega más testimonios si es necesario
+];
+
 
 
 const Home = () => {
@@ -69,9 +92,19 @@ const Home = () => {
         </div>
         <div className="content--testimonies">
           <div>
-            <CardTestimonio />
-            <CardTestimonio />
-            <CardTestimonio />
+            {
+              testimonios.map((testimonio, index) => {
+                return (
+                  <CardTestimonio
+                    key={index}
+                    contenido={testimonio.contenido}
+                    persona={testimonio.persona}
+                    fecha={testimonio.fecha}
+                    estrellas={testimonio.estrellas}
+                  />
+                );
+              })
+            }
           </div>
 
         </div>
