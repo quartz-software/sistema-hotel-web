@@ -27,6 +27,11 @@ const Layout = () => {
               Sign up
             </Link>
           </li>
+          <li className="navbar__item">
+            <Link className="navbar__link" to="/habitaciones">
+              habitaciones
+            </Link>
+          </li>
         </ul>
       </nav>
       <div id="content">

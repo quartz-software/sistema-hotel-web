@@ -1,0 +1,68 @@
+.room--card {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    color: black;
+    padding: 10px;
+
+    justify-content: space-between;
+    min-width: 277px;
+    min-height: 200px;
+
+    border-radius: 0 0 8px 8px;
+
+    border-top: solid 5px black;
+}
+
+.room--card .tag {
+    background-color: black;
+    color: white;
+    padding: 1px 4px;
+    border-radius: 4px;
+}
+
+.room--card>div {
+    display: flex;
+}
+
+.room--info {
+    width: 100%;
+}
+
+.room--card img {
+    width: 75px;
+    height: 50px;
+    border-radius: 4px;
+}
+
+.room--card.disponible {
+    border-color: #4FD22E;
+}
+
+.disponible .tag {
+    background-color: #4FD22E;
+}
+
+.room--card.limpieza {
+    border-color: #017DB0;
+}
+
+.limpieza .tag {
+    background-color: #017DB0;
+}
+
+.room--card.reservada {
+    border-color: #E3A327;
+}
+
+.reservada .tag {
+    background-color: #E3A327;
+}
+
+.room--card.ocupado {
+    border-color: #E32727;
+}
+
+.ocupado .tag {
+    background-color: #E32727;
+}
