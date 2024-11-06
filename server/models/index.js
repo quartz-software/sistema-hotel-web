@@ -38,7 +38,11 @@ const models = {
   User,
 };
 
-function defineRelationships() {}
+function defineRelationships() {
+  // Employee: userId
+  User.hasOne(Employee, { foreignKey: "userId", as: "employee" });
+  Employee.belongsTo(User, { foreignKey: "userId", as: "user" });
+}
 
 defineRelationships();
 export { sequelize };
