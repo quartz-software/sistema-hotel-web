@@ -8,28 +8,48 @@ const Room = sequelize.define(
       type: DataTypes.BIGINT,
       autoIncrement: true,
       primaryKey: true,
+      validate: {
+        isInt: true,
+      },
     },
-    numeroHabitacion: {
+    roomNumber: {
       type: DataTypes.STRING(10),
       allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
     },
-    tipo: {
+    type: {
       type: DataTypes.STRING(50),
       allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
     },
-    precioPorNoche: {
+    pricePerNight: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
+      validate: {
+        isDecimal: true,
+        min: 0.0,
+      },
     },
-    estado: {
+    status: {
       type: DataTypes.STRING(20),
       allowNull: false,
+      validate: {
+        isIn: [["Disponible", "Ocupado", "Mantenimiento", "Limpieza"]],
+      },
     },
-    capacidad: {
+    capacity: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate: {
+        isInt: true,
+        min: 1,
+      },
     },
-    descripcion: {
+    description: {
       type: DataTypes.TEXT,
       allowNull: true,
     },
