@@ -74,6 +74,7 @@
     border: 2px solid #B4B4B4;
     padding: .2em .4em;
     border-radius: 5px;
+    color: black;
 }
 
 .form--reserva button {

@@ -1,16 +1,30 @@
+import { FC } from "react";
 import "./CardHab.css"
 
+import Button from "../common/components/Button";
 
-export const CardHab = () => {
+type Props = {
+    tipo: string;
+    capacidad: number;
+    descripcion: string;
+    urlImg: string;
+}
+
+export const CardHab: FC<Props> = ({ tipo, capacidad, descripcion, urlImg }) => {
+    function recervaHab() {
+        console.log("Reservar Habitación");
+    }
     return (
         <div className="room--card">
-            <img src="/room1.jpg" alt="" />
+            <img src={urlImg} alt="" />
             <div className="room--card--info">
-                <h2>Room 1</h2>
+                <h2>{tipo}</h2>
                 <div>
-                    <span>3 Personas</span>
-                    <span>1 Cama Individual</span>
-                    <span>1 Cama Doble</span>
+                    <span><b>{capacidad}</b> Personas</span>
+                    <span>{descripcion}</span>
+                    <Button handleClick={recervaHab} disabled={false}>
+                        Recervar ahora
+                    </Button>
                 </div>
             </div>
         </div>

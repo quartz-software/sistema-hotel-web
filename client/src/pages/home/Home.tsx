@@ -4,6 +4,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { CardHab } from "./CardHab";
 import CardTestimonio from "./CardTestimonio";
 
+const habitaciones = [
+  {
+    tipo: "Habitación Doble",
+    capacidad: 2,
+    descripcion: "Habitación cómoda para parejas con vista al jardín y balcón privado.",
+    urlImg: "/imagenes/habitacion_doble.jpg"
+  },
+  {
+    tipo: "Suite Lujo",
+    capacidad: 3,
+    descripcion: "Suite con jacuzzi privado y una sala de estar con vistas impresionantes.",
+    urlImg: "/imagenes/suite_lujo.jpg"
+  },
+  {
+    tipo: "Habitación Familiar",
+    capacidad: 5,
+    descripcion: "Amplia habitación familiar con camas adicionales y área de juegos para niños.",
+    urlImg: "/imagenes/habitacion_familiar.jpg"
+  }
+];
+
+
 const testimonios = [
   {
     contenido: "Excelente servicio y habitaciones muy cómodas. Definitivamente volveremos.",
@@ -46,11 +68,11 @@ const Home = () => {
             </div>
             <div className="reserva--input">
               <label htmlFor="">Mayores:</label>
-              <input type="text" />
+              <input type="number" value={0} />
             </div>
             <div className="reserva--input">
               <label htmlFor="">Menores:</label>
-              <input type="text" />
+              <input type="number" value={0} />
             </div>
             <button className="btn--reservar">Reserva ahora</button>
           </div>
@@ -80,9 +102,19 @@ const Home = () => {
           <span className="section--title">Nuetras Habitaciones</span>
         </div>
         <div className="content--rooms">
-          <CardHab />
-          <CardHab />
-          <CardHab />
+          {
+            habitaciones.map((habitacion, index) => {
+              return (
+                <CardHab
+                  key={index}
+                  tipo={habitacion.tipo}
+                  capacidad={habitacion.capacidad}
+                  descripcion={habitacion.descripcion}
+                  urlImg="./room1.jpg"
+                />
+              )
+            })
+          }
         </div>
       </section>
       <section className="home__section section--testimonies">
