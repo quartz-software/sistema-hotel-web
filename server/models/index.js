@@ -48,6 +48,9 @@ function defineRelationships() {
   Client.hasMany(Booking, { foreignKey: "clientId", as: "booking" })
   Booking.belongsTo(Client, { foreignKey: "clientId", as: "client" });
 
+  // Employee: userId
+  User.hasOne(Employee, { foreignKey: "userId", as: "employee" });
+  Employee.belongsTo(User, { foreignKey: "userId", as: "user" });
 }
 
 defineRelationships();
