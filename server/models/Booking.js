@@ -1,6 +1,5 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
-import Client from "./Client.js";
 
 const Booking = sequelize.define(
   "Booking",
@@ -71,13 +70,19 @@ const Booking = sequelize.define(
         notEmpty: true
       }
     },
-    idEmployee: {
-    },
-    idCliet: {
+    employeeId: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: Client,
+        model: "employees",
+        key: 'id'
+      }
+    },
+    clientId: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      references: {
+        model: "clients",
         key: 'id'
       }
     }

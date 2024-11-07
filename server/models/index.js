@@ -38,7 +38,17 @@ const models = {
   User,
 };
 
-function defineRelationships() {}
+function defineRelationships() {
+
+  //Booking: employeeId
+  Employee.hasMany(Booking, { foreignKey: "employeeId", as: "booking" })
+  Booking.belongsTo(Employee, { foreignKey: "employeeId", as: "employee" });
+
+  //Booking: clientId
+  Client.hasMany(Booking, { foreignKey: "clientId", as: "booking" })
+  Booking.belongsTo(Client, { foreignKey: "clientId", as: "client" });
+
+}
 
 defineRelationships();
 export { sequelize };
