@@ -28,7 +28,7 @@ const StockModification = sequelize.define(
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: "employee",
+        model: "employees",
         key: "id",
       }
     },

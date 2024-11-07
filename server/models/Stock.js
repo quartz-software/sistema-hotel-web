@@ -19,7 +19,7 @@ const Stock = sequelize.define(
         notEmpty: true,
       }
     },
-    cantida: {
+    cantidad: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
@@ -27,7 +27,7 @@ const Stock = sequelize.define(
         min: 0,
       }
     },
-    unidM: {
+    unidadDeMedida: {
       type: DataTypes.STRING(5),
       allowNull: false,
       validate: {
@@ -41,7 +41,7 @@ const Stock = sequelize.define(
         notEmpty: true,
       }
     },
-    fachaAbastecimiento: {
+    fechaAbastecimiento: {
       type: DataTypes.DATE,
       allowNull: false,
       validate: {
