@@ -15,8 +15,8 @@ const Task = sequelize.define(
     status: {
       type: DataTypes.STRING(15),
       allowNull: false,
+      defaultValue: 'pendiente',
       validate: {
-        notEmpty: true,
         isIn: [['pendiente', 'en progreso', 'completada']],
       }
     },
@@ -31,23 +31,15 @@ const Task = sequelize.define(
     },
     dateStart: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     dateFinished: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     employeeId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "employees",
-        key: "id",
-      },
-    },
-    employeeId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: "employees",
         key: "id",
