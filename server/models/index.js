@@ -40,45 +40,55 @@ const models = {
 
 function defineRelationships() {
   // Employee: userId
-  User.hasOne(Employee, { foreignKey: "userId", as: "employee" });
-  Employee.belongsTo(User, { foreignKey: "userId", as: "user" });
+  User.hasOne(Employee, { foreignKey: "userId", as: "user_for_employee" });
+  Employee.belongsTo(User, { foreignKey: "userId", as: "employee_for_user" });
 
   // AdditionalService: serviceId
   Service.hasMany(AdditionalService, {
     foreignKey: "serviceId",
-    as: "additional_services:service",
+    as: "additional_services_for_service",
   });
   AdditionalService.belongsTo(Service, {
     foreignKey: "serviceId",
-    as: "service",
+    as: "service_for_additional_service",
   });
   // AdditionalService: bookingId
   Booking.hasMany(AdditionalService, {
     foreignKey: "bookingId",
-    as: "additional_services:booking",
+    as: "additional_services_booking",
   });
   AdditionalService.belongsTo(Booking, {
     foreignKey: "bookingId",
-    as: "booking",
+    as: "booking_for_additional_service",
   });
 
   // BookingRoom: bookingId
   Booking.hasMany(BookingRoom, {
     foreignKey: "bookingId",
-    as: "booking_rooms:booking",
+    as: "booking_rooms_booking",
   });
   BookingRoom.belongsTo(Booking, {
     foreignKey: "bookingId",
-    as: "booking",
+    as: "booking_for_booking_room",
   });
   // BookingRoom: roomId
   Room.hasMany(BookingRoom, {
     foreignKey: "roomId",
-    as: "booking_rooms:room",
+    as: "booking_rooms_room",
   });
   BookingRoom.belongsTo(Room, {
     foreignKey: "roomId",
-    as: "room",
+    as: "room_for_booking_room",
+  });
+
+  // RoomImage: roomId
+  Room.hasMany(RoomImage, {
+    foreignKey: "roomId",
+    as: "room_images_for_room",
+  });
+  RoomImage.belongsTo(Room, {
+    foreignKey: "roomId",
+    as: "room_for_room_image",
   });
 }
 
