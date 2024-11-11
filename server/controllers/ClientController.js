@@ -1,3 +1,5 @@
+import Client from "../models/Client.js";
+
 export default class ClientController {
   /**
    *
@@ -5,7 +7,13 @@ export default class ClientController {
    * @param {import("express").Response} res
    */
   static async findAll(req, res) {
-    res.status(500).send();
+    try {
+      const clients = await Client.findAll();
+      console.log(clients);
+      res.status(200).send();
+    } catch (e) {
+      res.status(500).send();
+    }
   }
   /**
    *
@@ -13,7 +21,17 @@ export default class ClientController {
    * @param {import("express").Response} res
    */
   static async findOne(req, res) {
-    res.status(500).send();
+    try {
+      const id = req.params.id;
+      if (!id) return res.status(400).send();
+
+      const room = await Client.findByPk(id);
+      if (!room) return res.status(404).send();
+
+      res.status(200).json(room);
+    } catch (e) {
+      res.status(500).send();
+    }
   }
   /**
    *
@@ -21,7 +39,13 @@ export default class ClientController {
    * @param {import("express").Response} res
    */
   static async create(req, res) {
-    res.status(500).send();
+    try {
+      const body = req.body;
+      const rooms = await Client.create(body);
+      res.status(201).json(rooms);
+    } catch (e) {
+      res.status(500).send();
+    }
   }
   /**
    *
@@ -29,7 +53,16 @@ export default class ClientController {
    * @param {import("express").Response} res
    */
   static async update(req, res) {
-    res.status(500).send();
+    try {
+      const id = req.params.id;
+      if (!id) return res.status(400).send();
+      const body = req.body;
+      if (!body) return res.status(404).send();
+      await Client.update(body, { where: { id } });
+      res.status(200).send();
+    } catch (e) {
+      res.status(500).send();
+    }
   }
   /**
    *
@@ -37,6 +70,13 @@ export default class ClientController {
    * @param {import("express").Response} res
    */
   static async delete(req, res) {
-    res.status(500).send();
+    try {
+      const id = req.params.id;
+      if (!id) return res.status(400).send();
+      await Client.destroy({ where: { id } });
+      res.status(200).send();
+    } catch (e) {
+      res.status(500).send();
+    }
   }
 }
