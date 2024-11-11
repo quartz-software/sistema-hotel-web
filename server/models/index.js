@@ -46,7 +46,7 @@ function defineRelationships() {
   // AdditionalService: serviceId
   Service.hasMany(AdditionalService, {
     foreignKey: "serviceId",
-    as: "additional_services",
+    as: "additional_services:service",
   });
   AdditionalService.belongsTo(Service, {
     foreignKey: "serviceId",
@@ -55,7 +55,7 @@ function defineRelationships() {
   // AdditionalService: bookingId
   Booking.hasMany(AdditionalService, {
     foreignKey: "bookingId",
-    as: "additional_services",
+    as: "additional_services:booking",
   });
   AdditionalService.belongsTo(Booking, {
     foreignKey: "bookingId",
@@ -65,7 +65,7 @@ function defineRelationships() {
   // BookingRoom: bookingId
   Booking.hasMany(BookingRoom, {
     foreignKey: "bookingId",
-    as: "booking_rooms",
+    as: "booking_rooms:booking",
   });
   BookingRoom.belongsTo(Booking, {
     foreignKey: "bookingId",
@@ -74,7 +74,7 @@ function defineRelationships() {
   // BookingRoom: roomId
   Room.hasMany(BookingRoom, {
     foreignKey: "roomId",
-    as: "booking_rooms",
+    as: "booking_rooms:room",
   });
   BookingRoom.belongsTo(Room, {
     foreignKey: "roomId",
