@@ -40,8 +40,14 @@ const models = {
 
 function defineRelationships() {
   // Employee: userId
-  User.hasOne(Employee, { foreignKey: "userId", as: "user_for_employee" });
-  Employee.belongsTo(User, { foreignKey: "userId", as: "employee_for_user" });
+  User.hasOne(Employee, {
+    foreignKey: "userId",
+    as: "user_for_employee",
+  });
+  Employee.belongsTo(User, {
+    foreignKey: "userId",
+    as: "employee_for_user",
+  });
 
   // AdditionalService: serviceId
   Service.hasMany(AdditionalService, {
@@ -55,7 +61,7 @@ function defineRelationships() {
   // AdditionalService: bookingId
   Booking.hasMany(AdditionalService, {
     foreignKey: "bookingId",
-    as: "additional_services_booking",
+    as: "additional_services_for_booking",
   });
   AdditionalService.belongsTo(Booking, {
     foreignKey: "bookingId",
@@ -65,7 +71,7 @@ function defineRelationships() {
   // BookingRoom: bookingId
   Booking.hasMany(BookingRoom, {
     foreignKey: "bookingId",
-    as: "booking_rooms_booking",
+    as: "booking_rooms_for_booking",
   });
   BookingRoom.belongsTo(Booking, {
     foreignKey: "bookingId",
@@ -74,7 +80,7 @@ function defineRelationships() {
   // BookingRoom: roomId
   Room.hasMany(BookingRoom, {
     foreignKey: "roomId",
-    as: "booking_rooms_room",
+    as: "booking_rooms_for_room",
   });
   BookingRoom.belongsTo(Room, {
     foreignKey: "roomId",
@@ -89,6 +95,25 @@ function defineRelationships() {
   RoomImage.belongsTo(Room, {
     foreignKey: "roomId",
     as: "room_for_room_image",
+  });
+
+  // ServiceRoom: roomId
+  Room.hasMany(ServiceRoom, {
+    foreignKey: "roomId",
+    as: "service_rooms_for_room",
+  });
+  ServiceRoom.belongsTo(Room, {
+    foreignKey: "roomId",
+    as: "room_for_service_room",
+  });
+  // ServiceRoom: serviceId
+  Service.hasMany(ServiceRoom, {
+    foreignKey: "serviceId",
+    as: "service_rooms_for_service",
+  });
+  ServiceRoom.belongsTo(Service, {
+    foreignKey: "serviceId",
+    as: "service_for_service_room",
   });
 }
 
