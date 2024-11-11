@@ -61,6 +61,25 @@ function defineRelationships() {
     foreignKey: "bookingId",
     as: "booking",
   });
+
+  // BookingRoom: bookingId
+  Booking.hasMany(BookingRoom, {
+    foreignKey: "bookingId",
+    as: "booking_rooms",
+  });
+  BookingRoom.belongsTo(Booking, {
+    foreignKey: "bookingId",
+    as: "booking",
+  });
+  // BookingRoom: roomId
+  Room.hasMany(BookingRoom, {
+    foreignKey: "roomId",
+    as: "booking_rooms",
+  });
+  BookingRoom.belongsTo(Room, {
+    foreignKey: "roomId",
+    as: "room",
+  });
 }
 
 defineRelationships();
