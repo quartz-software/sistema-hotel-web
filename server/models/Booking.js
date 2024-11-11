@@ -12,7 +12,7 @@ const Booking = sequelize.define(
         isInt: true,
       },
     },
-    numAdultos: {
+    nAdults: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
@@ -20,7 +20,7 @@ const Booking = sequelize.define(
         min: 1
       }
     },
-    numNinos: {
+    nChild: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
@@ -28,7 +28,7 @@ const Booking = sequelize.define(
         min: 0,
       }
     },
-    fechaReceva: {
+    bookingDate: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
@@ -52,7 +52,7 @@ const Booking = sequelize.define(
       allowNull: false,
       validate: {
         notEmpty: true,
-        isIn: [['En Curso', 'Cancelada', 'Teminada', 'Pendiente']]
+        isIn: [['in progress', 'cancelled', 'finished', 'pending']]
       }
     },
     totalPrice: {
