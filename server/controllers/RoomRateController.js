@@ -1,6 +1,8 @@
+import RoomRate from "../models/RoomRate.js";
+import { Op } from "sequelize";
+
 export default class RoomRateController {
   /**
-   *
    * @param {import("express").Request} req
    * @param {import("express").Response} res
    */
@@ -11,26 +13,32 @@ export default class RoomRateController {
       if (!startDate || !endDate) {
         return res.status(400).send();
       }
+
       const where = {
         date: {
           [Op.between]: [new Date(startDate), new Date(endDate)]
         }
       };
+
       const roomRates = await RoomRate.findAll({ where });
       res.status(200).json(roomRates);
     } catch (error) {
       res.status(500).send();
     }
   }
-  
+
   /**
-   *
    * @param {import("express").Request} req
    * @param {import("express").Response} res
    */
   static async findOne(req, res) {
     try {
       const { id } = req.params;
+
+      if (!id) {
+        return res.status(400).send();
+      }
+
       const roomRate = await RoomRate.findByPk(id);
       if (roomRate) {
         res.status(200).json(roomRate);
@@ -41,30 +49,45 @@ export default class RoomRateController {
       res.status(500).send();
     }
   }
-  
+
   /**
-   *
    * @param {import("express").Request} req
    * @param {import("express").Response} res
    */
   static async create(req, res) {
     try {
-      const newRoomRate = await RoomRate.create(req.body);
+      const body = req.body;
+
+      if (!body) {
+        return res.status(400).send();
+      }
+
+      const newRoomRate = await RoomRate.create(body);
       res.status(201).json(newRoomRate);
     } catch (error) {
       res.status(500).send();
     }
   }
-  
+
   /**
-   *
    * @param {import("express").Request} req
    * @param {import("express").Response} res
    */
   static async update(req, res) {
     try {
       const { id } = req.params;
-      const [updated] = await RoomRate.update(req.body, { where: { id } });
+      const body = req.body;
+
+      if (!id) {
+        return res.status(400).send();
+      }
+
+      if (!body) {
+        return res.status(400).send();
+      }
+
+      const [updated] = await RoomRate.update(body, { where: { id } });
+
       if (updated) {
         const updatedRoomRate = await RoomRate.findByPk(id);
         res.status(200).json(updatedRoomRate);
@@ -75,19 +98,27 @@ export default class RoomRateController {
       res.status(500).send();
     }
   }
-  
+
   /**
-   *
    * @param {import("express").Request} req
    * @param {import("express").Response} res
    */
   static async delete(req, res) {
     try {
-      const id = req.params.id;
-      if (!id) return res.status(400).send();
-      await Room.destroy({ where: { id } });
-      res.status(200).send();
-    } catch (e) {
+      const { id } = req.params;
+
+      if (!id) {
+        return res.status(400).send();
+      }
+
+      const deleted = await RoomRate.destroy({ where: { id } });
+
+      if (deleted) {
+        res.status(200).send();
+      } else {
+        res.status(404).send();
+      }
+    } catch (error) {
       res.status(500).send();
     }
   }

@@ -7,9 +7,9 @@ export default class RoomAvailabilityController {
    */
   static async findAll(req, res) {
     try {
-      const roomAvailabilities = await RoomAvailability.findAll();
+      const roomAvailabilities = await RoomAvailability.findAll({ order: [["id", "ASC"]] });
       res.status(200).json(roomAvailabilities);
-    } catch (error) {
+    } catch (e) {
       res.status(500).send();
     }
   }
@@ -20,14 +20,14 @@ export default class RoomAvailabilityController {
    */
   static async findOne(req, res) {
     try {
-      const { id } = req.params;
+      const id = req.params.id;
+      if (!id) return res.status(400).send();
+
       const roomAvailability = await RoomAvailability.findByPk(id);
-      if (roomAvailability) {
-        res.status(200).json(roomAvailability);
-      } else {
-        res.status(404).json({ message: "Room availability not found" });
-      }
-    } catch (error) {
+      if (!roomAvailability) return res.status(404).send();
+
+      res.status(200).json(roomAvailability);
+    } catch (e) {
       res.status(500).send();
     }
   }
@@ -38,9 +38,10 @@ export default class RoomAvailabilityController {
    */
   static async create(req, res) {
     try {
-      const newRoomAvailability = await RoomAvailability.create(req.body);
-      res.status(201).json(newRoomAvailability);
-    } catch (error) {
+      const body = req.body;
+      const roomAvailability = await RoomAvailability.create(body);
+      res.status(201).json(roomAvailability);
+    } catch (e) {
       res.status(500).send();
     }
   }
@@ -51,15 +52,20 @@ export default class RoomAvailabilityController {
    */
   static async update(req, res) {
     try {
-      const { id } = req.params;
-      const [updated] = await RoomAvailability.update(req.body, { where: { id } });
+      const id = req.params.id;
+      if (!id) return res.status(400).send();
+
+      const body = req.body;
+      if (!body) return res.status(404).send();
+
+      const [updated] = await RoomAvailability.update(body, { where: { id } });
       if (updated) {
         const updatedRoomAvailability = await RoomAvailability.findByPk(id);
         res.status(200).json(updatedRoomAvailability);
       } else {
         res.status(404).send();
       }
-    } catch (error) {
+    } catch (e) {
       res.status(500).send();
     }
   }
@@ -72,7 +78,8 @@ export default class RoomAvailabilityController {
     try {
       const id = req.params.id;
       if (!id) return res.status(400).send();
-      await Room.destroy({ where: { id } });
+
+      await RoomAvailability.destroy({ where: { id } });
       res.status(200).send();
     } catch (e) {
       res.status(500).send();
