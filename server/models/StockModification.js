@@ -12,12 +12,12 @@ const StockModification = sequelize.define(
         isInt: true,
       },
     },
-    fecha: {
+    date: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW
     },
-    cantidad: {
+    quantity: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {

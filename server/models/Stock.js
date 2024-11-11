@@ -19,7 +19,7 @@ const Stock = sequelize.define(
         notEmpty: true,
       }
     },
-    cantidad: {
+    quantity: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
@@ -27,7 +27,7 @@ const Stock = sequelize.define(
         min: 0,
       }
     },
-    unidadDeMedida: {
+    measure: {
       type: DataTypes.STRING(5),
       allowNull: false,
       validate: {
@@ -38,10 +38,11 @@ const Stock = sequelize.define(
       type: DataTypes.STRING(50),
       allowNull: false,
       validate: {
+        //isIn: [[]],
         notEmpty: true,
       }
     },
-    fechaAbastecimiento: {
+    supplyDate: {
       type: DataTypes.DATE,
       allowNull: false,
       validate: {
