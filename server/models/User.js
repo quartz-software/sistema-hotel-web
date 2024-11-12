@@ -24,9 +24,9 @@ const User = sequelize.define(
       type: DataTypes.STRING(500),
       allowNull: false,
       validate: {
-        notEmpty: true, 
-        len: [8, 500],  
-        isAlphanumeric:true,
+        notEmpty: true,
+        len: [8, 500],
+        isAlphanumeric: true,
       },
     },
     role: {
@@ -34,15 +34,7 @@ const User = sequelize.define(
       allowNull: false,
       validate: {
         notEmpty: true,
-        isIn: [['Administrador', 'Recepcionista', 'Limpieza','Mantenimiento']],
-      },
-    },
-    status: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-        isIn: [['Activo', 'Licencia Medica', 'Vacaciones','Inactivo']],
+        isIn: [["employee", "client"]],
       },
     },
     createdAt: {
