@@ -7,7 +7,9 @@ export default class RoomAvailabilityController {
    */
   static async findAll(req, res) {
     try {
-      const roomAvailabilities = await RoomAvailability.findAll({ order: [["id", "ASC"]] });
+      const roomAvailabilities = await RoomAvailability.findAll({
+        order: [["id", "ASC"]],
+      });
       res.status(200).json(roomAvailabilities);
     } catch (e) {
       res.status(500).send();
@@ -58,13 +60,8 @@ export default class RoomAvailabilityController {
       const body = req.body;
       if (!body) return res.status(404).send();
 
-      const [updated] = await RoomAvailability.update(body, { where: { id } });
-      if (updated) {
-        const updatedRoomAvailability = await RoomAvailability.findByPk(id);
-        res.status(200).json(updatedRoomAvailability);
-      } else {
-        res.status(404).send();
-      }
+      await RoomAvailability.update(body, { where: { id } });
+      res.status(200).send();
     } catch (e) {
       res.status(500).send();
     }
