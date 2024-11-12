@@ -12,6 +12,35 @@ const StockModification = sequelize.define(
         isInt: true,
       },
     },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isInt: true,
+      }
+    },
+    employeeId: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      references: {
+        model: "employees",
+        key: "id",
+      }
+    },
+    stockId: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      references: {
+        model: "stock",
+        key: "id",
+      }
+    }
+
   },
   {
     tableName: "stock_modifications",
