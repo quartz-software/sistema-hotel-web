@@ -154,8 +154,6 @@ function defineRelationships() {
     foreignKey: "serviceId",
     as: "service_for_service_room",
   });
-  User.hasOne(Employee, { foreignKey: "userId", as: "employee" });
-  Employee.belongsTo(User, { foreignKey: "userId", as: "user" });
 
   //Modification-stock: stockId
   Stock.hasMany(StockModification, {
@@ -177,12 +175,24 @@ function defineRelationships() {
     as: "employee_for_stock_modification",
   });
   //Task: employeeId
-  Employee.hasMany(Task, { foreignKey: "employeeId", as: "tasks" });
-  Task.belongsTo(Employee, { foreignKey: "employeeId", as: "employee" });
+  Employee.hasMany(Task, {
+    foreignKey: "employeeId",
+    as: "tasks_for_employee",
+  });
+  Task.belongsTo(Employee, {
+    foreignKey: "employeeId",
+    as: "employee_for_task",
+  });
 
   //Task: roomId
-  Room.hasMany(Task, { foreignKey: "roomId", as: "tasks" });
-  Task.belongsTo(Room, { foreignKey: "roomId", as: "room" });
+  Room.hasMany(Task, {
+    foreignKey: "roomId",
+    as: "tasks_for_room",
+  });
+  Task.belongsTo(Room, {
+    foreignKey: "roomId",
+    as: "room_for_tasks",
+  });
 }
 
 defineRelationships();
