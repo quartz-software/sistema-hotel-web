@@ -38,7 +38,17 @@ const models = {
   User,
 };
 
-function defineRelationships() {}
+function defineRelationships() {
+  // RoomRate: roomId
+  Room.hasMany(RoomRate, {
+    foreignKey: "roomId",
+    as: "room_rates_for_room",
+  });
+  RoomRate.belongsTo(Room, {
+    foreignKey: "roomId",
+    as: "room_for_room_rate",
+  });
+}
 
 defineRelationships();
 export { sequelize };
