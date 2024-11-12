@@ -53,7 +53,6 @@ export default class RoomRateController {
       const newRoomRate = await RoomRate.create(body);
       res.status(201).json(newRoomRate);
     } catch (error) {
-      console.log(error);
       res.status(500).send();
     }
   }
