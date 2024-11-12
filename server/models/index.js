@@ -44,12 +44,24 @@ function defineRelationships() {
   Employee.belongsTo(User, { foreignKey: "userId", as: "user" });
 
   //Modification-stock: stockId
-  Stock.hasMany(StockModification, { foreignKey: "stockId", as: "stockModification" });
-  StockModification.belongsTo(Stock, { foreignKey: "stockId", as: "stock" });
+  Stock.hasMany(StockModification, {
+    foreignKey: "stockId",
+    as: "stock_modifications_for_stock",
+  });
+  StockModification.belongsTo(Stock, {
+    foreignKey: "stockId",
+    as: "stock_for_stock_modification",
+  });
 
   //Modification-stock: employeeId
-  Employee.hasMany(StockModification, { foreignKey: "employeeId", as: "stockModification" })
-  StockModification.belongsTo(Employee, { foreignKey: "employeeId", as: "employee" });
+  Employee.hasMany(StockModification, {
+    foreignKey: "employeeId",
+    as: "stock_modifications_for_employee",
+  });
+  StockModification.belongsTo(Employee, {
+    foreignKey: "employeeId",
+    as: "employee_for_stock_modification",
+  });
 }
 
 defineRelationships();
