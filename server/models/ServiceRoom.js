@@ -4,12 +4,18 @@ import sequelize from "../config/db.js";
 const ServiceRoom = sequelize.define(
   "ServiceRoom",
   {
-    id: {
-      type: DataTypes.BIGINT,
-      autoIncrement: true,
-      primaryKey: true,
-      validate: {
-        isInt: true,
+    idService: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "services",
+        key: "id",
+      },
+    },
+    idRoom: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "rooms",
+        key: "id",
       },
     },
   },

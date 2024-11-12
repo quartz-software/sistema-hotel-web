@@ -4,12 +4,18 @@ import sequelize from "../config/db.js";
 const BookingRoom = sequelize.define(
   "BookingRoom",
   {
-    id: {
-      type: DataTypes.BIGINT,
-      autoIncrement: true,
-      primaryKey: true,
-      validate: {
-        isInt: true,
+    idBooking: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "bookings",
+        key: "id",
+      },
+    },
+    idRoom: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "rooms",
+        key: "id",
       },
     },
   },
