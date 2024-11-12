@@ -1,12 +1,13 @@
 .div--filter {
-    display: flex;
-    flex-direction: column;
-    max-width: 350px;
-    margin-bottom: 1em
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  margin-bottom: 1em;
 }
 
 .content--rooms {
-    display: flex;
-    gap: 1em;
-    flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1em;
+  flex-wrap: wrap;
 }
