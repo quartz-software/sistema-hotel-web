@@ -1,4 +1,6 @@
+import sequelize from "../config/db.js";
 import Client from "../models/Client.js";
+import User from "../models/User.js";
 
 export default class ClientController {
   /**
@@ -38,11 +40,19 @@ export default class ClientController {
    * @param {import("express").Response} res
    */
   static async create(req, res) {
+    const transaction = await sequelize.transaction();
     try {
       const body = req.body;
-      const client = await Client.create(body);
-      res.status(201).json(client);
+      const user = body.user;
+      const newUser = await User.create(user);
+
+      const client = body.client;
+      client.userId = newUser.id;
+      const newClient = await Client.create(client);
+      res.status(201).json({ client: newClient, user: newUser });
+      transaction.commit();
     } catch (e) {
+      transaction.rollback();
       res.status(500).send();
     }
   }
