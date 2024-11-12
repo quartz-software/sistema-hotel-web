@@ -39,6 +39,25 @@ const models = {
 };
 
 function defineRelationships() {
+  // RoomRate: roomId
+  Room.hasMany(RoomRate, {
+    foreignKey: "roomId",
+    as: "room_rates_for_room",
+  });
+  RoomRate.belongsTo(Room, {
+    foreignKey: "roomId",
+    as: "room_for_room_rate",
+  });
+
+  // RoomAvailability: roomId
+  Room.hasMany(RoomAvailability, {
+    foreignKey: "roomId",
+    as: "room_availabilities_for_room",
+  });
+  RoomAvailability.belongsTo(Room, {
+    foreignKey: "roomId",
+    as: "room_for_room_availability",
+  });
   //Booking: employeeId
   Employee.hasMany(Booking, {
     foreignKey: "employeeId",
