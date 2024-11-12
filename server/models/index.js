@@ -39,14 +39,25 @@ const models = {
 };
 
 function defineRelationships() {
-
   //Booking: employeeId
-  Employee.hasMany(Booking, { foreignKey: "employeeId", as: "booking" })
-  Booking.belongsTo(Employee, { foreignKey: "employeeId", as: "employee" });
+  Employee.hasMany(Booking, {
+    foreignKey: "employeeId",
+    as: "bookings_for_employee",
+  });
+  Booking.belongsTo(Employee, {
+    foreignKey: "employeeId",
+    as: "employee_for_booking",
+  });
 
   //Booking: clientId
-  Client.hasMany(Booking, { foreignKey: "clientId", as: "booking" })
-  Booking.belongsTo(Client, { foreignKey: "clientId", as: "client" });
+  Client.hasMany(Booking, {
+    foreignKey: "clientId",
+    as: "bookings_for_client",
+  });
+  Booking.belongsTo(Client, {
+    foreignKey: "clientId",
+    as: "client_for_booking",
+  });
 
   // Employee: userId
   User.hasOne(Employee, { foreignKey: "userId", as: "employee" });
