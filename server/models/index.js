@@ -63,6 +63,25 @@ function defineRelationships() {
   User.hasOne(Employee, { foreignKey: "userId", as: "employee" });
   Employee.belongsTo(User, { foreignKey: "userId", as: "user" });
 
+  //Modification-stock: stockId
+  Stock.hasMany(StockModification, {
+    foreignKey: "stockId",
+    as: "stock_modifications_for_stock",
+  });
+  StockModification.belongsTo(Stock, {
+    foreignKey: "stockId",
+    as: "stock_for_stock_modification",
+  });
+
+  //Modification-stock: employeeId
+  Employee.hasMany(StockModification, {
+    foreignKey: "employeeId",
+    as: "stock_modifications_for_employee",
+  });
+  StockModification.belongsTo(Employee, {
+    foreignKey: "employeeId",
+    as: "employee_for_stock_modification",
+  });
   //Task: employeeId
   Employee.hasMany(Task, { foreignKey: "employeeId", as: "tasks" });
   Task.belongsTo(Employee, { foreignKey: "employeeId", as: "employee" });
@@ -70,7 +89,6 @@ function defineRelationships() {
   //Task: roomId
   Room.hasMany(Task, { foreignKey: "roomId", as: "tasks" });
   Task.belongsTo(Room, { foreignKey: "roomId", as: "room" });
-
 }
 
 defineRelationships();
