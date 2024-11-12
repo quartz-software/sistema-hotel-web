@@ -12,6 +12,39 @@ const AdditionalService = sequelize.define(
         isInt: true,
       },
     },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isIn: [
+          [
+            "pending",
+            "accepted",
+            "rejected",
+            "in_progress",
+            "completed",
+            "cancelled",
+            "failed",
+          ],
+        ],
+      },
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    serviceId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    bookingId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     tableName: "additional_services",
