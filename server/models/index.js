@@ -62,6 +62,15 @@ function defineRelationships() {
   // Employee: userId
   User.hasOne(Employee, { foreignKey: "userId", as: "employee" });
   Employee.belongsTo(User, { foreignKey: "userId", as: "user" });
+
+  //Task: employeeId
+  Employee.hasMany(Task, { foreignKey: "employeeId", as: "tasks" });
+  Task.belongsTo(Employee, { foreignKey: "employeeId", as: "employee" });
+
+  //Task: roomId
+  Room.hasMany(Task, { foreignKey: "roomId", as: "tasks" });
+  Task.belongsTo(Room, { foreignKey: "roomId", as: "room" });
+
 }
 
 defineRelationships();
