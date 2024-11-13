@@ -12,7 +12,7 @@ const PaymentDetail = sequelize.define(
         isInt: true,
       },
     },
-    concepts: {
+    concept: {
       type: DataTypes.STRING(255),
       allowNull: false,
     },
