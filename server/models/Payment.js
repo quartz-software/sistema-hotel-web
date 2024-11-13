@@ -12,46 +12,46 @@ const Payment = sequelize.define(
         isInt: true,
       },
     },
-    fechaPago:{
-      type:DataTypes.DATE,
-      allowNull:false,
-      validate:{
-        isDate:true
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isDate: true,
       },
     },
-    montoTotal:{
-      type:DataTypes.DECIMAL(10,2),
-      allowNull:false,
-        validate:{
-          isDecimal:true,
-          min:0.0,
-        }
-    },
-    metodo:{
-      type:DataTypes.STRING(40),
-      allowNull:true,
-      validate:{
-        isIn:["Tarjeta","Efectivo"]
-      }
-    },
-    estado:{
-      type:DataTypes.STRING(40),
-      allowNull:false,
-      validate:{
-        isIn:["Pendiente","Cancealdo"]
-      }
-    },
-    idReserva:{
-      type:DataTypes.BIGINT,
-      allowNull:false,
-      validate:{
-        isInt:true,
+    total: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+      validate: {
+        isDecimal: true,
+        min: 0.0,
       },
-      references:{
-        model:"bookings",
-        key:"id"
-      }
-    }
+    },
+    paymentMethod: {
+      type: DataTypes.STRING(40),
+      allowNull: true,
+      validate: {
+        isIn: ["card", "cash"],
+      },
+    },
+    status: {
+      type: DataTypes.STRING(40),
+      allowNull: false,
+      validate: {
+        isIn: ["pending", "cancelled"],
+      },
+    },
+    bookingId: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      validate: {
+        isInt: true,
+      },
+      references: {
+        model: "bookings",
+        key: "id",
+      },
+    },
   },
   {
     tableName: "payments",

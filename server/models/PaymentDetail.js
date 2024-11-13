@@ -12,29 +12,29 @@ const PaymentDetail = sequelize.define(
         isInt: true,
       },
     },
-    concepto:{
-      type:DataTypes.STRING(255),
-      allowNull:false, 
+    concepts: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
     },
-    monto:{
-      type:DataTypes.DECIMAL(10,2),
-      allowNull:false,
+    amount: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
     },
-    pagado:{
-      type:DataTypes.DECIMAL(10,2),
-      allowNull:false,
-      validate:{
-        min:0.0
-      }  
+    isPaid: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+      validate: {
+        min: 0.0,
+      },
     },
-    idPago:{
-      type:DataTypes.BIGINT,
-      allowNull:false,
-      references:{
-        model:"payments",
-        key:"id"
-      }
-    }
+    paymentId: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      references: {
+        model: "payments",
+        key: "id",
+      },
+    },
   },
   {
     tableName: "payment_details",
