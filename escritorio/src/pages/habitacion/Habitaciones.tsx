@@ -1,42 +1,41 @@
 import Input from "../common/components/Input";
 import CardRoom from "./CardRoom";
 
+import { useEffect, useState } from "react";
+
 import "./Habitaciones.css";
 
-const habitaciones = [
-  {
-    numHab: 101,
-    tipo: "Suite Presidencial",
-    capacida: 4,
-    estado: "Disponible",
-  },
-  {
-    numHab: 102,
-    tipo: "Habitación Doble",
-    capacida: 2,
-    estado: "Reservada",
-  },
-  {
-    numHab: 103,
-    tipo: "Habitación Individual",
-    capacida: 1,
-    estado: "Limpieza",
-  },
-  {
-    numHab: 104,
-    tipo: "Suite Lujo",
-    capacida: 3,
-    estado: "Ocupado",
-  },
-  {
-    numHab: 105,
-    tipo: "Habitación Familiar",
-    capacida: 5,
-    estado: "Disponible",
-  },
-];
 
 const Habitaciones = () => {
+  const [roomsData, setRoomsData] = useState([]);
+
+  function getData() {
+    let url = "http://localhost:8000/api/rooms"
+    let cont = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+    fetch(url, cont)
+      .then((res) => {
+        if (res.status == 200) {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        setRoomsData(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error.toString());
+      });
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <>
       <h1>Habitaciones</h1>
@@ -45,13 +44,10 @@ const Habitaciones = () => {
         <Input placeholder="Buscar" type="search" />
       </div>
       <div className="content--rooms">
-        {habitaciones.map((room, index) => (
+        {roomsData.map((room, index) => (
           <CardRoom
             key={index}
-            numHab={room.numHab}
-            tipo={room.tipo}
-            capacida={room.capacida}
-            estado={room.estado}
+            room={room}
           />
         ))}
       </div>

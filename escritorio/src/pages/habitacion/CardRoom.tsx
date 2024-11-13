@@ -1,32 +1,46 @@
-import { FC } from "react";
+import { FC, MouseEvent } from "react";
 import Button from "../common/components/Button"
 import "./CardRoom.css"
+import { useNavigate } from "react-router-dom";
 
 type Props = {
-    numHab: number;
-    tipo: string;
-    capacida: number;
-    estado: string;
+    room: {
+        id: number;
+        roomNumber: string;
+        type: number;
+        status: string;
+        capacity: string;
+        pricePerNight: string;
+        description: string;
+    }
 }
 
-const CardRoom: FC<Props> = ({ numHab, tipo, capacida, estado }) => {
+const CardRoom: FC<Props> = ({ room }) => {
 
-    const estadoClase = `room--card ${estado.toLowerCase()}`
+    const estadoClase = `room--card ${room.status}`
+    const nav = useNavigate()
+
 
     return (
         <div className={estadoClase}>
             <div>
                 <div className="room--info">
-                    <span className="tag">{estado}</span>
-                    <h1>{numHab}</h1>
-                    <h3>{tipo}</h3>
+                    <span className="tag">{room.status}</span>
+                    <h1>{room.roomNumber}</h1>
+                    <h3>{room.type}</h3>
                     <div>
-                        {capacida} personas
+                        {room.capacity} personas
                     </div>
                 </div>
                 <img src="./room1.jpg" alt="" />
             </div>
-            <Button>
+            <Button
+                handleClick={
+                    function (event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+                        nav("/reserva", { state: { room } })
+                    }
+                }
+                disabled={false} >
                 Reservar
             </Button>
         </div>

@@ -19,7 +19,7 @@
   border-radius: 4px;
 }
 
-.room--card > div {
+.room--card>div {
   display: flex;
 }
 
@@ -33,34 +33,34 @@
   border-radius: 4px;
 }
 
-.room--card.disponible {
+.room--card.available {
   border-color: #4fd22e;
 }
 
-.disponible .tag {
+.available .tag {
   background-color: #4fd22e;
 }
 
-.room--card.limpieza {
+.room--card.cleaning {
   border-color: #017db0;
 }
 
-.limpieza .tag {
+.cleaning .tag {
   background-color: #017db0;
 }
 
-.room--card.reservada {
+.room--card.maintainance {
   border-color: #e3a327;
 }
 
-.reservada .tag {
+.maintainance .tag {
   background-color: #e3a327;
 }
 
-.room--card.ocupado {
+.room--card.occupied {
   border-color: #e32727;
 }
 
-.ocupado .tag {
+.occupied .tag {
   background-color: #e32727;
 }
