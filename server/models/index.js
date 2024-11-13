@@ -39,6 +39,36 @@ const models = {
 };
 
 function defineRelationships() {
+  // Payment: bookingId
+  Booking.hasOne(Payment, {
+    foreignKey: "bookingId",
+    as: "payment_for_booking",
+  });
+  Payment.belongsTo(Booking, {
+    foreignKey: "bookingId",
+    as: "booking_for_payment",
+  });
+
+  // PaymentDetail: paymentId
+  Payment.hasMany(PaymentDetail, {
+    foreignKey: "paymentId",
+    as: "payment_details_for_payment",
+  });
+  PaymentDetail.belongsTo(Payment, {
+    foreignKey: "paymentId",
+    as: "payment_for_payment_detail",
+  });
+
+  // RoomPromotion: roomId
+  Room.hasMany(RoomPromotion, {
+    foreignKey: "roomId",
+    as: "room_promotions_for_room",
+  });
+
+  RoomPromotion.belongsTo(Room, {
+    foreignKey: "roomId",
+    as: "room_for_room_promotion",
+  });
   // RoomRate: roomId
   Room.hasMany(RoomRate, {
     foreignKey: "roomId",
