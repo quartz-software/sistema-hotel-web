@@ -1,4 +1,4 @@
-import { FC, MouseEvent } from "react";
+import { FC } from "react";
 import Button from "../common/components/Button"
 import "./CardRoom.css"
 import { useNavigate } from "react-router-dom";
@@ -36,7 +36,7 @@ const CardRoom: FC<Props> = ({ room }) => {
             </div>
             <Button
                 handleClick={
-                    function (event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+                    function (): void {
                         nav("/reserva", { state: { room } })
                     }
                 }

@@ -25,7 +25,6 @@ const Habitaciones = () => {
       })
       .then((data) => {
         setRoomsData(data);
-        console.log(data);
       })
       .catch((error) => {
         console.error(error.toString());

@@ -4,7 +4,8 @@ import FormField from "../common/components/FormField"
 import Input from "../common/components/Input"
 
 import "./Reserva_Formulario.css"
-import { MouseEvent, useState } from "react"
+import { useEffect, useState } from "react"
+import Cliente_Formulario_Modal from "./Cliente_Formulario_Modal"
 
 type Room = {
     id: string;
@@ -21,6 +22,8 @@ const Reserva_Formulario = () => {
     const location = useLocation();
     const room = location.state?.room as Room
 
+    const [clientsData, setClientsData] = useState([]);
+    const [isModalOpen, setModalOpen] = useState(false);
     const [bookingData, setBookingData] = useState({
         nAdults: 0,
         nChild: 0,
@@ -30,8 +33,8 @@ const Reserva_Formulario = () => {
         status: "pending",
         totalPrice: 0.00,
         bookingOrigin: "",
-        employeeId: null,
-        clientId: null
+        employeeId: 1,
+        clientId: "1"
     })
 
     function calcularDiasEntreFechas() {
@@ -69,13 +72,39 @@ const Reserva_Formulario = () => {
         fetch(url, cont)
             .then((res) => {
                 if (res.status == 200) {
-                    //ocultar modal
+                    nav("/habitaciones")
                 }
             })
             .catch((error) => {
                 console.error(error);
             })
     }
+
+    function getDataClient() {
+        let url = "http://localhost:8000/api/clients"
+        let cont = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+        fetch(url, cont)
+            .then((res) => {
+                if (res.status == 200) {
+                    return res.json();
+                }
+            })
+            .then((data) => {
+                setClientsData(data);
+            })
+            .catch((error) => {
+                console.error(error.toString());
+            });
+    }
+
+    useEffect(() => {
+        getDataClient();
+    }, []);
 
     return (
         <>
@@ -109,6 +138,7 @@ const Reserva_Formulario = () => {
             </div>
 
             <form
+                className="booking-form"
                 onSubmit={(e) => {
                     e.preventDefault();
                 }}
@@ -116,13 +146,24 @@ const Reserva_Formulario = () => {
                 <div className="div--form">
                     <div className="div--form-field">
                         <FormField label="CLIENTE" errorMessage="">
-                            <select name="" id=""
-                                onChange={(e) => {
-                                    setBookingData({ ...bookingData, clientId: parseInt(e.target.value) })
-                                }}
-                            >
-                                <option value="1">Seleccione un cliente</option>
-                            </select>
+                            <div>
+                                <select name="" id=""
+                                    onChange={(e) => {
+                                        setBookingData({ ...bookingData, clientId: e.target.value })
+                                        console.log(e.target.value)
+                                    }}
+                                >
+                                    {clientsData.map((client, index) => (
+                                        <option key={index} value={client.id}>
+                                            {`${client.dni}   |   ${client.firstname} ${client.lastname1} ${client.lastname2}`}
+                                        </option>
+                                    ))}
+                                </select>
+                                <button onClick={() => setModalOpen(true)}>Add</button>
+                                <Cliente_Formulario_Modal
+                                    isOpen={isModalOpen}
+                                    onClose={() => setModalOpen(false)} />
+                            </div>
                         </FormField>
                     </div>
                     <div className="div--form-2">
@@ -141,7 +182,7 @@ const Reserva_Formulario = () => {
                                 <Input
                                     type="number"
                                     handleInput={(value: number) => {
-                                        setBookingData({ ...bookingData, nChil: value })
+                                        setBookingData({ ...bookingData, nChild: value })
                                     }}
                                 />
                             </FormField>
@@ -156,6 +197,7 @@ const Reserva_Formulario = () => {
                                     type="date"
                                     handleInput={(value: Date) => {
                                         setBookingData({ ...bookingData, checkIn: new Date(value) })
+                                        console.log(value);
                                     }}
                                     onChange={(value: Date) => {
                                         console.log(value);
@@ -172,11 +214,11 @@ const Reserva_Formulario = () => {
                                 <Input
                                     type="date"
                                     handleInput={(value: Date) => {
-                                        setBookingData({ ...bookingData, checkIn: new Date(value) })
+                                        setBookingData({ ...bookingData, checkOut: new Date(value) })
                                     }}
                                     onChange={(value: Date) => {
                                         console.log(value);
-                                        setBookingData({ ...bookingData, checkIn: new Date(value) })
+                                        setBookingData({ ...bookingData, checkOut: new Date(value) })
                                     }}
                                     resetMessage={() => {
                                         console.log("no reset");
@@ -213,9 +255,7 @@ const Reserva_Formulario = () => {
                             <FormField label="DESCUENTO:" errorMessage=" ">
                                 <Input
                                     type="number"
-                                    handleInput={(value: number) => {
-                                        console.log("Descuento", value);
-                                    }}
+                                    handleInput={() => { }}
                                 />
                             </FormField>
                         </div>
