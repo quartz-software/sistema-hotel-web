@@ -6,6 +6,7 @@ import Layout from "./pages/common/Layout";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Habitaciones from "./pages/habitacion/Habitaciones";
+import Reserva_Formulario from "./pages/reserva/Reserva_Formulario";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="Habitaciones" element={<Habitaciones />} />
+          <Route path="reserva" element={<Reserva_Formulario />} />
         </Route>
       </Routes>
     </BrowserRouter>

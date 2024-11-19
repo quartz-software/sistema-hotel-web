@@ -24,6 +24,9 @@ const Reserva_Formulario = () => {
 
     const [clientsData, setClientsData] = useState([]);
     const [isModalOpen, setModalOpen] = useState(false);
+    const [roomData, serRoomData] = useState({
+        status: "occupied"
+    })
     const [bookingData, setBookingData] = useState({
         nAdults: 0,
         nChild: 0,
@@ -46,6 +49,29 @@ const Reserva_Formulario = () => {
         const diferenciaEnDias = diferenciaEnMilisegundos / (1000 * 60 * 60 * 24);
 
         return Math.round(diferenciaEnDias);
+    }
+    function postDataRoom() {
+        let url = `http://localhost:8000/api/rooms/${room.id}`;
+        console.log(url)
+        let cont = {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                status: roomData.status
+            })
+        };
+
+        fetch(url, cont)
+            .then((res) => {
+                if (res.status == 200) {
+                    nav("/habitaciones")
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            })
     }
 
     function postData() {
@@ -159,10 +185,16 @@ const Reserva_Formulario = () => {
                                         </option>
                                     ))}
                                 </select>
-                                <button onClick={() => setModalOpen(true)}>Add</button>
-                                <Cliente_Formulario_Modal
-                                    isOpen={isModalOpen}
-                                    onClose={() => setModalOpen(false)} />
+                                <Button disabled={false}
+                                    handleClick={() => {
+                                        setModalOpen(true)
+                                    }}>
+                                    +
+                                </Button>
+                                {
+                                    isModalOpen ?
+                                        <Cliente_Formulario_Modal /> : <></>
+                                }
                             </div>
                         </FormField>
                     </div>
@@ -199,10 +231,6 @@ const Reserva_Formulario = () => {
                                         setBookingData({ ...bookingData, checkIn: new Date(value) })
                                         console.log(value);
                                     }}
-                                    onChange={(value: Date) => {
-                                        console.log(value);
-                                        setBookingData({ ...bookingData, checkIn: new Date(value) })
-                                    }}
                                     resetMessage={() => {
                                         console.log("no reset");
                                     }}
@@ -214,10 +242,6 @@ const Reserva_Formulario = () => {
                                 <Input
                                     type="date"
                                     handleInput={(value: Date) => {
-                                        setBookingData({ ...bookingData, checkOut: new Date(value) })
-                                    }}
-                                    onChange={(value: Date) => {
-                                        console.log(value);
                                         setBookingData({ ...bookingData, checkOut: new Date(value) })
                                     }}
                                     resetMessage={() => {
@@ -264,7 +288,10 @@ const Reserva_Formulario = () => {
                 <div className="div--form">
                     <Button
                         disabled={false}
-                        handleClick={postData}
+                        handleClick={() => {
+                            postDataRoom()
+                            postData()
+                        }}
                     >
                         Reservar
                     </Button>

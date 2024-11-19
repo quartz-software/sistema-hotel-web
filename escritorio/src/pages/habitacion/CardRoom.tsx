@@ -20,12 +20,20 @@ const CardRoom: FC<Props> = ({ room }) => {
     const estadoClase = `room--card ${room.status}`
     const nav = useNavigate()
 
+    let cTag = ""
+    if (room.status == "available") {
+        cTag = "Disponible"
+    }
+    else if (room.status == "occupied") {
+        cTag = "Ocupado"
+    }
+
 
     return (
         <div className={estadoClase}>
             <div>
                 <div className="room--info">
-                    <span className="tag">{room.status}</span>
+                    <span className="tag">{cTag}</span>
                     <h1>{room.roomNumber}</h1>
                     <h3>{room.type}</h3>
                     <div>

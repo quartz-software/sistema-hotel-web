@@ -10,6 +10,9 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
+
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
 .modal-container {
@@ -27,17 +30,6 @@
     color: black;
 }
 
-.modal-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: black;
-}
-
 .modal-content>form {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -51,4 +43,9 @@
     grid-column-end: 3;
     justify-content: right;
     gap: 1em;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
 }

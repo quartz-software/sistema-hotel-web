@@ -10,6 +10,9 @@
   border-radius: 0 0 8px 8px;
 
   border-top: solid 5px black;
+
+  /* Aplicar un box-shadow */
+  box-shadow: 0 0 10px rgba(0, 0, 0, .3)
 }
 
 .room--card .tag {

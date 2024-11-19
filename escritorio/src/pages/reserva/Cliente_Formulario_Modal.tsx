@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import Button from "../common/components/Button";
 import FormField from "../common/components/FormField";
 import Input from "../common/components/Input";
 import "./Cliente_Formulario.css"
 
-const Cliente_Formulario_Modal = ({ isOpen, onClose }) => {
+type Props = {
+    isOpen: Function
+}
+
+
+const Cliente_Formulario_Modal = () => {
 
     const [userData, setUserData] = useState({
         email: "",
-        password: "securePassword123",
+        password: "",
         role: "client"
     })
     const [clientData, setClientData] = useState({
@@ -51,19 +56,16 @@ const Cliente_Formulario_Modal = ({ isOpen, onClose }) => {
             })
         };
 
-        console.log(cont.body);
         fetch(url, cont)
             .then((res) => {
                 if (res.status == 201) {
-                    //onClose()
+                    // cerrar modal
                 }
             })
             .catch((error) => {
                 console.error(error);
             })
     }
-
-    if (!isOpen) return null;
 
     return (
         <div className="modal-overlay">
@@ -156,7 +158,7 @@ const Cliente_Formulario_Modal = ({ isOpen, onClose }) => {
                         <div className="div--btns">
                             <Button disabled={false}
                                 handleClick={() => {
-                                    onClose()
+                                    console.log("Cerra modal");
                                 }}>
                                 Cerrar
                             </Button>
