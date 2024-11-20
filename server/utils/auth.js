@@ -1,33 +1,32 @@
 import bcrypt from "bcrypt";
-import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 
-export async function createUser({ password, email }) {
+export async function encryptPassword(password) {
   const rounds = 10;
-  const encrypted = await bcrypt.hash(password, rounds);
-
-  const newUser = await User.create({
-    email,
-    password: encrypted,
-    role: "client",
-    status: "active",
-  });
-  await newUser.save();
-  return newUser;
+  const encryptedPassword = await bcrypt.hash(password, rounds);
+  return encryptedPassword;
 }
 
-export async function authUser(password, encrypted) {
-  const esValida = await bcrypt.compare(password, encrypted);
-  return esValida;
-}
-
-export async function validateUser(token) {
-  const isValid = jwt.verify(token, process.env.SECRET);
+export async function authUser(userModel, password) {
+  const isValid = await bcrypt.compare(password, userModel.password);
   return isValid;
+}
+
+export async function createToken(userModel) {
+  let payload = { id: userModel.id, role: userModel.role };
+  let secret = process.env.SECRET;
+  let token = jwt.sign(payload, secret);
+  return token;
+}
+
+export async function validateToken(token) {
+  const payload = jwt.verify(token, process.env.SECRET);
+  return payload;
 }
 
 export default {
   authUser,
-  createUser,
-  validateToken: validateUser,
+  encryptPassword,
+  validateToken,
+  createToken,
 };
