@@ -6,6 +6,7 @@ import Layout from "./pages/common/Layout";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Habitaciones from "./pages/habitacion/Habitaciones";
+import Habitaciones_admin from "./pages/habitacion/Habitaciones_admin";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Route path="services" element={<Services />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="Habitaciones" element={<Habitaciones />} />
+          <Route path="Habitaciones" element={<Habitaciones_admin />} />
         </Route>
       </Routes>
     </BrowserRouter>

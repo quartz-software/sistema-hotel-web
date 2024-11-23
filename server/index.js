@@ -76,6 +76,15 @@ async function init() {
       userId: clientUser.id,
     });
 
+    const room1 = await Room.create({
+      roomNumber: 101,
+      type: "normal",
+      pricePerNight: 100.99,
+      status: "available",
+      capacity: 1,
+      description: "Habitacion normal"
+    })
+
     await Service.bulkCreate([
       {
         name: "Room Service",
