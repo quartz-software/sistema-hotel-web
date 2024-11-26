@@ -15,10 +15,10 @@ const Task = sequelize.define(
     status: {
       type: DataTypes.STRING(15),
       allowNull: false,
-      defaultValue: 'pendiente',
+      defaultValue: "pendiente",
       validate: {
-        isIn: [['pendiente', 'en progreso', 'completada']],
-      }
+        isIn: [["pending", "in_progress", "completed"]],
+      },
     },
     description: {
       type: DataTypes.TEXT,
@@ -27,7 +27,7 @@ const Task = sequelize.define(
     dateCreate: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW
+      defaultValue: DataTypes.NOW,
     },
     dateStart: {
       type: DataTypes.DATE,
