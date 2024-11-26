@@ -4,6 +4,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { fileURLToPath } from "url";
 import router from "./router.js";
+import uploads from "./routes/uploads.js";
 import cookieParser from "cookie-parser";
 import env from "dotenv";
 env.config();
@@ -18,5 +19,6 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(Express.static(path.join(__dirname, "dist")));
 app.use("/api", router);
+app.use("/uploads", uploads);
 
 export default app;
