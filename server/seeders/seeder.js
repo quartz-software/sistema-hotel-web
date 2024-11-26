@@ -15,14 +15,13 @@ export default class Seeder {
   static async Seed() {
     try {
       await sequelize.sync({ force: true });
+      await this.SeedEmployees();
+      await this.SeedClients();
+      await this.SeedRooms();
+      await this.SeedServices();
+      await this.SeedBookings();
+      await this.SeedAdditionalServices();
     } catch (error) {}
-
-    await this.SeedEmployees();
-    await this.SeedClients();
-    await this.SeedRooms();
-    await this.SeedServices();
-    await this.SeedBookings();
-    await this.SeedAdditionalServices();
   }
   static async SeedEmployees() {
     const usersAndEmployees = [
@@ -475,20 +474,20 @@ export default class Seeder {
 
     const servicesRooms = [
       {
-        idRoom: 1,
-        idService: 1,
+        roomId: 1,
+        serviceId: 1,
       },
       {
-        idRoom: 1,
-        idService: 3,
+        roomId: 1,
+        serviceId: 3,
       },
       {
-        idRoom: 1,
-        idService: 2,
+        roomId: 1,
+        serviceId: 2,
       },
       {
-        idRoom: 3,
-        idService: 1,
+        roomId: 3,
+        serviceId: 1,
       },
     ];
     await ServiceRoom.bulkCreate(servicesRooms);
@@ -740,36 +739,36 @@ export default class Seeder {
     await Booking.bulkCreate(bookings);
 
     const bookingRooms = [
-      { idBooking: 1, idRoom: 1 },
-      { idBooking: 2, idRoom: 2 },
-      { idBooking: 3, idRoom: 3 },
-      { idBooking: 4, idRoom: 4 },
-      { idBooking: 5, idRoom: 5 },
-      { idBooking: 6, idRoom: 6 },
-      { idBooking: 7, idRoom: 7 },
-      { idBooking: 8, idRoom: 8 },
-      { idBooking: 9, idRoom: 9 },
-      { idBooking: 10, idRoom: 10 },
-      { idBooking: 11, idRoom: 11 },
-      { idBooking: 12, idRoom: 12 },
-      { idBooking: 13, idRoom: 13 },
-      { idBooking: 14, idRoom: 14 },
-      { idBooking: 15, idRoom: 15 },
+      { bookingId: 1, roomId: 1 },
+      { bookingId: 2, roomId: 2 },
+      { bookingId: 3, roomId: 3 },
+      { bookingId: 4, roomId: 4 },
+      { bookingId: 5, roomId: 5 },
+      { bookingId: 6, roomId: 6 },
+      { bookingId: 7, roomId: 7 },
+      { bookingId: 8, roomId: 8 },
+      { bookingId: 9, roomId: 9 },
+      { bookingId: 10, roomId: 10 },
+      { bookingId: 11, roomId: 11 },
+      { bookingId: 12, roomId: 12 },
+      { bookingId: 13, roomId: 13 },
+      { bookingId: 14, roomId: 14 },
+      { bookingId: 15, roomId: 15 },
       // Reservación 16: Asocia dos habitaciones
-      { idBooking: 16, idRoom: 1 },
-      { idBooking: 16, idRoom: 2 },
+      { bookingId: 16, roomId: 1 },
+      { bookingId: 16, roomId: 2 },
       // Reservación 17: Asocia dos habitaciones
-      { idBooking: 17, idRoom: 3 },
-      { idBooking: 17, idRoom: 4 },
+      { bookingId: 17, roomId: 3 },
+      { bookingId: 17, roomId: 4 },
       // Reservación 18: Asocia dos habitaciones
-      { idBooking: 18, idRoom: 5 },
-      { idBooking: 18, idRoom: 6 },
+      { bookingId: 18, roomId: 5 },
+      { bookingId: 18, roomId: 6 },
       // Reservación 19: Asocia dos habitaciones
-      { idBooking: 19, idRoom: 7 },
-      { idBooking: 19, idRoom: 8 },
+      { bookingId: 19, roomId: 7 },
+      { bookingId: 19, roomId: 8 },
       // Reservación 20: Asocia dos habitaciones
-      { idBooking: 20, idRoom: 9 },
-      { idBooking: 20, idRoom: 10 },
+      { bookingId: 20, roomId: 9 },
+      { bookingId: 20, roomId: 10 },
     ];
     BookingRoom.bulkCreate(bookingRooms);
   }

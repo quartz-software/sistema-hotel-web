@@ -22,6 +22,12 @@ const RoomRoomPromotion = sequelize.define(
     },
   },
   {
+    indexes: [
+      {
+        unique: true,
+        fields: ["roomId", "roomPromotionId"],
+      },
+    ],
     tableName: "room_room_promotions",
     timestamps: false,
   }

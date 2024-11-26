@@ -64,20 +64,28 @@ function defineRelationships() {
   // RoomPromotion: roomId
   Room.belongsToMany(RoomPromotion, {
     through: RoomRoomPromotion,
+    foreignKey: "roomId",
+    otherKey: "roomPromotionId",
     as: "room_promotions",
   });
   RoomPromotion.belongsToMany(Room, {
     through: RoomRoomPromotion,
+    foreignKey: "roomPromotionsId",
+    otherKey: "roomId",
     as: "rooms",
   });
 
   // RoomRate: roomId
   Room.belongsToMany(RoomRate, {
     through: RoomRoomRate,
+    foreignKey: "roomId",
+    otherKey: "roomRateId",
     as: "room_rates",
   });
   RoomRate.belongsToMany(Room, {
     through: RoomRoomRate,
+    foreignKey: "roomRateId",
+    otherKey: "roomId",
     as: "rooms",
   });
 
@@ -141,16 +149,17 @@ function defineRelationships() {
 
   // BookingRoom: bookingId
   Booking.belongsToMany(Room, {
-    foreignKey: "bookingId",
     through: BookingRoom,
+    foreignKey: "bookingId",
+    otherKey: "roomId",
     as: "rooms",
   });
   Room.belongsToMany(Booking, {
-    foreignKey: "bookingId",
     through: BookingRoom,
+    foreignKey: "roomId",
+    otherKey: "bookingId",
     as: "bookings",
   });
-
   // RoomImage: roomId
   Room.hasMany(RoomImage, {
     foreignKey: "roomId",
@@ -163,10 +172,14 @@ function defineRelationships() {
 
   // ServiceRoom: roomId
   Room.belongsToMany(Service, {
+    foreignKey: "roomId",
+    otherKey: "serviceId",
     through: ServiceRoom,
     as: "services",
   });
   Service.belongsToMany(Room, {
+    foreignKey: "serviceId",
+    otherKey: "roomId",
     through: ServiceRoom,
     as: "rooms",
   });

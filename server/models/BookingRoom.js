@@ -20,6 +20,12 @@ const BookingRoom = sequelize.define(
     },
   },
   {
+    indexes: [
+      {
+        unique: true,
+        fields: ["bookingId", "roomId"],
+      },
+    ],
     tableName: "bookings_rooms",
     timestamps: false,
   }
