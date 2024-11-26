@@ -4,6 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "seed": "node ./seeders/seeder.js",
     "dev": "nodemon index.js",
     "start": "node index.js"
   },
