@@ -29,14 +29,6 @@ const RoomRate = sequelize.define(
       allowNull: false,
       defaultValue: false,
     },
-    roomId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        key: "id",
-        model: "rooms",
-      },
-    },
   },
   {
     tableName: "room_rates",
