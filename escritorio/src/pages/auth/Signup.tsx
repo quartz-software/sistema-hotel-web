@@ -50,7 +50,7 @@ const Signup = () => {
         }
         setIsFetching(false);
       })
-      .catch((error) => {});
+      .catch(() => {});
   }
   return (
     <form
@@ -73,6 +73,7 @@ const Signup = () => {
           resetMessage={() => {
             setEmailMessage("");
           }}
+          value={userData.email}
         />
       </FormField>
       <FormField label="Contraseña" errorMessage={passwordMessage}>
@@ -86,6 +87,7 @@ const Signup = () => {
           resetMessage={() => {
             setPasswordMessage("");
           }}
+          value={userData.password}
         />
       </FormField>
       <Button disabled={false} handleClick={postData}>
