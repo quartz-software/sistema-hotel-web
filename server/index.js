@@ -76,14 +76,72 @@ async function init() {
       userId: clientUser.id,
     });
 
-    const room1 = await Room.create({
-      roomNumber: 101,
-      type: "normal",
-      pricePerNight: 100.99,
-      status: "available",
-      capacity: 1,
-      description: "Habitacion normal"
-    })
+    await Room.bulkCreate([
+      {
+        roomNumber: 101,
+        type: "normal",
+        pricePerNight: 100.99,
+        status: "available",
+        capacity: 1,
+        description: "Habitación normal con una cama individual y comodidades básicas."
+      },
+      {
+        roomNumber: 102,
+        type: "suite",
+        pricePerNight: 299.99,
+        status: "occupied",
+        capacity: 4,
+        description: "Suite de lujo con dos habitaciones, sala de estar y jacuzzi."
+      },
+      {
+        roomNumber: 103,
+        type: "premium",
+        pricePerNight: 199.99,
+        status: "maintainance",
+        capacity: 2,
+        description: "Habitación premium con balcón y vistas al mar."
+      },
+      {
+        roomNumber: 104,
+        type: "normal",
+        pricePerNight: 120.50,
+        status: "cleaning",
+        capacity: 2,
+        description: "Habitación normal con dos camas individuales."
+      },
+      {
+        roomNumber: 105,
+        type: "suite",
+        pricePerNight: 349.00,
+        status: "available",
+        capacity: 6,
+        description: "Suite presidencial con comedor privado y acceso VIP."
+      },
+      {
+        roomNumber: 106,
+        type: "normal",
+        pricePerNight: 110.00,
+        status: "available",
+        capacity: 1,
+        description: "Habitación económica con acceso a internet y televisión por cable."
+      },
+      {
+        roomNumber: 107,
+        type: "premium",
+        pricePerNight: 180.75,
+        status: "occupied",
+        capacity: 3,
+        description: "Habitación premium con cama king size y minibar incluido."
+      },
+      {
+        roomNumber: 108,
+        type: "suite",
+        pricePerNight: 275.50,
+        status: "cleaning",
+        capacity: 5,
+        description: "Suite familiar con cocina pequeña y dos baños."
+      }
+    ]);
 
     await Service.bulkCreate([
       {
