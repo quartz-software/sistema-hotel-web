@@ -1,29 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./components/Services.css";
 import ServiceModal from "./components/ServiceModal";
 import ServiceList from "./components/ServiceList";
-
-interface Service {
-  id: number;
-  name: string;
-  description?: string;
-  restrictions?: string;
-  type: string;
-  currency: string;
-  price: number;
-  openHour: string;
-  closeHour: string;
-  available: boolean;
-}
 
 const Services: React.FC = () => {
   const [services, setServices] = useState<Service[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleAddService = (service: Omit<Service, "id">) => {
+  const handleAddService = (service: Service) => {
     const newService: Service = { ...service, id: Date.now() };
-    setServices([...services, newService]);
-    setIsModalOpen(false);
+    fetch("/api/services", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newService),
+    })
+      .then((res) => {
+        if (res.status === 200) return res.json();
+      })
+      .then((data: Service) => {
+        newService.id = data.id;
+        setServices([...services, newService]);
+        setIsModalOpen(false);
+      });
   };
 
   const handleDeleteService = (id: number) => {
@@ -37,6 +37,34 @@ const Services: React.FC = () => {
       )
     );
   };
+
+  useEffect(() => {
+    fetch("/api/services")
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((data: Service[]) => {
+        let result: Service[] = [];
+        data.forEach((i) => {
+          result.push({
+            id: i.id,
+            name: i.name,
+            description: i.description,
+            restrictions: i.restrictions,
+            type: i.type,
+            currency: i.currency,
+            price: i.price,
+            openHour: i.openHour,
+            closeHour: i.closeHour,
+            available: i.available,
+          });
+        });
+
+        setServices(result);
+      });
+  }, []);
 
   return (
     <div className="services-container">
