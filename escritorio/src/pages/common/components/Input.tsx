@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import "./Input.css";
 
 type Props = {
@@ -6,7 +6,8 @@ type Props = {
   handleInput: Function;
   type: string;
   resetMessage: Function;
-  autocomplete: "email" | "current-password" | "new-password";
+  autocomplete?: "email" | "current-password" | "new-password";
+  value: string,
 };
 
 const Input: FC<Props> = ({
@@ -15,16 +16,15 @@ const Input: FC<Props> = ({
   type,
   resetMessage,
   autocomplete,
+  value,
 }) => {
-  const [value, setValue] = useState("");
   return (
     <input
-      autoComplete={autocomplete}
+      autoComplete={autocomplete ? autocomplete : ""}
       className="input"
       onInput={(e) => {
         const target = e.target as HTMLInputElement;
         const result = target.value.trim();
-        setValue(result);
         handleInput(result);
         resetMessage();
       }}

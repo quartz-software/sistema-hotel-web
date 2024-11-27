@@ -1,23 +1,17 @@
-.form{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 1rem;
+.form--room {
+    max-width: 500px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
 }
 
-.form__div{
+.form__div {
     display: flex;
     flex-direction: column;
     margin-right: 15rem;
 }
-.form__input{
-    border-radius: 0.5rem;
-    width: 15rem;
-    background-color: transparent;
 
-}
-
-.form__btn{
+.form__btn {
     align-self: self-end;
 }
-
-

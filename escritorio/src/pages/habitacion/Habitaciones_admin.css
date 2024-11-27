@@ -1,8 +1,9 @@
 .div--filter {
     display: flex;
-    flex-direction: column;
-    max-width: 350px;
+    width: 100%;
     margin-bottom: 1em;
+    align-items: end;
+    justify-content: space-between;
 }
 
 .table--rooms {
@@ -34,7 +35,7 @@
     background-color: rgba(150, 200, 220, .05);
 }
 
-.td--btn {
+.table--rooms tr>td:last-child {
     text-align: center;
 }
 

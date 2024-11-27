@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPen } from "@fortawesome/free-solid-svg-icons"
 
 import "./Habitaciones_admin.css"
+import { useNavigate } from "react-router-dom";
+import FormField from "../common/components/FormField";
 
 type Room = {
     id: string,
@@ -17,16 +19,11 @@ type Room = {
 }
 
 const Habitaciones_admin = () => {
+    const nav = useNavigate()
     const [roomsData, setRoomsData] = useState([]);
     function getData() {
-        let url = "http://localhost:8000/api/rooms"
-        let cont = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }
-        fetch(url, cont)
+        let url = "/api/rooms"
+        fetch(url)
             .then((res) => {
                 if (res.status == 200) {
                     return res.json();
@@ -47,20 +44,33 @@ const Habitaciones_admin = () => {
         <>
             <h1>Habitaciones</h1>
             <div className="div--filter">
-                <label>Buscar</label>
-                <Input placeholder="Buscar" type="search" />
+                <FormField label="Buscar" errorMessage="">
+                    <Input
+                        handleInput={() => { }}
+                        resetMessage={() => { }}
+                        placeholder="Buscar"
+                        type="search"
+                        value=""
+                    />
+                </FormField>
+                <Button disabled={false} handleClick={() => {
+                    nav(`/habitaciones/form`)
+                }}>
+                    Agregar
+                </Button>
             </div>
             <table className="table--rooms">
                 <thead>
                     <th>Id</th>
-                    <th>Num</th>
+                    <th>Numero</th>
                     <th>Tipo</th>
                     <th>Capacidad</th>
                     <th>Precio/noche</th>
+                    <th>Estado</th>
                     <th></th>
                 </thead>
                 {
-                    roomsData.length != 0 ?
+                    roomsData.length == 0 ?
                         <div className="div--nd">No se encomtraron cuartos</div>
                         :
                         <tbody>
@@ -73,9 +83,10 @@ const Habitaciones_admin = () => {
                                             <td>{habitacion.type}</td>
                                             <td>{habitacion.capacity}</td>
                                             <td>{habitacion.pricePerNight}</td>
-                                            <td className="td--btn">
+                                            <td>{habitacion.status}</td>
+                                            <td>
                                                 <Button disabled={false} handleClick={() => {
-                                                    console.log(habitacion);
+                                                    nav(`/habitaciones/form?id=${habitacion.id}`)
                                                 }}>
                                                     <FontAwesomeIcon icon={faPen} />
                                                 </Button>
