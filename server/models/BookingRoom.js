@@ -4,14 +4,14 @@ import sequelize from "../config/db.js";
 const BookingRoom = sequelize.define(
   "BookingRoom",
   {
-    idBooking: {
+    bookingId: {
       type: DataTypes.INTEGER,
       references: {
         model: "bookings",
         key: "id",
       },
     },
-    idRoom: {
+    roomId: {
       type: DataTypes.INTEGER,
       references: {
         model: "rooms",
@@ -20,6 +20,12 @@ const BookingRoom = sequelize.define(
     },
   },
   {
+    indexes: [
+      {
+        unique: true,
+        fields: ["bookingId", "roomId"],
+      },
+    ],
     tableName: "bookings_rooms",
     timestamps: false,
   }
