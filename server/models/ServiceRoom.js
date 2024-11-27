@@ -4,14 +4,14 @@ import sequelize from "../config/db.js";
 const ServiceRoom = sequelize.define(
   "ServiceRoom",
   {
-    idService: {
+    serviceId: {
       type: DataTypes.INTEGER,
       references: {
         model: "services",
         key: "id",
       },
     },
-    idRoom: {
+    roomId: {
       type: DataTypes.INTEGER,
       references: {
         model: "rooms",
@@ -20,6 +20,12 @@ const ServiceRoom = sequelize.define(
     },
   },
   {
+    indexes: [
+      {
+        unique: true,
+        fields: ["serviceId", "roomId"],
+      },
+    ],
     tableName: "services_rooms",
     timestamps: false,
   }
