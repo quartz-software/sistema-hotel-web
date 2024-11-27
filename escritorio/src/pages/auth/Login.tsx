@@ -56,13 +56,13 @@ const Login = () => {
         }
         setIsFetching(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setIsFetching(false);
       });
   }
 
   return (
-    <form className="form login-form">
+    <form className="form login-form" onSubmit={(e) => e.preventDefault()}>
       <img className="login-form__img" src={Llamarada} alt="LLamarada" />
       <h2 className="login-form__title">Inicia Sesion</h2>
       <p className="login-form__register">
@@ -82,6 +82,7 @@ const Login = () => {
           resetMessage={() => {
             setEmailMessage("");
           }}
+          value={userData.email}
         />
       </FormField>
       <FormField label="Contraseña" errorMessage={passwordMessage}>
@@ -95,6 +96,7 @@ const Login = () => {
           resetMessage={() => {
             setPasswordMessage("");
           }}
+          value={userData.password}
         />
       </FormField>
       <p className="login-form__reset-password">

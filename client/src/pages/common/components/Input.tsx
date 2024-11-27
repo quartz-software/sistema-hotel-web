@@ -1,12 +1,21 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import "./Input.css";
 
 type Props = {
   placeholder?: string;
   handleInput: Function;
-  type: string;
+  type:
+    | "text"
+    | "password"
+    | "email"
+    | "tel"
+    | "number"
+    | "file"
+    | "checkbox"
+    | "radio";
   resetMessage: Function;
-  autocomplete: "email" | "current-password" | "new-password";
+  autocomplete?: "email" | "current-password" | "new-password";
+  value: string | boolean;
 };
 
 const Input: FC<Props> = ({
@@ -15,22 +24,32 @@ const Input: FC<Props> = ({
   type,
   resetMessage,
   autocomplete,
+  value,
 }) => {
-  const [value, setValue] = useState("");
+  function handleResult(value: string | boolean) {
+    resetMessage();
+    handleInput(value);
+  }
   return (
     <input
       autoComplete={autocomplete}
       className="input"
       onInput={(e) => {
+        if (type === "checkbox" || type === "radio") return;
         const target = e.target as HTMLInputElement;
-        const result = target.value.trim();
-        setValue(result);
-        handleInput(result);
-        resetMessage();
+        const result = target.value;
+        handleResult(result);
       }}
       type={type}
+      checked={typeof value === "boolean" ? value : false}
+      onChange={(e) => {
+        if (type !== "checkbox" && type !== "radio") return;
+        const target = e.target as HTMLInputElement;
+        const result = target.checked;
+        handleResult(result);
+      }}
       placeholder={placeholder ? placeholder : ""}
-      value={value}
+      value={typeof value !== "string" ? "" : value}
     />
   );
 };
