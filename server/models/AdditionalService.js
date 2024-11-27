@@ -40,10 +40,26 @@ const AdditionalService = sequelize.define(
     serviceId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        key: "id",
+        model: "services",
+      },
     },
     bookingId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        key: "id",
+        model: "bookings",
+      },
+    },
+    roomId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        key: "id",
+        model: "rooms",
+      },
     },
   },
   {
