@@ -11,6 +11,7 @@ type Props = {
     | "tel"
     | "number"
     | "file"
+    | "date"
     | "checkbox"
     | "radio";
   resetMessage: Function;
