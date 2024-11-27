@@ -1,9 +1,9 @@
-.div--filter {
+.div--search {
     display: flex;
     width: 100%;
-    margin-bottom: 1em;
     align-items: end;
     justify-content: space-between;
+    margin-bottom: 1em;
 }
 
 .table--rooms {

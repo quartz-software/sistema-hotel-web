@@ -32,6 +32,21 @@ const Layout = () => {
               habitaciones
             </Link>
           </li>
+          <li className="navbar__item">
+            <Link className="navbar__link" to="admin/habitaciones">
+              habitaciones Admin
+            </Link>
+          </li>
+          <li className="navbar__item">
+            <Link className="navbar__link" to="admin/habitaciones">
+              Tarifas
+            </Link>
+          </li>
+          <li className="navbar__item">
+            <Link className="navbar__link" to="admin/habitaciones">
+              Promociones
+            </Link>
+          </li>
         </ul>
       </nav>
       <div id="content">

@@ -18,8 +18,9 @@ function App() {
           <Route path="services" element={<Services />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="habitaciones" element={<Habitaciones_admin />} />
-          <Route path="/habitaciones/form" element={<Habitaciones_formulario />} />
+          <Route path="habitaciones" element={<Habitaciones />} />
+          <Route path="admin/habitaciones" element={<Habitaciones_admin />} />
+          <Route path="admin/habitaciones/form" element={<Habitaciones_formulario />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -43,7 +43,7 @@ const Habitaciones_admin = () => {
     return (
         <>
             <h1>Habitaciones</h1>
-            <div className="div--filter">
+            <div className="div--search">
                 <FormField label="Buscar" errorMessage="">
                     <Input
                         handleInput={() => { }}
@@ -54,7 +54,7 @@ const Habitaciones_admin = () => {
                     />
                 </FormField>
                 <Button disabled={false} handleClick={() => {
-                    nav(`/habitaciones/form`)
+                    nav(`/admin/habitaciones/form`)
                 }}>
                     Agregar
                 </Button>
@@ -73,7 +73,7 @@ const Habitaciones_admin = () => {
                     roomsData.length == 0 ?
                         <div className="div--nd">No se encomtraron cuartos</div>
                         :
-                        <tbody>
+                        <tbody >
                             {
                                 roomsData.map((habitacion: Room) => {
                                     return (
@@ -86,7 +86,7 @@ const Habitaciones_admin = () => {
                                             <td>{habitacion.status}</td>
                                             <td>
                                                 <Button disabled={false} handleClick={() => {
-                                                    nav(`/habitaciones/form?id=${habitacion.id}`)
+                                                    nav(`/admin/habitaciones/form?id=${habitacion.id}`)
                                                 }}>
                                                     <FontAwesomeIcon icon={faPen} />
                                                 </Button>

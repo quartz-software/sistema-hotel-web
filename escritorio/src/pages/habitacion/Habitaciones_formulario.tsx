@@ -61,7 +61,7 @@ const Habitaciones_formulario = () => {
         fetch(url, cont)
             .then((res) => {
                 if (res.status == 200 || res.status == 201) {
-                    navigate("/habitaciones")
+                    navigate("/admim/habitaciones")
                 }
             })
             .catch((error) => {
@@ -161,7 +161,7 @@ const Habitaciones_formulario = () => {
                 <Button
                     disabled={false}
                     handleClick={() => {
-                        navigate("/habitaciones")
+                        navigate("/admin/habitaciones")
                     }}>
                     Cancelar
                 </Button>
