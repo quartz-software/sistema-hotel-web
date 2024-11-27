@@ -12,6 +12,23 @@ const RoomRate = sequelize.define(
         isInt: true,
       },
     },
+    startDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    endDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    pricePerNight: {
+      type: DataTypes.DECIMAL(6, 2),
+      allowNull: false,
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   },
   {
     tableName: "room_rates",

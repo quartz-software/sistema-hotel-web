@@ -1,13 +1,20 @@
 import { Router } from "express";
-import Room from "../models/Room.js";
-import { where } from "sequelize";
 import RoomController from "../controllers/RoomController.js";
+import configureMulter from "../utils/multer.js";
 const router = Router();
 
 router.get("/", RoomController.findAll);
-router.post("/", RoomController.create);
+router.post(
+  "/",
+  configureMulter("images/").array("images", 5),
+  RoomController.create
+);
 router.get("/:id", RoomController.findOne);
-router.put("/:id", RoomController.update);
+router.put(
+  "/:id",
+  configureMulter("images/").single("image"),
+  RoomController.update
+);
 router.delete("/:id", RoomController.delete);
 
 export default router;

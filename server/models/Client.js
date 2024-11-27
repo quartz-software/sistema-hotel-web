@@ -12,6 +12,18 @@ const Client = sequelize.define(
         isInt: true,
       },
     },
+    country: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "users",
+        key: "id",
+      },
+    },
   },
   {
     tableName: "clients",

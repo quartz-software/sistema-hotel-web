@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
+
+
+#content {
+    /* margin: 0;
+    padding: 0; */
+    background-color: white;
+}
+
+
+.home__section {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    color: black;
+    justify-content: center;
+}
+
+.section--portada {
+    /* position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: -10; */
+    background-repeat: no-repeat;
+    background-image: url("/bg__sucre.jpg");
+    /* filter: brightness(0.5) contrast(0.8) saturate(1.8); */
+    background-size: cover;
+}
+
+
+.content--home {
+    max-width: 1000px;
+}
+
+.content--portada {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .6);
+
+    padding: 6em 1em 3em 1em;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content--portada>h1 {
+    /* Aplica las fuente: Alex Brush al h1 */
+    font-family: 'Megrim';
+    font-size: 120px;
+    color: white;
+}
+
+.form--reserva {
+    display: flex;
+    background-color: white;
+    padding: 1em;
+    border-radius: 1em;
+    gap: 1em;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.form--reserva>.reserva--input {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+
+}
+
+.reserva--input>input {
+    background-color: white;
+    border: 2px solid #B4B4B4;
+    padding: .2em .4em;
+    border-radius: 5px;
+    color: black;
+}
+
+.form--reserva button {
+    background-color: #017DB0;
+    border: none;
+    border-radius: 5px;
+}
+
+.section--info {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 1rem;
+}
+
+.section--title {
+    font-family: 'Megrim';
+    font-size: 64px;
+    line-height: 125%;
+}
+
+.content--info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    height: 60%;
+    display: flex;
+}
+
+.content--info>div {
+    justify-content: space-between;
+    text-align: left;
+    height: fit-content;
+    width: 100%;
+    min-width: 377px;
+}
+
+.content--info>img {
+    height: 100%;
+    width: 100%;
+    border: 1px solid;
+    object-fit: cover;
+}
+
+
+.section--head {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.section--rooms {
+    align-items: center;
+    background-color: rgba(1, 125, 176, .05);
+    flex-direction: column;
+    gap: 3em;
+    padding: 1rem;
+}
+
+.content--rooms {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    width: 100%;
+    max-width: 1000px;
+    overflow: hidden;
+}
+
+.section--testimonies {
+    flex-direction: column;
+    gap: 3em;
+    padding: 1rem;
+    align-items: center;
+}
+
+.content--testimonies {
+    display: flex;
+    max-width: 1000px;
+    overflow-x: auto;
+}
+
+.content--testimonies>div {
+    display: flex;
+    gap: 1em;
+    /* min-width: 100%; */
+    margin-bottom: 1em;
+}

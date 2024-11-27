@@ -1,0 +1,23 @@
+.form{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+}
+
+.form__div{
+    display: flex;
+    flex-direction: column;
+    margin-right: 15rem;
+}
+.form__input{
+    border-radius: 0.5rem;
+    width: 15rem;
+    background-color: transparent;
+
+}
+
+.form__btn{
+    align-self: self-end;
+}
+
+
