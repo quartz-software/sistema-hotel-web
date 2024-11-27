@@ -15,7 +15,7 @@ const Task = sequelize.define(
     status: {
       type: DataTypes.STRING(15),
       allowNull: false,
-      defaultValue: "pendiente",
+      defaultValue: "pending",
       validate: {
         isIn: [["pending", "in_progress", "completed"]],
       },
@@ -45,11 +45,11 @@ const Task = sequelize.define(
         key: "id",
       },
     },
-    roomId: {
+    additionalServiceId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "rooms",
+        model: "additional_services",
         key: "id",
       },
     },

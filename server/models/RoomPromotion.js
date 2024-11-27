@@ -38,15 +38,7 @@ const RoomPromotion = sequelize.define(
       type: DataTypes.STRING(50),
       allowNull: false,
       validate: {
-        isIn: ["Activa", "Expirada"],
-      },
-    },
-    bookingId: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      references: {
-        model: "rooms",
-        key: "id",
+        isIn: ["active", "inactive", "expired"],
       },
     },
   },
