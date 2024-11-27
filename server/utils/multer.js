@@ -1,14 +1,11 @@
 import multer from "multer";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { extname, join } from "path";
 import { v4 as uuidv4 } from "uuid";
 
-function configureMulter(subfolder, multiple = false, maxCount = 5) {
+function configureMulter(subfolder) {
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      const uploadPath = join(__dirname, "uploads", subfolder);
+      const uploadPath = join(process.cwd(), "uploads", subfolder);
       cb(null, uploadPath);
     },
     filename: function (req, file, cb) {
@@ -18,9 +15,7 @@ function configureMulter(subfolder, multiple = false, maxCount = 5) {
     },
   });
 
-  const upload = multer({ storage });
-
-  return multiple ? upload.array("files", maxCount) : upload.single("file");
+  return multer({ storage });
 }
 
 export default configureMulter;
