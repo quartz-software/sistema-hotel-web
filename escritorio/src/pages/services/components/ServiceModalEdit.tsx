@@ -1,26 +1,18 @@
-import React, { useState } from "react";
-import "./ServiceModal.css";
+import React, { useState, useEffect } from "react";
 import Button from "../../common/components/Button";
 import Input from "../../common/components/Input";
 
-interface ServiceModalProps {
+interface ServiceModalEditProps {
+  service: Service;  
   onClose: () => void;
   onSave: (service: Service) => void;
 }
 
-const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
-  const [serviceData, setSetserviceData] = useState<Service>({
-    id: 0,
-    name: "",
-    description: "",
-    restrictions: "",
-    type: "room service",
-    currency: "usd",
-    price: 0,
-    openHour: "08:00",
-    closeHour: "18:00",
-    available: false,
-  });
+const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({ service, onClose, onSave }) => {
+  const [serviceData, setServiceData] = useState<Service>(service);
+  useEffect(() => {
+    setServiceData(service); 
+  }, [service]);
 
   const handleSave = () => {
     if (
@@ -35,23 +27,19 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
       return;
     }
 
-    onSave(serviceData);
+    onSave(serviceData);  
   };
 
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <h2>Agregar Servicio</h2>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
+        <h2>Editar Servicio</h2>
+        <form onSubmit={(e) => e.preventDefault()}>
           <Input
             type="text"
             placeholder="Nombre del servicio"
             handleInput={(value: string) => {
-              setSetserviceData({ ...serviceData, name: value });
+              setServiceData({ ...serviceData, name: value });
             }}
             resetMessage={() => {}}
             value={serviceData.name}
@@ -60,7 +48,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
             type="textarea"
             placeholder="Descripción del servicio (opcional)"
             handleInput={(value: string) => {
-              setSetserviceData({ ...serviceData, description: value });
+              setServiceData({ ...serviceData, description: value });
             }}
             resetMessage={() => {}}
             value={serviceData.description ?? ""}
@@ -69,7 +57,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
             type="textarea"
             placeholder="Restricciones (opcional)"
             handleInput={(value: string) => {
-              setSetserviceData({ ...serviceData, restrictions: value });
+              setServiceData({ ...serviceData, restrictions: value });
             }}
             resetMessage={() => {}}
             value={serviceData.restrictions ?? ""}
@@ -80,7 +68,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
               id="service-type"
               value={serviceData.type}
               onChange={(e) => {
-                setSetserviceData({ ...serviceData, type: e.target.value });
+                setServiceData({ ...serviceData, type: e.target.value });
               }}
             >
               <option value="room service">Room Service</option>
@@ -97,7 +85,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
               id="currency"
               value={serviceData.currency}
               onChange={(e) =>
-                setSetserviceData({ ...serviceData, currency: e.target.value })
+                setServiceData({ ...serviceData, currency: e.target.value })
               }
             >
               <option value="usd">USD</option>
@@ -109,7 +97,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
             type="number"
             placeholder="Precio"
             handleInput={(value: string) => {
-              setSetserviceData({ ...serviceData, price: parseFloat(value) });
+              setServiceData({ ...serviceData, price: parseFloat(value) });
             }}
             resetMessage={() => {}}
             value={serviceData.price.toString()}
@@ -120,7 +108,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
               type="time"
               placeholder=""
               handleInput={(value: string) =>
-                setSetserviceData({ ...serviceData, openHour: value })
+                setServiceData({ ...serviceData, openHour: value })
               }
               resetMessage={() => {}}
               value={serviceData.openHour}
@@ -132,7 +120,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
               type="time"
               placeholder=""
               handleInput={(value: string) => {
-                setSetserviceData({ ...serviceData, closeHour: value });
+                setServiceData({ ...serviceData, closeHour: value });
               }}
               resetMessage={() => {}}
               value={serviceData.closeHour}
@@ -145,7 +133,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
                 type="checkbox"
                 placeholder=""
                 handleInput={(value: boolean) => {
-                  setSetserviceData({ ...serviceData, available: value });
+                  setServiceData({ ...serviceData, available: value });
                 }}
                 resetMessage={() => {}}
                 value={serviceData.available}
@@ -166,4 +154,4 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
   );
 };
 
-export default ServiceModal;
+export default ServiceModalEdit;

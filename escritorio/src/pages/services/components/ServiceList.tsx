@@ -11,7 +11,6 @@ interface Service {
   closeHour: string;
   available: boolean;
 }
-
 interface ServiceListProps {
   services: Service[];
   onDelete: (id: number) => void;
