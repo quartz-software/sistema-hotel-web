@@ -9,7 +9,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 const Habitaciones_formulario = () => {
 
     const navigate = useNavigate();
-
     const [params] = useSearchParams();
     const id = params.get("id")
 
@@ -61,7 +60,7 @@ const Habitaciones_formulario = () => {
         fetch(url, cont)
             .then((res) => {
                 if (res.status == 200 || res.status == 201) {
-                    navigate("/admim/habitaciones")
+                    navigate("/admin/habitaciones")
                 }
             })
             .catch((error) => {

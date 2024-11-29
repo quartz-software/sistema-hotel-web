@@ -8,7 +8,7 @@ export default class RoomRateController {
    */
   static async findAll(req, res) {
     try {
-      const roomRates = await RoomRate.findAll();
+      const roomRates = await RoomRate.findAll({ order: [["id", "ASC"]] });
       res.status(200).json(roomRates);
     } catch (error) {
       res.status(500).send();
@@ -54,6 +54,8 @@ export default class RoomRateController {
       res.status(201).json(newRoomRate);
     } catch (error) {
       res.status(500).send();
+      console.log(error);
+
     }
   }
 
