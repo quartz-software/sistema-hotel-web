@@ -4,10 +4,19 @@ import "./Input.css";
 type Props = {
   placeholder?: string;
   handleInput: Function;
-  type: string;
+  type:
+  | "text"
+  | "password"
+  | "email"
+  | "tel"
+  | "number"
+  | "file"
+  | "date"
+  | "checkbox"
+  | "radio";
   resetMessage: Function;
   autocomplete?: "email" | "current-password" | "new-password";
-  value: string,
+  value: string | boolean;
 };
 
 const Input: FC<Props> = ({
@@ -18,19 +27,30 @@ const Input: FC<Props> = ({
   autocomplete,
   value,
 }) => {
+  function handleResult(value: string | boolean) {
+    resetMessage();
+    handleInput(value);
+  }
   return (
     <input
       autoComplete={autocomplete ? autocomplete : ""}
       className="input"
       onInput={(e) => {
+        if (type === "checkbox" || type === "radio") return;
         const target = e.target as HTMLInputElement;
-        const result = target.value.trim();
-        handleInput(result);
-        resetMessage();
+        const result = target.value;
+        handleResult(result);
       }}
       type={type}
+      checked={typeof value === "boolean" ? value : false}
+      onChange={(e) => {
+        if (type !== "checkbox" && type !== "radio") return;
+        const target = e.target as HTMLInputElement;
+        const result = target.checked;
+        handleResult(result);
+      }}
       placeholder={placeholder ? placeholder : ""}
-      value={value}
+      value={typeof value !== "string" ? "" : value}
     />
   );
 };

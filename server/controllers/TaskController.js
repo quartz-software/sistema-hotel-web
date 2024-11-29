@@ -1,3 +1,4 @@
+import { literal } from "sequelize";
 import Task from "../models/Task.js";
 
 export default class TaskController {
@@ -8,7 +9,40 @@ export default class TaskController {
    */
   static async findAll(req, res) {
     try {
-      const tasks = await Task.findAll();
+      const { pid, quantity, status } = req.query;
+      if (
+        isNaN(pid) ||
+        isNaN(quantity) ||
+        (status && typeof status != "string")
+      )
+        return res.status(400).send();
+
+      if (!pid) pid = 0;
+      if (!quantity) quantity = 20;
+      /**
+       * @type {import("sequelize").FindOptions}
+       */
+      const options = {
+        limit: quantity,
+        offset: pid * quantity,
+        order: [
+          [
+            literal(`CASE 
+            WHEN status = 'pending' THEN 1
+            WHEN status = 'in_progress' THEN 2
+            WHEN status = 'completed' THEN 3
+            ELSE 4
+          END`),
+            "ASC",
+          ],
+          ["dateCreate", "ASC"],
+        ],
+      };
+      if (status)
+        options.where = {
+          status: status,
+        };
+      const tasks = await Task.findAll(options);
       res.status(200).json(tasks);
     } catch (e) {
       res.status(500).send();
