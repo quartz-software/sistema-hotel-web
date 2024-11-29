@@ -8,6 +8,8 @@ import Signup from "./pages/auth/Signup";
 import Habitaciones from "./pages/habitacion/Habitaciones";
 import Habitaciones_admin from "./pages/habitacion/Habitaciones_admin";
 import Habitaciones_formulario from "./pages/habitacion/Habitaciones_formulario";
+import RoomRates from "./pages/RoomRate/RoomRates";
+import RoomRatesForm from "./pages/RoomRate/RoomRatesForm";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="habitaciones" element={<Habitaciones />} />
           <Route path="admin/habitaciones" element={<Habitaciones_admin />} />
           <Route path="admin/habitaciones/form" element={<Habitaciones_formulario />} />
+          <Route path="room_rate" element={<RoomRates />} />
+          <Route path="room_rate/form" element={<RoomRatesForm />} />
         </Route>
       </Routes>
     </BrowserRouter>
