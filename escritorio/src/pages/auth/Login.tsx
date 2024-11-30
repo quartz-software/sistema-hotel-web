@@ -11,12 +11,15 @@ import "./Login.css";
 import Social from "./components/Social";
 import FormField from "../common/components/FormField";
 import { useNavigate } from "react-router-dom";
+import useUserRole from "../common/hooks/useUserRole";
 
 const Login = () => {
   const [userData, setUserData] = useState({ email: "", password: "" });
   const [isFetching, setIsFetching] = useState(false);
   const [emailMessage, setEmailMessage] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
+  const [formError, setFormError] = useState("");
+  const { fetchRole } = useUserRole();
   const navigate = useNavigate();
 
   function postData() {
@@ -50,9 +53,14 @@ const Login = () => {
       }),
     };
     fetch(url, cont)
-      .then((res) => {
+      .then(async (res) => {
         if (res.status == 200) {
-          navigate("/");
+          let user = await fetchRole();
+          if (user === "admin" || user === "recepcionist") {
+            navigate("/home");
+          } else {
+            setFormError("Acceso no permitido");
+          }
         }
         setIsFetching(false);
       })
@@ -102,6 +110,7 @@ const Login = () => {
       <p className="login-form__reset-password">
         <a>¿Olvidaste tu contraseña?</a>
       </p>
+      <p className="login-form__message">{formError}</p>
 
       <Button handleClick={postData} disabled={isFetching}>
         {isFetching ? "Cargando..." : "Iniciar Sesion"}
