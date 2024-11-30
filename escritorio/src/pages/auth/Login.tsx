@@ -70,61 +70,55 @@ const Login = () => {
   }
 
   return (
-    <form className="form login-form" onSubmit={(e) => e.preventDefault()}>
-      <img className="login-form__img" src={Llamarada} alt="LLamarada" />
-      <h2 className="login-form__title">Inicia Sesion</h2>
-      <p className="login-form__register">
-        ¿Aún no tienes una cuenta?
-        <br />
-        Registrate <a href="./Signup">aquí</a>
-      </p>
+    <div className="login-form-container">
+      <form className="form login-form" onSubmit={(e) => e.preventDefault()}>
+        <img className="login-form__img" src={Llamarada} alt="LLamarada" />
+        <h2 className="login-form__title">Inicia Sesion</h2>
 
-      <FormField label="Usuario" errorMessage={emailMessage}>
-        <Input
-          autocomplete="email"
-          placeholder={"Correo"}
-          handleInput={(value: string) => {
-            setUserData({ ...userData, email: value });
-          }}
-          type="text"
-          resetMessage={() => {
-            setEmailMessage("");
-          }}
-          value={userData.email}
-        />
-      </FormField>
-      <FormField label="Contraseña" errorMessage={passwordMessage}>
-        <Input
-          autocomplete="current-password"
-          placeholder={"Contraseña"}
-          handleInput={(value: string) => {
-            setUserData({ ...userData, password: value });
-          }}
-          type="password"
-          resetMessage={() => {
-            setPasswordMessage("");
-          }}
-          value={userData.password}
-        />
-      </FormField>
-      <p className="login-form__reset-password">
-        <a>¿Olvidaste tu contraseña?</a>
-      </p>
-      <p className="login-form__message">{formError}</p>
+        <FormField label="Usuario" errorMessage={emailMessage}>
+          <Input
+            autocomplete="email"
+            placeholder={"Correo"}
+            handleInput={(value: string) => {
+              setUserData({ ...userData, email: value });
+            }}
+            type="text"
+            resetMessage={() => {
+              setEmailMessage("");
+            }}
+            value={userData.email}
+          />
+        </FormField>
+        <FormField label="Contraseña" errorMessage={passwordMessage}>
+          <Input
+            autocomplete="current-password"
+            placeholder={"Contraseña"}
+            handleInput={(value: string) => {
+              setUserData({ ...userData, password: value });
+            }}
+            type="password"
+            resetMessage={() => {
+              setPasswordMessage("");
+            }}
+            value={userData.password}
+          />
+        </FormField>
+        <p className="login-form__message">{formError}</p>
 
-      <Button handleClick={postData} disabled={isFetching}>
-        {isFetching ? "Cargando..." : "Iniciar Sesion"}
-      </Button>
+        <Button handleClick={postData} disabled={isFetching}>
+          {isFetching ? "Cargando..." : "Iniciar Sesion"}
+        </Button>
 
-      <p className="login-form__text">
-        o <br /> ingresa con
-      </p>
-      <div className="login-form__social">
-        <Social red={Google} />
-        <Social red={Facebook} />
-        <Social red={Twiter} />
-      </div>
-    </form>
+        <p className="login-form__text">
+          o <br /> Ingresa con
+        </p>
+        <div className="login-form__social">
+          <Social red={Google} />
+          <Social red={Facebook} />
+          <Social red={Twiter} />
+        </div>
+      </form>
+    </div>
   );
 };
 
