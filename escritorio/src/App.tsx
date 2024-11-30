@@ -10,7 +10,6 @@ import Rooms from "./pages/rooms/Index";
 import Rates from "./pages/rates/Index";
 import Promotions from "./pages/promotions/Index";
 import Services from "./pages/services/Index";
-import Signup from "./pages/auth/Signup";
 import Stock from "./pages/stock/Index";
 import Tasks from "./pages/tasks/Index";
 import { useEffect, useState } from "react";
