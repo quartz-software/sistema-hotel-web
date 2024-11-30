@@ -1,5 +1,5 @@
-import Employee from "../models/Employee.js";
-import User from "../models/User.js";
+import { models } from "../models/index.js";
+const { User, Employee } = models;
 
 export default class EmployeeController {
   /**

@@ -1,6 +1,6 @@
 import { literal } from "sequelize";
-import Task from "../models/Task.js";
-
+import { models } from "../models/index.js";
+const { Task } = models;
 export default class TaskController {
   /**
    *

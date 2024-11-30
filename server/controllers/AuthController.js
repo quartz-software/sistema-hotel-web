@@ -1,4 +1,5 @@
-import User from "../models/User.js";
+import { models, sequelize } from "../models/index.js";
+const { User } = models;
 import auth, { authUser, createToken, encryptPassword } from "../utils/auth.js";
 import isEqual from "../utils/isEqual.js";
 

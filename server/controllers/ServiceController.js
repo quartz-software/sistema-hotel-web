@@ -1,4 +1,5 @@
-import Service from "../models/Service.js";
+import { models } from "../models/index.js";
+const { Service } = models;
 import isEqual from "../utils/isEqual.js";
 
 export default class ServiceController {
