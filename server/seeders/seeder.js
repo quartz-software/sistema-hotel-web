@@ -1,15 +1,17 @@
-import Room from "../models/Room.js";
-import User from "../models/User.js";
-import Employee from "../models/Employee.js";
-import Client from "../models/Client.js";
-import Service from "../models/Service.js";
-import RoomImage from "../models/RoomImage.js";
-import { sequelize } from "../models/index.js";
-import Booking from "../models/Booking.js";
-import BookingRoom from "../models/BookingRoom.js";
-import ServiceRoom from "../models/ServiceRoom.js";
-import AdditionalService from "../models/AdditionalService.js";
-import Task from "../models/Task.js";
+import { sequelize, models } from "../models/index.js";
+const {
+  Room,
+  User,
+  Employee,
+  Client,
+  Service,
+  RoomImage,
+  Booking,
+  BookingRoom,
+  ServiceRoom,
+  AdditionalService,
+  Task,
+} = models;
 
 export default class Seeder {
   static async Seed() {

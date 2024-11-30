@@ -1,7 +1,7 @@
 import Input from "../common/components/Input";
-import CardRoom from "./CardRoom";
+import CardRoom from "./components/CardRoom";
 
-import "./Habitaciones.css";
+import "./Index.css";
 
 const habitaciones = [
   {
@@ -38,11 +38,19 @@ const habitaciones = [
 
 const Habitaciones = () => {
   return (
-    <>
+    <div>
       <h1>Habitaciones</h1>
       <div className="div--filter">
         <label>Buscar</label>
-        <Input placeholder="Buscar" type="search" />
+        <Input
+          placeholder="Buscar"
+          type="text"
+          resetMessage={() => {}}
+          value=""
+          handleInput={(value: string) => {
+            console.log(value);
+          }}
+        />
       </div>
       <div className="content--rooms">
         {habitaciones.map((room, index) => (
@@ -55,7 +63,7 @@ const Habitaciones = () => {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
