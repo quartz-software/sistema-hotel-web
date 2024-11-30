@@ -1,4 +1,5 @@
 import sequelize from "../config/db.js";
+
 import AdditionalService from "./AdditionalService.js";
 import Booking from "./Booking.js";
 import BookingRoom from "./BookingRoom.js";
@@ -31,7 +32,9 @@ const models = {
   RoomAvailability,
   RoomImage,
   RoomPromotion,
+  RoomRoomPromotion,
   RoomRate,
+  RoomRoomRate,
   Service,
   ServiceRoom,
   Stock,
@@ -226,5 +229,6 @@ function defineRelationships() {
 }
 
 defineRelationships();
+export default { sequelize, models };
+export { models };
 export { sequelize };
-export default models;
