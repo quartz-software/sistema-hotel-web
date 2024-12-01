@@ -10,6 +10,8 @@ import BookingRoom from "../models/BookingRoom.js";
 import ServiceRoom from "../models/ServiceRoom.js";
 import AdditionalService from "../models/AdditionalService.js";
 import Task from "../models/Task.js";
+import RoomRate from "../models/RoomRate.js";
+import RoomRoomRate from "../models/RoomRoomRate.js";
 
 export default class Seeder {
   static async Seed() {
@@ -21,7 +23,7 @@ export default class Seeder {
       await this.SeedServices();
       await this.SeedBookings();
       await this.SeedAdditionalServices();
-    } catch (error) {}
+    } catch (error) { }
   }
   static async SeedEmployees() {
     const usersAndEmployees = [
@@ -770,7 +772,7 @@ export default class Seeder {
       { bookingId: 20, roomId: 9 },
       { bookingId: 20, roomId: 10 },
     ];
-    BookingRoom.bulkCreate(bookingRooms);
+    await BookingRoom.bulkCreate(bookingRooms);
   }
   static async SeedAdditionalServices() {
     const additionalServiceRequests = [
@@ -899,6 +901,62 @@ export default class Seeder {
 
     await Task.bulkCreate(tasks);
   }
+  static async SeedRoomRates() {
+    const roomRates = [
+      {
+        startDate: "2024-11-29",
+        endDate: "2024-12-31",
+        pricePerNight: 100.00,
+        isActive: true,
+      },
+      {
+        startDate: "2025-01-01",
+        endDate: "2025-01-30",
+        pricePerNight: 120.99,
+        isActive: true,
+      },
+      {
+        startDate: "2024-11-10",
+        endDate: "2024-12-10",
+        pricePerNight: 100.00,
+        isActive: false,
+      },
+      {
+        startDate: "2024-09-21",
+        endDate: "2024-12-31",
+        pricePerNight: 200.00,
+        isActive: false,
+      },
+      {
+        startDate: "2024-12-01",
+        endDate: "2024-12-31",
+        pricePerNight: 130.00,
+        isActive: true,
+      },
+    ];
+    await RoomRate.bulkCreate(roomRates);
+
+    const roomRoomRates = [
+      {
+        roomId: 1,
+        roomRateId: 1,
+      },
+      {
+        roomId: 1,
+        roomRateId: 2,
+      },
+      {
+        roomId: 2,
+        roomRateId: 1,
+      },
+      {
+        roomId: 2,
+        roomRateId: 3,
+      },
+    ]
+    await RoomRoomRate.bulkCreate(roomRoomRates);
+  }
+
 }
 
 Seeder.Seed();
