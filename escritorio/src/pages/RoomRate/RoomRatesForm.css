@@ -1,0 +1,13 @@
+.form--rate {
+  max-width: 45rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+
+.form--rate>h1,
+.form--rate>h2 {
+  grid-column-end: 3;
+  grid-column-start: 1;
+}

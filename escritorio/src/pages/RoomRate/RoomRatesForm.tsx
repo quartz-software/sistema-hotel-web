@@ -4,6 +4,8 @@ import FormField from "../common/components/FormField"
 import Input from "../common/components/Input"
 import { useEffect, useState } from "react";
 
+import "./RoomRatesForm.css"
+
 const RoomRatesForm = () => {
 
   const navigate = useNavigate()
@@ -69,18 +71,16 @@ const RoomRatesForm = () => {
 
   return (
     <div>
-      <h1>Tarifa</h1>
-      <form className="form--room"
+      <form className="form--rate"
         onSubmit={(e) => {
           e.preventDefault()
         }}>
+        <h1>Tarifa</h1>
         <FormField label="Precio" errorMessage="">
           <Input
             placeholder="Precio"
             type="number"
             handleInput={(value: string) => {
-              console.log(roomRateData);
-
               setRoomRateData({ ...roomRateData, pricePerNight: value })
             }}
             value={roomRateData.pricePerNight}
@@ -89,11 +89,11 @@ const RoomRatesForm = () => {
         <FormField label="Estado" errorMessage="">
           <Input
             placeholder="Estado"
-            type="text"
-            handleInput={(value: string) => {
-              setRoomRateData({ ...roomRateData, isActive: value == "Active" ? true : false })
+            type="checkbox"
+            handleInput={(value: boolean) => {
+              setRoomRateData({ ...roomRateData, isActive: value ? true : false })
             }}
-            value={roomRateData.isActive ? "Activo" : "Deshactivado"}
+            value={roomRateData.isActive ? true : false}
             resetMessage={() => { }}
           />
         </FormField>
@@ -121,9 +121,7 @@ const RoomRatesForm = () => {
             resetMessage={() => { }}
           />
         </FormField>
-
-
-
+        <h2>Habitaciones</h2>
         <Button
           disabled={false}
           handleClick={postData}>
