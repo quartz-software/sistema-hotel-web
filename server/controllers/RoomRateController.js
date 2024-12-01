@@ -28,7 +28,13 @@ export default class RoomRateController {
         return res.status(400).send();
       }
 
-      const roomRate = await RoomRate.findByPk(id);
+      const roomRate = await models.RoomRate.findByPk(id, {
+        include: {
+          model: models.Room,
+          as: "rooms",
+          through: { attributes: ["id", "roomNumber", "type"] }
+        }
+      });
       if (roomRate) {
         res.status(200).json(roomRate);
       } else {

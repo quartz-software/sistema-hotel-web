@@ -9,6 +9,8 @@ const {
   Booking,
   BookingRoom,
   ServiceRoom,
+  RoomRate,
+  RoomRoomRate,
   AdditionalService,
   Task,
 } = models;
@@ -23,7 +25,10 @@ export default class Seeder {
       await this.SeedServices();
       await this.SeedBookings();
       await this.SeedAdditionalServices();
-    } catch (error) { }
+      await this.SeedRoomRates();
+    } catch (error) {
+      console.log(error);
+    }
   }
   static async SeedEmployees() {
     const usersAndEmployees = [
