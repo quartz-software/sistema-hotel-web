@@ -1,6 +1,5 @@
-import sequelize from "../config/db.js";
-import Room from "../models/Room.js";
-import RoomImage from "../models/RoomImage.js";
+import { models, sequelize } from "../models/index.js";
+const { Room, RoomImage } = models;
 
 export default class RoomController {
   /**

@@ -1,4 +1,5 @@
-import RoomPromotion from "../models/RoomPromotion.js";
+import { models } from "../models/index.js";
+const { RoomPromotion } = models;
 
 export default class RoomPromotionController {
   /**

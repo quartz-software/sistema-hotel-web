@@ -1,4 +1,5 @@
-import RoomRate from "../models/RoomRate.js";
+import { models } from "../models/index.js";
+const { RoomRate } = models;
 import { Op } from "sequelize";
 
 export default class RoomRateController {

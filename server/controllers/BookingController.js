@@ -1,4 +1,5 @@
-import Booking from "../models/Booking.js";
+import { models } from "../models/index.js";
+const { Booking } = models;
 
 export default class BookingController {
   /**

@@ -1,4 +1,5 @@
-import RoomAvailability from "../models/RoomAvailability.js";
+import { models } from "../models/index.js";
+const { RoomAvailability } = models;
 
 export default class RoomAvailabilityController {
   /**

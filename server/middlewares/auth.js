@@ -1,5 +1,5 @@
-import { where } from "sequelize";
-import Employee from "../models/Employee.js";
+import { models } from "../models/index.js";
+const { Employee } = models;
 import { validateToken } from "../utils/auth.js";
 import isEqual from "../utils/isEqual.js";
 
