@@ -1,4 +1,5 @@
 import Button from "../../common/components/Button";
+import '../components/ServiceList.css'
 interface Service {
   id: number;
   name: string;
