@@ -49,7 +49,7 @@ const Habitaciones_admin = () => {
                         handleInput={() => { }}
                         resetMessage={() => { }}
                         placeholder="Buscar"
-                        type="search"
+                        type="text"
                         value=""
                     />
                 </FormField>

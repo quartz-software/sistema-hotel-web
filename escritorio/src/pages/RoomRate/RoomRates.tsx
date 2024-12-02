@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPen } from "@fortawesome/free-solid-svg-icons"
+import "./RoomRates.css"
 
 type RoomRate = {
   id: number,
@@ -35,7 +36,6 @@ const RoomRates = () => {
         }
       })
       .then((data) => {
-        console.log(data);
         setRoomRatesData(data)
       })
       .catch((error) => {
@@ -49,7 +49,7 @@ const RoomRates = () => {
   }, [])
 
   return (
-    <>
+    <div>
       <h1>Tarifas de habitacion</h1>
       <div className="div--search">
         <FormField label="Buscar" errorMessage="">
@@ -57,17 +57,17 @@ const RoomRates = () => {
             handleInput={() => { }}
             resetMessage={() => { }}
             placeholder="Buscar"
-            type="search"
+            type="text"
             value=""
           />
         </FormField>
         <Button disabled={false} handleClick={() => {
-          nav(`/room_rate/form`)
+          nav(`/rates/edit`)
         }}>
           Agregar
         </Button>
       </div>
-      <table className="table--rooms">
+      <table className="table--rates">
         <thead>
           <th>Id</th>
           <th>Fecha Inicio</th>
@@ -92,7 +92,7 @@ const RoomRates = () => {
                       <td>{roomRate.isActive ? "Activo" : "Deshabilitado"}</td>
                       <td>
                         <Button disabled={false} handleClick={() => {
-                          nav(`/room_rate/form?id=${roomRate.id}`)
+                          nav(`/rates/edit?id=${roomRate.id}`)
                         }}>
                           <FontAwesomeIcon icon={faPen} />
                         </Button>
@@ -104,7 +104,7 @@ const RoomRates = () => {
             </tbody>
         }
       </table>
-    </>
+    </div>
   )
 }
 

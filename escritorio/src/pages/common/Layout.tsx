@@ -41,9 +41,8 @@ const Layout = () => {
           </li>
           {isAdmin && (
             <li
-              className={`navbar__item ${
-                isActiveLink("/services") ? "active" : ""
-              }`}
+              className={`navbar__item ${isActiveLink("/services") ? "active" : ""
+                }`}
             >
               <Link className="navbar__link" to="/services">
                 <i>
@@ -65,9 +64,8 @@ const Layout = () => {
           </li>
           {isAdmin && (
             <li
-              className={`navbar__item ${
-                isActiveLink("/rooms") ? "active" : ""
-              }`}
+              className={`navbar__item ${isActiveLink("/rooms") ? "active" : ""
+                }`}
             >
               <Link className="navbar__link" to="/rooms">
                 <i>
@@ -79,9 +77,8 @@ const Layout = () => {
           )}
           {isAdmin && (
             <li
-              className={`navbar__item ${
-                isActiveLink("/promotions") ? "active" : ""
-              }`}
+              className={`navbar__item ${isActiveLink("/promotions") ? "active" : ""
+                }`}
             >
               <Link className="navbar__link" to="/promotions">
                 <i>
@@ -93,9 +90,8 @@ const Layout = () => {
           )}
           {isAdmin && (
             <li
-              className={`navbar__item ${
-                isActiveLink("/rates") ? "active" : ""
-              }`}
+              className={`navbar__item ${isActiveLink("/rates") ? "active" : ""
+                }`}
             >
               <Link className="navbar__link" to="/rates">
                 <i>
@@ -106,9 +102,8 @@ const Layout = () => {
             </li>
           )}
           <li
-            className={`navbar__item ${
-              isActiveLink("/addservices") ? "active" : ""
-            }`}
+            className={`navbar__item ${isActiveLink("/addservices") ? "active" : ""
+              }`}
           >
             <Link className="navbar__link" to="/addservices">
               <i>
@@ -118,9 +113,8 @@ const Layout = () => {
             </Link>
           </li>
           <li
-            className={`navbar__item ${
-              isActiveLink("/bookings") ? "active" : ""
-            }`}
+            className={`navbar__item ${isActiveLink("/bookings") ? "active" : ""
+              }`}
           >
             <Link className="navbar__link" to="/bookings">
               <i>
@@ -131,9 +125,8 @@ const Layout = () => {
           </li>
           {isAdmin && (
             <li
-              className={`navbar__item ${
-                isActiveLink("/stock") ? "active" : ""
-              }`}
+              className={`navbar__item ${isActiveLink("/stock") ? "active" : ""
+                }`}
             >
               <Link className="navbar__link" to="/stock">
                 <i>
@@ -162,7 +155,7 @@ const Layout = () => {
             </Link>
           </li>
           <li className="navbar__item">
-            <Link className="navbar__link" to="room_rate">
+            <Link className="navbar__link" to="rates">
               Tarifas
             </Link>
           </li>
