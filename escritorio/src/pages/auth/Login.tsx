@@ -11,12 +11,15 @@ import "./Login.css";
 import Social from "./components/Social";
 import FormField from "../common/components/FormField";
 import { useNavigate } from "react-router-dom";
+import useUserRole from "../common/hooks/useUserRole";
 
 const Login = () => {
   const [userData, setUserData] = useState({ email: "", password: "" });
   const [isFetching, setIsFetching] = useState(false);
   const [emailMessage, setEmailMessage] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
+  const [formError, setFormError] = useState("");
+  const { fetchRole } = useUserRole();
   const navigate = useNavigate();
 
   function postData() {
@@ -50,70 +53,72 @@ const Login = () => {
       }),
     };
     fetch(url, cont)
-      .then((res) => {
+      .then(async (res) => {
         if (res.status == 200) {
-          navigate("/");
+          let user = await fetchRole();
+          if (user === "admin" || user === "recepcionist") {
+            navigate("/home");
+          } else {
+            setFormError("Acceso no permitido");
+          }
         }
         setIsFetching(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setIsFetching(false);
       });
   }
 
   return (
-    <form className="form login-form">
-      <img className="login-form__img" src={Llamarada} alt="LLamarada" />
-      <h2 className="login-form__title">Inicia Sesion</h2>
-      <p className="login-form__register">
-        ¿Aún no tienes una cuenta?
-        <br />
-        Registrate <a href="./Signup">aquí</a>
-      </p>
+    <div className="login-form-container">
+      <form className="form login-form" onSubmit={(e) => e.preventDefault()}>
+        <img className="login-form__img" src={Llamarada} alt="LLamarada" />
+        <h2 className="login-form__title">Inicia Sesion</h2>
 
-      <FormField label="Usuario" errorMessage={emailMessage}>
-        <Input
-          autocomplete="email"
-          placeholder={"Correo"}
-          handleInput={(value: string) => {
-            setUserData({ ...userData, email: value });
-          }}
-          type="text"
-          resetMessage={() => {
-            setEmailMessage("");
-          }}
-        />
-      </FormField>
-      <FormField label="Contraseña" errorMessage={passwordMessage}>
-        <Input
-          autocomplete="current-password"
-          placeholder={"Contraseña"}
-          handleInput={(value: string) => {
-            setUserData({ ...userData, password: value });
-          }}
-          type="password"
-          resetMessage={() => {
-            setPasswordMessage("");
-          }}
-        />
-      </FormField>
-      <p className="login-form__reset-password">
-        <a>¿Olvidaste tu contraseña?</a>
-      </p>
+        <FormField label="Usuario" errorMessage={emailMessage}>
+          <Input
+            autocomplete="email"
+            placeholder={"Correo"}
+            handleInput={(value: string) => {
+              setUserData({ ...userData, email: value });
+            }}
+            type="text"
+            resetMessage={() => {
+              setEmailMessage("");
+            }}
+            value={userData.email}
+          />
+        </FormField>
+        <FormField label="Contraseña" errorMessage={passwordMessage}>
+          <Input
+            autocomplete="current-password"
+            placeholder={"Contraseña"}
+            handleInput={(value: string) => {
+              setUserData({ ...userData, password: value });
+            }}
+            type="password"
+            resetMessage={() => {
+              setPasswordMessage("");
+            }}
+            value={userData.password}
+          />
+        </FormField>
+        <p className="login-form__message">{formError}</p>
 
-      <Button handleClick={postData} disabled={isFetching}>
-        {isFetching ? "Cargando..." : "Iniciar Sesion"}
-      </Button>
+        <Button handleClick={postData} disabled={isFetching}>
+          {isFetching ? "Cargando..." : "Iniciar Sesion"}
+        </Button>
 
-      <p className="login-form__text">
-        o <br /> ingresa con
-      </p>
-      <div className="login-form__social">
-        <Social red={Google} />
-        <Social red={Facebook} />
-        <Social red={Twiter} />
-      </div>
-    </form>
+        <p className="login-form__text">
+          o <br /> Ingresa con
+        </p>
+        <div className="login-form__social">
+          <Social red={Google} />
+          <Social red={Facebook} />
+          <Social red={Twiter} />
+        </div>
+      </form>
+    </div>
   );
 };
 

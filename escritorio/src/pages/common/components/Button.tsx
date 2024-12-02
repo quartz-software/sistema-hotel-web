@@ -4,7 +4,7 @@ import "./Button.css";
 type Props = {
   children: ReactNode;
   handleClick: MouseEventHandler<HTMLButtonElement>;
-  disabled: boolean;
+  disabled?: boolean;
 };
 
 const Button: FC<Props> = ({ children, handleClick, disabled }) => {
@@ -14,7 +14,7 @@ const Button: FC<Props> = ({ children, handleClick, disabled }) => {
       onClick={(e) => {
         if (!disabled) handleClick(e);
       }}
-      disabled={disabled}
+      {...(disabled ? { disabled: true } : {})}
     >
       {children}
     </button>

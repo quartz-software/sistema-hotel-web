@@ -12,6 +12,35 @@ const RoomPromotion = sequelize.define(
         isInt: true,
       },
     },
+    description: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    startDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isDate: true,
+      },
+    },
+    endDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isDate: true,
+      },
+    },
+    discount: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      validate: {
+        isIn: ["active", "inactive", "expired"],
+      },
+    },
   },
   {
     tableName: "room_promotions",

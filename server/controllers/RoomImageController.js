@@ -1,4 +1,5 @@
-import RoomImage from "../models/RoomImage.js";
+import { models } from "../models/index.js";
+const { RoomImage } = models;
 export default class RoomImageController {
   /**
    *

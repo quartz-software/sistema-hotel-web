@@ -1,4 +1,5 @@
-import AdditionalService from "../models/AdditionalService.js";
+import { models } from "../models/index.js";
+const { AdditionalService } = models;
 export default class AdditionalServiceController {
   /**
    *

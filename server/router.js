@@ -12,8 +12,10 @@ import rooms from "./routes/rooms.js";
 import services from "./routes/services.js";
 import stock from "./routes/stock.js";
 import tasks from "./routes/tasks.js";
+import authMiddleware from "./middlewares/auth.js";
 const router = Router();
 
+router.use(authMiddleware);
 router.use("/auth", auth);
 router.use("/addservices", addservices);
 router.use("/availabilities", availabilities);
