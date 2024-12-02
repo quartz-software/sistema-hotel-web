@@ -21,6 +21,62 @@ const Layout = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const listItems = [
+    {
+      icon: faHome,
+      path: "/",
+      label: "Inicio",
+      show: true,
+    },
+    {
+      icon: faTools,
+      path: "/services",
+      label: "Servicios",
+      show: isAdmin,
+    },
+    {
+      icon: faTasks,
+      path: "/tasks",
+      label: "Tareas",
+      show: true,
+    },
+    {
+      icon: faDoorClosed,
+      path: "/rooms",
+      label: "Habitaciones",
+      show: isAdmin,
+    },
+    {
+      icon: faTags,
+      path: "/promotions",
+      label: "Promociones",
+      show: isAdmin,
+    },
+    {
+      icon: faDollarSign,
+      path: "/rates",
+      label: "Tarifas",
+      show: isAdmin,
+    },
+    {
+      icon: faPlusCircle,
+      path: "/addservices",
+      label: "Solicitudes",
+      show: true,
+    },
+    {
+      icon: faCalendarCheck,
+      path: "/bookings",
+      label: "Reservaciones",
+      show: true,
+    },
+    {
+      icon: faBoxes,
+      path: "/stock",
+      label: "Inventario",
+      show: isAdmin,
+    },
+  ];
   async function handleLogout(): Promise<void> {
     let loggedout = await useLogout();
     if (loggedout == true) navigate("/login");
@@ -31,118 +87,24 @@ const Layout = () => {
     <div className="app_container">
       <nav className="navbar">
         <ul className="navbar__list">
-          <li className={`navbar__item ${isActiveLink("/") ? "active" : ""}`}>
-            <Link className="navbar__link" to="/">
-              <i>
-                <FontAwesomeIcon icon={faHome} />
-              </i>
-              <span>Inicio</span>
-            </Link>
-          </li>
-          {isAdmin && (
-            <li
-              className={`navbar__item ${
-                isActiveLink("/services") ? "active" : ""
-              }`}
-            >
-              <Link className="navbar__link" to="/services">
-                <i>
-                  <FontAwesomeIcon icon={faTools} />
-                </i>
-                <span>Servicios</span>
-              </Link>
-            </li>
-          )}
-          <li
-            className={`navbar__item ${isActiveLink("/tasks") ? "active" : ""}`}
-          >
-            <Link className="navbar__link" to="/tasks">
-              <i>
-                <FontAwesomeIcon icon={faTasks} />
-              </i>
-              <span>Tareas</span>
-            </Link>
-          </li>
-          {isAdmin && (
-            <li
-              className={`navbar__item ${
-                isActiveLink("/rooms") ? "active" : ""
-              }`}
-            >
-              <Link className="navbar__link" to="/rooms">
-                <i>
-                  <FontAwesomeIcon icon={faDoorClosed} />
-                </i>
-                <span>Habitaciones</span>
-              </Link>
-            </li>
-          )}
-          {isAdmin && (
-            <li
-              className={`navbar__item ${
-                isActiveLink("/promotions") ? "active" : ""
-              }`}
-            >
-              <Link className="navbar__link" to="/promotions">
-                <i>
-                  <FontAwesomeIcon icon={faTags} />
-                </i>
-                <span>Promociones</span>
-              </Link>
-            </li>
-          )}
-          {isAdmin && (
-            <li
-              className={`navbar__item ${
-                isActiveLink("/rates") ? "active" : ""
-              }`}
-            >
-              <Link className="navbar__link" to="/rates">
-                <i>
-                  <FontAwesomeIcon icon={faDollarSign} />
-                </i>
-                <span>Tarifas</span>
-              </Link>
-            </li>
-          )}
-          <li
-            className={`navbar__item ${
-              isActiveLink("/addservices") ? "active" : ""
-            }`}
-          >
-            <Link className="navbar__link" to="/addservices">
-              <i>
-                <FontAwesomeIcon icon={faPlusCircle} />
-              </i>
-              <span>Solicitudes</span>
-            </Link>
-          </li>
-          <li
-            className={`navbar__item ${
-              isActiveLink("/bookings") ? "active" : ""
-            }`}
-          >
-            <Link className="navbar__link" to="/bookings">
-              <i>
-                <FontAwesomeIcon icon={faCalendarCheck} />
-              </i>
-              <span>Reservaciones</span>
-            </Link>
-          </li>
-          {isAdmin && (
-            <li
-              className={`navbar__item ${
-                isActiveLink("/stock") ? "active" : ""
-              }`}
-            >
-              <Link className="navbar__link" to="/stock">
-                <i>
-                  <FontAwesomeIcon icon={faBoxes} />
-                </i>
-                <span>Inventario</span>
-              </Link>
-            </li>
-          )}
+          {listItems.map((i) => {
+            return (
+              i.show && (
+                <li
+                  className={`navbar__item ${
+                    isActiveLink(i.path) ? "active" : ""
+                  }`}
+                >
+                  <Link className="navbar__link" to={i.path}>
+                    <i>
+                      <FontAwesomeIcon icon={i.icon} />
+                    </i>
+                    <span>{i.label}</span>
+                  </Link>
+                </li>
+              )
+            );
+          })}
         </ul>
         <ul className="navbar__list">
           <li className="navbar__item">

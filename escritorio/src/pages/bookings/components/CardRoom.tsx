@@ -18,13 +18,15 @@ type Props = {
 const CardRoom: FC<Props> = ({ room }) => {
   const estadoClase = `room--card ${room.status}`;
   const nav = useNavigate();
+  const roomStatus = {
+    unavailable: "No Disponible",
+    available: "Disponible",
+    occupied: "Ocupado",
+    maintenance: "En mantenimiento",
+    cleaning: "Limpieza",
+  };
 
-  let cTag = "";
-  if (room.status == "available") {
-    cTag = "Disponible";
-  } else if (room.status == "occupied") {
-    cTag = "Ocupado";
-  }
+  let cTag = roomStatus[room.status];
 
   return (
     <div className={estadoClase}>

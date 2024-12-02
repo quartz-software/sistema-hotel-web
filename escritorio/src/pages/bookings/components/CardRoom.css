@@ -12,17 +12,18 @@
   border-top: solid 5px black;
 
   /* Aplicar un box-shadow */
-  box-shadow: 0 0 10px rgba(0, 0, 0, .3)
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .room--card .tag {
   background-color: black;
   color: white;
-  padding: 1px 4px;
+  padding: 0.25em 0.5em;
   border-radius: 4px;
+  font-size: 0.8em;
 }
 
-.room--card>div {
+.room--card > div {
   display: flex;
 }
 
