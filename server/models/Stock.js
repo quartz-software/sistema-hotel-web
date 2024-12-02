@@ -27,18 +27,15 @@ const Stock = sequelize.define(
         min: 0,
       }
     },
-    measure: {
-      type: DataTypes.STRING(5),
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      }
+    price: {
+      type: DataTypes.DECIMAL(6, 2),
+      allowNull: true,
     },
     category: {
       type: DataTypes.STRING(50),
       allowNull: false,
       validate: {
-        //isIn: [[]],
+        isIn: [["food", "cleaning", "maintanance"]],
         notEmpty: true,
       }
     },
