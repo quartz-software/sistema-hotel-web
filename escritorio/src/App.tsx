@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import useUserRole from "./pages/common/hooks/useUserRole";
 import RoomRatesForm from "./pages/RoomRate/RoomRatesForm";
 import PromotionsForm from "./pages/promotions/PromotionsForm";
+import Habitaciones_admin from "./pages/rooms/Habitaciones_admin";
 
 function App() {
   const [isAuth, setIsAuth] = useState<boolean | null>(null);
@@ -93,7 +94,7 @@ function App() {
             <Route index element={<RoomRates />} />
             <Route path="edit" element={<RoomRatesForm />} />
           </Route>
-          <Route path="rooms" element={<Rooms />} />
+          <Route path="rooms" element={<Habitaciones_admin />} />
           <Route path="services" element={<Services />} />
           <Route path="stock" element={<Stock />} />
           <Route path="tasks" element={<Tasks />} />

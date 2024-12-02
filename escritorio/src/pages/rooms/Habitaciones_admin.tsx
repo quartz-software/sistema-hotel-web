@@ -30,6 +30,8 @@ const Habitaciones_admin = () => {
                 }
             })
             .then((data) => {
+                console.log(data);
+
                 setRoomsData(data);
             })
             .catch((error) => {
@@ -41,7 +43,7 @@ const Habitaciones_admin = () => {
         getData();
     }, []);
     return (
-        <>
+        <div>
             <h1>Habitaciones</h1>
             <div className="div--search">
                 <FormField label="Buscar" errorMessage="">
@@ -98,7 +100,7 @@ const Habitaciones_admin = () => {
                         </tbody>
                 }
             </table>
-        </>
+        </div>
     )
 }
 
