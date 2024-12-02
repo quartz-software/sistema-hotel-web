@@ -11,6 +11,8 @@ const {
   ServiceRoom,
   RoomRate,
   RoomRoomRate,
+  RoomPromotion,
+  RoomRoomPromotion,
   AdditionalService,
   Task,
 } = models;
@@ -26,6 +28,7 @@ export default class Seeder {
       await this.SeedBookings();
       await this.SeedAdditionalServices();
       await this.SeedRoomRates();
+      await this.SeedPromotions();
     } catch (error) {
       console.log(error);
     }
@@ -960,6 +963,57 @@ export default class Seeder {
       },
     ]
     await RoomRoomRate.bulkCreate(roomRoomRates);
+  }
+  static async SeedPromotions() {
+    const promotions = [
+      {
+        description: "Black Friday Deal",
+        startDate: "2024-11-29",
+        endDate: "2024-12-01",
+        discount: 25.00,
+        status: "active",
+      },
+      {
+        description: "Holiday Special",
+        startDate: "2024-12-20",
+        endDate: "2024-12-31",
+        discount: 15.00,
+        status: "active",
+      },
+      {
+        description: "New Year Discount",
+        startDate: "2025-01-01",
+        endDate: "2025-01-07",
+        discount: 20.00,
+        status: "active",
+      },
+      {
+        description: "Spring Promotion",
+        startDate: "2025-03-01",
+        endDate: "2025-03-31",
+        discount: 10.00,
+        status: "inactive",
+      },
+    ];
+    await RoomPromotion.bulkCreate(promotions);
+
+    const roomRoomPromotions = [
+      // Black Friday Deal
+      { roomId: 1, roomPromotionId: 1 }, // 101
+      { roomId: 2, roomPromotionId: 1 }, // 102
+      { roomId: 6, roomPromotionId: 1 }, // 106
+
+      // Holiday Special
+      { roomId: 11, roomPromotionId: 2 }, // 111
+      { roomId: 8, roomPromotionId: 2 }, // 108
+      { roomId: 13, roomPromotionId: 2 }, // 113
+
+      // Spring Promotion
+      { roomId: 9, roomPromotionId: 3 }, // 109
+      { roomId: 7, roomPromotionId: 3 }, // 107
+      { roomId: 14, roomPromotionId: 3 }, // 114
+    ];
+    await RoomRoomPromotion.bulkCreate(roomRoomPromotions);
   }
 
 }

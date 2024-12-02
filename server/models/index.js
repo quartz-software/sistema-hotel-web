@@ -73,7 +73,7 @@ function defineRelationships() {
   });
   RoomPromotion.belongsToMany(Room, {
     through: RoomRoomPromotion,
-    foreignKey: "roomPromotionsId",
+    foreignKey: "roomPromotionId",
     otherKey: "roomId",
     as: "rooms",
   });
