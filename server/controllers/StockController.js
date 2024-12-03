@@ -1,4 +1,5 @@
-import Stock from "../models/Stock.js"
+import { models } from "../models/index.js";
+const { Stock } = models;
 
 export default class StockController {
   /**
@@ -8,7 +9,7 @@ export default class StockController {
    */
   static async findAll(req, res) {
     try {
-      const stock = await Stock.findAll({ order: [["id", "ASC"]] })
+      const stock = await Stock.findAll({ order: [["id", "ASC"]] });
       res.status(200).send(stock);
     } catch (e) {
       res.status(500).send();

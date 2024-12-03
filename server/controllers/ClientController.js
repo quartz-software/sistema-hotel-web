@@ -1,6 +1,5 @@
-import sequelize from "../config/db.js";
-import Client from "../models/Client.js";
-import User from "../models/User.js";
+import { models, sequelize } from "../models/index.js";
+const { User, Client } = models;
 
 export default class ClientController {
   /**
