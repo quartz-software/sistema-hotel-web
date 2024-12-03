@@ -1,6 +1,8 @@
 import React from "react";
 import Button from "../../common/components/Button";
 import "../components/ServiceList.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 interface ServiceListProps {
   services: Service[];
@@ -13,6 +15,13 @@ const ServiceList: React.FC<ServiceListProps> = ({
   onDelete,
   onEdit,
 }) => {
+  const ServiceTypes = {
+    "room service": "Servicio a la Habitacion",
+    cleaning: "Limpieza",
+    wellness: "Bienestar",
+    transport: "Transporte",
+    other: "Otro",
+  };
   return (
     <div className="service-list">
       <table className="service-table">
@@ -30,7 +39,7 @@ const ServiceList: React.FC<ServiceListProps> = ({
           {services.map((service) => (
             <tr key={service.id}>
               <td>{service.name}</td>
-              <td>{service.type}</td>
+              <td>{ServiceTypes[service.type]}</td>
               <td>
                 {service.price} {service.currency.toUpperCase()}
               </td>
@@ -46,13 +55,13 @@ const ServiceList: React.FC<ServiceListProps> = ({
               </td>
               <td className="service-actions">
                 <Button handleClick={() => onEdit(service)} disabled={false}>
-                  E
+                  <FontAwesomeIcon icon={faPen}></FontAwesomeIcon>
                 </Button>
                 <Button
                   handleClick={() => onDelete(service.id)}
                   disabled={false}
                 >
-                  E
+                  <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
                 </Button>
               </td>
             </tr>

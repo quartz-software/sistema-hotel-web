@@ -8,15 +8,19 @@ interface ServiceModalEditProps {
   onSave: (service: Service) => void;
 }
 
-const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({ service, onClose, onSave }) => {
+const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({
+  service,
+  onClose,
+  onSave,
+}) => {
   const [serviceData, setServiceData] = useState<Service>(service);
-  console.log(service)
+  console.log(service);
   useEffect(() => {
-    setServiceData(service);  
+    setServiceData(service);
   }, [service]);
 
   const handleSave = () => {
-    onSave(serviceData);  
+    onSave(serviceData);
   };
 
   return (
@@ -31,23 +35,23 @@ const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({ service, onClose, o
               setServiceData({ ...serviceData, name: value });
             }}
             value={serviceData.name}
+            resetMessage={() => {}}
           />
-          <Input
-            type="textarea"
+          <textarea
             placeholder="Descripción del servicio (opcional)"
-            handleInput={(value: string) => {
-              setServiceData({ ...serviceData, description: value });
+            onChange={(e) => {
+              setServiceData({ ...serviceData, description: e.target.value });
             }}
             value={serviceData.description ?? ""}
           />
-          <Input
-            type="textarea"
+          <textarea
             placeholder="Restricciones (opcional)"
-            handleInput={(value: string) => {
-              setServiceData({ ...serviceData, restrictions: value });
+            onChange={(e) => {
+              setServiceData({ ...serviceData, restrictions: e.target.value });
             }}
-            value={serviceData.restrictions ?? ""}
-          />
+          >
+            {serviceData.restrictions ?? ""}
+          </textarea>
           <div>
             <label htmlFor="service-type">Tipo de servicio:</label>
             <select
@@ -86,6 +90,7 @@ const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({ service, onClose, o
               setServiceData({ ...serviceData, price: parseFloat(value) });
             }}
             value={serviceData.price.toString()}
+            resetMessage={() => {}}
           />
           <div>
             <label>Hora de Apertura:</label>
@@ -95,6 +100,7 @@ const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({ service, onClose, o
                 setServiceData({ ...serviceData, openHour: value })
               }
               value={serviceData.openHour}
+              resetMessage={() => {}}
             />
           </div>
           <div>
@@ -102,9 +108,11 @@ const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({ service, onClose, o
             <Input
               type="time"
               handleInput={(value: string) => {
+                console.log(value);
                 setServiceData({ ...serviceData, closeHour: value });
               }}
               value={serviceData.closeHour}
+              resetMessage={() => {}}
             />
           </div>
           <div>
@@ -114,7 +122,10 @@ const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({ service, onClose, o
                 type="checkbox"
                 checked={serviceData.available}
                 onChange={(e) =>
-                  setServiceData({ ...serviceData, available: e.target.checked })
+                  setServiceData({
+                    ...serviceData,
+                    available: e.target.checked,
+                  })
                 }
               />
             </label>

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import './components/Services.css';
+import "./components/Services.css";
 import ServiceModal from "./components/ServiceModal";
 import ServiceModalEdit from "./components/ServiceModalEdit";
 import ServiceList from "./components/ServiceList";
 
 const Services: React.FC = () => {
   const [services, setServices] = useState<Service[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); 
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [serviceToEdit, setServiceToEdit] = useState<Service | null>(null);
 
   const handleAddService = (service: Service) => {
@@ -43,9 +43,9 @@ const Services: React.FC = () => {
   };
 
   const handleOpenEditModal = (service: Service) => {
-    setServiceToEdit(service);  
-    setIsEditModalOpen(true);  
-    console.log(service)
+    setServiceToEdit(service);
+    setIsEditModalOpen(true);
+    console.log(service);
   };
 
   useEffect(() => {
@@ -61,14 +61,14 @@ const Services: React.FC = () => {
       <h1>Gestión de Servicios</h1>
       <button
         className="add-service-button"
-        onClick={() => setIsModalOpen(true)} 
+        onClick={() => setIsModalOpen(true)}
       >
         Agregar Servicio
       </button>
       <ServiceList
         services={services}
         onDelete={handleDeleteService}
-        onEdit={handleOpenEditModal} 
+        onEdit={handleOpenEditModal}
       />
       {isModalOpen && (
         <ServiceModal
@@ -80,7 +80,7 @@ const Services: React.FC = () => {
         <ServiceModalEdit
           service={serviceToEdit}
           onClose={() => setIsEditModalOpen(false)}
-          onSave={handleEditService} 
+          onSave={handleEditService}
         />
       )}
     </div>
