@@ -70,8 +70,7 @@ const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({
               value={serviceData.restrictions ?? ""}
             ></textarea>
           </FormField>
-          <div>
-            <label htmlFor="service-type">Tipo de servicio:</label>
+          <FormField errorMessage="" label="Tipo de Servicio:">
             <select
               id="service-type"
               value={serviceData.type}
@@ -85,10 +84,9 @@ const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({
               <option value="transport">Transporte</option>
               <option value="other">Otros</option>
             </select>
-          </div>
+          </FormField>
 
-          <div>
-            <label htmlFor="currency">Moneda:</label>
+          <FormField label="Moneda:" errorMessage="">
             <select
               id="currency"
               value={serviceData.currency}
@@ -99,19 +97,19 @@ const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({
               <option value="usd">USD</option>
               <option value="bs">BS</option>
             </select>
-          </div>
-
-          <Input
-            type="number"
-            placeholder="Precio"
-            handleInput={(value: string) => {
-              setServiceData({ ...serviceData, price: parseFloat(value) });
-            }}
-            value={serviceData.price.toString()}
-            resetMessage={() => {}}
-          />
-          <div>
-            <label>Hora de Apertura:</label>
+          </FormField>
+          <FormField label="Precio:" errorMessage="">
+            <Input
+              type="number"
+              placeholder="Precio"
+              handleInput={(value: string) => {
+                setServiceData({ ...serviceData, price: parseFloat(value) });
+              }}
+              value={serviceData.price.toString()}
+              resetMessage={() => {}}
+            />
+          </FormField>
+          <FormField label="Hora de Apertura:" errorMessage="">
             <Input
               type="time"
               handleInput={(value: string) =>
@@ -120,9 +118,8 @@ const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({
               value={serviceData.openHour}
               resetMessage={() => {}}
             />
-          </div>
-          <div>
-            <label>Hora de Cierre:</label>
+          </FormField>
+          <FormField label="Hora de Cierre:" errorMessage="">
             <Input
               type="time"
               handleInput={(value: string) => {
@@ -132,22 +129,19 @@ const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({
               value={serviceData.closeHour}
               resetMessage={() => {}}
             />
-          </div>
-          <div>
-            <label>
-              ¿Disponible?
-              <input
-                type="checkbox"
-                checked={serviceData.available}
-                onChange={(e) =>
-                  setServiceData({
-                    ...serviceData,
-                    available: e.target.checked,
-                  })
-                }
-              />
-            </label>
-          </div>
+          </FormField>
+          <FormField label="Hora de Cierre:" errorMessage="">
+            <input
+              type="checkbox"
+              checked={serviceData.available}
+              onChange={(e) =>
+                setServiceData({
+                  ...serviceData,
+                  available: e.target.checked,
+                })
+              }
+            />
+          </FormField>
           <div className="modal-buttons">
             <Button handleClick={handleSave} disabled={false}>
               Guardar

@@ -23,6 +23,7 @@ const Services: React.FC = () => {
         if (res.status === 200) return res.json();
       })
       .then((data: Service) => {
+        console.log(data);
         newService.id = data.id;
         setServices([...services, newService]);
         setIsModalOpen(false);

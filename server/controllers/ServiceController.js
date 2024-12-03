@@ -70,10 +70,30 @@ export default class ServiceController {
         return res.status(403).json();
       }
 
-      const body = req.body;
-      if (!body || body.id != undefined) return res.status(400).send();
-      const service = await Service.create(body);
-      service.save();
+      if (!req.body) return res.status(400).send();
+      if (!req.body) return res.status(400).send();
+      const {
+        name,
+        description,
+        restrictions,
+        type,
+        currency,
+        price,
+        openHour,
+        closeHour,
+        available,
+      } = req.body;
+      const service = await Service.create({
+        name,
+        description,
+        restrictions,
+        type,
+        currency,
+        price,
+        openHour,
+        closeHour,
+        available,
+      });
       res.status(200).json(service);
     } catch (error) {
       res.status(500).send();
@@ -92,9 +112,33 @@ export default class ServiceController {
       }
 
       const id = req.params.id;
-      const body = req.body;
+      if (!req.body) return res.status(400).send();
+      const {
+        name,
+        description,
+        restrictions,
+        type,
+        currency,
+        price,
+        openHour,
+        closeHour,
+        available,
+      } = req.body;
       if (!id || !body || isNaN(parseInt(id))) return res.status(400).send();
-      await Service.update(body, { where: { id } });
+      await Service.update(
+        {
+          name,
+          description,
+          restrictions,
+          type,
+          currency,
+          price,
+          openHour,
+          closeHour,
+          available,
+        },
+        { where: { id } }
+      );
       res.status(200).send();
     } catch (error) {
       res.status(500).send();
