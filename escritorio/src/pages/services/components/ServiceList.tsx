@@ -1,51 +1,49 @@
+import React from "react";
 import Button from "../../common/components/Button";
-import '../components/ServiceList.css'
-interface Service {
-  id: number;
-  name: string;
-  description?: string;
-  restrictions?: string;
-  type: string;
-  currency: string;
-  price: number;
-  openHour: string;
-  closeHour: string;
-  available: boolean;
-}
+import '../components/ServiceList.css';
+
 interface ServiceListProps {
   services: Service[];
   onDelete: (id: number) => void;
-  onEdit: (updatedService: Service) => void;
+  onEdit: (service: Service) => void;
 }
 
 const ServiceList: React.FC<ServiceListProps> = ({ services, onDelete, onEdit }) => {
   return (
     <div className="service-list">
-      {services.map((service) => (
-        <div key={service.id} className="service-item">
-          <div className="service-details">
-            <strong>{service.name}</strong>
-            <p>{service.description || "Sin descripción"}</p>
-            <p>Restricciones: {service.restrictions || "Ninguna"}</p>
-            <p>Tipo: {service.type}</p>
-            <p>
-              Precio: {service.price} {service.currency.toUpperCase()}
-            </p>
-            <p>
-              Horario: {service.openHour} - {service.closeHour}
-            </p>
-            <p>{service.available ? "Disponible" : "No Disponible"}</p>
-          </div>
-          <div className="service-actions">
-            <Button handleClick={() => onEdit(service)} disabled={false}>
-              Editar
-            </Button>
-            <Button handleClick={() => onDelete(service.id)} disabled={false}>
-              Eliminar
-            </Button>
-          </div>
-        </div>
-      ))}
+      <table className="service-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Precio</th>
+            <th>Horario</th>
+            <th>Disponibilidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {services.map((service) => (
+            <tr key={service.id}>
+              <td>{service.name}</td>
+              <td>{service.type}</td>
+              <td>{service.price} {service.currency.toUpperCase()}</td>
+              <td>{service.openHour} - {service.closeHour}</td>
+              <td className={`service-availability ${service.available ? 'available' : 'unavailable'}`}>
+              {service.available ? "Disponible" : "No Disponible"}
+              </td>
+              <td className="service-actions">
+                <Button handleClick={() => onEdit(service)} disabled={false}>
+                  Editar
+                </Button>
+                <Button handleClick={() => onDelete(service.id)} disabled={false}>
+                  Eliminar
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

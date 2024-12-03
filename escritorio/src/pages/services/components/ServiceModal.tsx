@@ -9,7 +9,7 @@ interface ServiceModalProps {
 }
 
 const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
-  const [serviceData, setSetserviceData] = useState<Service>({
+  const [serviceData, setServiceData] = useState<Service>({
     id: 0,
     name: "",
     description: "",
@@ -21,20 +21,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
     closeHour: "18:00",
     available: false,
   });
-
   const handleSave = () => {
-    if (
-      !serviceData.name ||
-      !serviceData.type ||
-      !serviceData.currency ||
-      !serviceData.price ||
-      !serviceData.openHour ||
-      !serviceData.closeHour
-    ) {
-      alert("Por favor, completa todos los campos obligatorios.");
-      return;
-    }
-
     onSave(serviceData);
   };
 
@@ -51,28 +38,25 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
             type="text"
             placeholder="Nombre del servicio"
             handleInput={(value: string) => {
-              setSetserviceData({ ...serviceData, name: value });
+              setServiceData({ ...serviceData, name: value });
             }}
             resetMessage={() => {}}
-            value={serviceData.name}
           />
           <Input
             type="textarea"
             placeholder="Descripción del servicio (opcional)"
             handleInput={(value: string) => {
-              setSetserviceData({ ...serviceData, description: value });
+              setServiceData({ ...serviceData, description: value });
             }}
             resetMessage={() => {}}
-            value={serviceData.description ?? ""}
           />
           <Input
             type="textarea"
             placeholder="Restricciones (opcional)"
             handleInput={(value: string) => {
-              setSetserviceData({ ...serviceData, restrictions: value });
+              setServiceData({ ...serviceData, restrictions: value });
             }}
             resetMessage={() => {}}
-            value={serviceData.restrictions ?? ""}
           />
           <div>
             <label htmlFor="service-type">Tipo de servicio:</label>
@@ -80,7 +64,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
               id="service-type"
               value={serviceData.type}
               onChange={(e) => {
-                setSetserviceData({ ...serviceData, type: e.target.value });
+                setServiceData({ ...serviceData, type: e.target.value });
               }}
             >
               <option value="room service">Room Service</option>
@@ -97,7 +81,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
               id="currency"
               value={serviceData.currency}
               onChange={(e) =>
-                setSetserviceData({ ...serviceData, currency: e.target.value })
+                setServiceData({ ...serviceData, currency: e.target.value })
               }
             >
               <option value="usd">USD</option>
@@ -109,33 +93,28 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
             type="number"
             placeholder="Precio"
             handleInput={(value: string) => {
-              setSetserviceData({ ...serviceData, price: parseFloat(value) });
+              setServiceData({ ...serviceData, price: parseFloat(value) });
             }}
             resetMessage={() => {}}
-            value={serviceData.price.toString()}
           />
           <div>
             <label>Hora de Apertura:</label>
             <Input
               type="time"
-              placeholder=""
               handleInput={(value: string) =>
-                setSetserviceData({ ...serviceData, openHour: value })
+                setServiceData({ ...serviceData, openHour: value })
               }
               resetMessage={() => {}}
-              value={serviceData.openHour}
             />
           </div>
           <div>
             <label>Hora de Cierre:</label>
             <Input
               type="time"
-              placeholder=""
               handleInput={(value: string) => {
-                setSetserviceData({ ...serviceData, closeHour: value });
+                setServiceData({ ...serviceData, closeHour: value });
               }}
               resetMessage={() => {}}
-              value={serviceData.closeHour}
             />
           </div>
           <div>
@@ -143,12 +122,10 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
               ¿Disponible?
               <Input
                 type="checkbox"
-                placeholder=""
                 handleInput={(value: boolean) => {
-                  setSetserviceData({ ...serviceData, available: value });
+                  setServiceData({ ...serviceData, available: value });
                 }}
                 resetMessage={() => {}}
-                value={serviceData.available}
               />
             </label>
           </div>

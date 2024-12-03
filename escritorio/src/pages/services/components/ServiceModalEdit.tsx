@@ -3,30 +3,19 @@ import Button from "../../common/components/Button";
 import Input from "../../common/components/Input";
 
 interface ServiceModalEditProps {
-  service: Service;  
+  service: Service;
   onClose: () => void;
   onSave: (service: Service) => void;
 }
 
 const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({ service, onClose, onSave }) => {
   const [serviceData, setServiceData] = useState<Service>(service);
+  console.log(service)
   useEffect(() => {
-    setServiceData(service); 
+    setServiceData(service);  
   }, [service]);
 
   const handleSave = () => {
-    if (
-      !serviceData.name ||
-      !serviceData.type ||
-      !serviceData.currency ||
-      !serviceData.price ||
-      !serviceData.openHour ||
-      !serviceData.closeHour
-    ) {
-      alert("Por favor, completa todos los campos obligatorios.");
-      return;
-    }
-
     onSave(serviceData);  
   };
 
@@ -41,7 +30,6 @@ const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({ service, onClose, o
             handleInput={(value: string) => {
               setServiceData({ ...serviceData, name: value });
             }}
-            resetMessage={() => {}}
             value={serviceData.name}
           />
           <Input
@@ -50,7 +38,6 @@ const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({ service, onClose, o
             handleInput={(value: string) => {
               setServiceData({ ...serviceData, description: value });
             }}
-            resetMessage={() => {}}
             value={serviceData.description ?? ""}
           />
           <Input
@@ -59,7 +46,6 @@ const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({ service, onClose, o
             handleInput={(value: string) => {
               setServiceData({ ...serviceData, restrictions: value });
             }}
-            resetMessage={() => {}}
             value={serviceData.restrictions ?? ""}
           />
           <div>
@@ -99,18 +85,15 @@ const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({ service, onClose, o
             handleInput={(value: string) => {
               setServiceData({ ...serviceData, price: parseFloat(value) });
             }}
-            resetMessage={() => {}}
             value={serviceData.price.toString()}
           />
           <div>
             <label>Hora de Apertura:</label>
             <Input
               type="time"
-              placeholder=""
               handleInput={(value: string) =>
                 setServiceData({ ...serviceData, openHour: value })
               }
-              resetMessage={() => {}}
               value={serviceData.openHour}
             />
           </div>
@@ -118,25 +101,21 @@ const ServiceModalEdit: React.FC<ServiceModalEditProps> = ({ service, onClose, o
             <label>Hora de Cierre:</label>
             <Input
               type="time"
-              placeholder=""
               handleInput={(value: string) => {
                 setServiceData({ ...serviceData, closeHour: value });
               }}
-              resetMessage={() => {}}
               value={serviceData.closeHour}
             />
           </div>
           <div>
             <label>
               ¿Disponible?
-              <Input
+              <input
                 type="checkbox"
-                placeholder=""
-                handleInput={(value: boolean) => {
-                  setServiceData({ ...serviceData, available: value });
-                }}
-                resetMessage={() => {}}
-                value={serviceData.available}
+                checked={serviceData.available}
+                onChange={(e) =>
+                  setServiceData({ ...serviceData, available: e.target.checked })
+                }
               />
             </label>
           </div>
