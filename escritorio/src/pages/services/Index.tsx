@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./components/Services.css";
+import "./Index.css";
 import ServiceModal from "./components/ServiceModal";
 import ServiceModalEdit from "./components/ServiceModalEdit";
 import ServiceList from "./components/ServiceList";
@@ -45,7 +45,6 @@ const Services: React.FC = () => {
   const handleOpenEditModal = (service: Service) => {
     setServiceToEdit(service);
     setIsEditModalOpen(true);
-    console.log(service);
   };
 
   useEffect(() => {

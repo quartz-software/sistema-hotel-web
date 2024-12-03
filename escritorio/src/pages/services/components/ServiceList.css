@@ -12,16 +12,16 @@
 .service-table td {
   padding: 10px;
   text-align: left;
-  border: 1px solid #ddd;
+  border: 1px solid #555;
 }
 .service-table th {
-  background-color: #f2f2f2;
+  background-color: #333;
   font-size: 16px;
   font-weight: bold;
 }
 .service-table td {
   font-size: 14px;
-  color: #666;
+  color: #cccccc;
 }
 .service-actions {
   display: flex;
@@ -64,13 +64,35 @@
 .service-table td:nth-child(6) {
   width: 100%;
 }
-.service-availability {
+.service-availability span {
+  font-size: 0.9rem;
+  padding: 0.2em 0.25em;
+  border-radius: 0.25em;
   font-weight: bold;
   text-align: center;
+  color: white;
 }
-.service-availability.available {
-  color: green;
+.service-availability.available span {
+  background-color: rgb(57, 126, 57);
 }
-.service-availability.unavailable {
-  color: red;
+.service-availability.unavailable span {
+  background-color: rgb(171, 42, 42);
+}
+
+@media (prefers-color-scheme: light) {
+  .service-table th,
+  .service-table td {
+    border: 1px solid #ddd;
+    color: #666666;
+  }
+  .service-table th {
+    background-color: #f2f2f2;
+    color: #444444;
+  }
+  .service-availability.available span {
+    background-color: rgb(62, 182, 62);
+  }
+  .service-availability.unavailable span {
+    background-color: rgb(193, 33, 33);
+  }
 }

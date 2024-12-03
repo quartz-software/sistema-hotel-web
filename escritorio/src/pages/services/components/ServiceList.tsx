@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../../common/components/Button";
-import "../components/ServiceList.css";
+import "./ServiceList.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
@@ -51,7 +51,9 @@ const ServiceList: React.FC<ServiceListProps> = ({
                   service.available ? "available" : "unavailable"
                 }`}
               >
-                {service.available ? "Disponible" : "No Disponible"}
+                <span>
+                  {service.available ? "Disponible" : "No Disponible"}
+                </span>
               </td>
               <td className="service-actions">
                 <Button handleClick={() => onEdit(service)} disabled={false}>

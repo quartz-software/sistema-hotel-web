@@ -31,6 +31,13 @@ body {
   min-height: 100vh;
 }
 
+input,
+select,
+textarea {
+  background-color: #3a3a3a;
+  font-family: inherit;
+}
+
 p,
 h1,
 h2,
@@ -53,5 +60,10 @@ a {
   }
   a:hover {
     color: #747bff;
+  }
+  input,
+  select,
+  textarea {
+    background-color: white;
   }
 }

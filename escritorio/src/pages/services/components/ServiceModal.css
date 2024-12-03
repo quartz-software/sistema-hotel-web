@@ -14,7 +14,7 @@
 }
 
 .modal-content {
-  background: white;
+  background: #2a2a2a;
   padding: 20px;
   border-radius: 10px;
   width: 400px;
@@ -28,7 +28,6 @@
 .modal-content h2 {
   margin-bottom: 20px;
   font-size: 1.5rem;
-  color: #333;
 }
 
 .modal-content input,
@@ -39,8 +38,6 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-  background-color: #f9f9f9;
-  color: #333;
   box-sizing: border-box;
 }
 
@@ -58,8 +55,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-  background-color: white;
-  color: #333;
+  color: #aaaaaa;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -127,4 +123,10 @@
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
+}
+
+@media (prefers-color-scheme: light) {
+  .modal-content {
+    background: #ffffff;
+  }
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./ServiceModal.css";
 import Button from "../../common/components/Button";
 import Input from "../../common/components/Input";
+import FormField from "../../common/components/FormField";
 
 interface ServiceModalProps {
   onClose: () => void;
@@ -26,7 +27,17 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
   };
 
   return (
-    <div className="modal-overlay">
+    <div
+      className="modal-overlay"
+      onClick={(e) => {
+        if (
+          e.target instanceof HTMLDivElement &&
+          e.target.classList.contains("modal-overlay")
+        ) {
+          onClose();
+        }
+      }}
+    >
       <div className="modal-content">
         <h2>Agregar Servicio</h2>
         <form
@@ -34,30 +45,38 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
             e.preventDefault();
           }}
         >
-          <Input
-            type="text"
-            placeholder="Nombre del servicio"
-            handleInput={(value: string) => {
-              setServiceData({ ...serviceData, name: value });
-            }}
-            resetMessage={() => {}}
-            value={serviceData.name}
-          />
-          <textarea
-            placeholder="Descripción del servicio (opcional)"
-            onChange={(e) => {
-              setServiceData({ ...serviceData, description: e.target.value });
-            }}
-            value={serviceData.description ?? ""}
-          />
-          <textarea
-            placeholder="Restricciones (opcional)"
-            onChange={(e) => {
-              setServiceData({ ...serviceData, restrictions: e.target.value });
-            }}
-          >
-            {serviceData.restrictions ?? ""}
-          </textarea>
+          <FormField errorMessage="" label="Nombre:">
+            <Input
+              type="text"
+              placeholder="Nombre del servicio"
+              handleInput={(value: string) => {
+                setServiceData({ ...serviceData, name: value });
+              }}
+              resetMessage={() => {}}
+              value={serviceData.name}
+            />
+          </FormField>
+          <FormField errorMessage="" label="Descripcion (opcional):">
+            <textarea
+              placeholder="Descripción "
+              onChange={(e) => {
+                setServiceData({ ...serviceData, description: e.target.value });
+              }}
+              value={serviceData.description ?? ""}
+            ></textarea>
+          </FormField>
+          <FormField errorMessage="" label="Restricciones (opcional):">
+            <textarea
+              placeholder="Restricciones"
+              onChange={(e) => {
+                setServiceData({
+                  ...serviceData,
+                  restrictions: e.target.value,
+                });
+              }}
+              value={serviceData.restrictions ?? ""}
+            ></textarea>
+          </FormField>
           <div>
             <label htmlFor="service-type">Tipo de servicio:</label>
             <select
@@ -67,11 +86,11 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
                 setServiceData({ ...serviceData, type: e.target.value });
               }}
             >
-              <option value="room service">Room Service</option>
-              <option value="cleaning">Cleaning</option>
-              <option value="wellness">Wellness</option>
-              <option value="transport">Transport</option>
-              <option value="other">Other</option>
+              <option value="room service">Servicio a la Habitacion</option>
+              <option value="cleaning">Limpieza</option>
+              <option value="wellness">Bienestar</option>
+              <option value="transport">Transporte</option>
+              <option value="other">Otros</option>
             </select>
           </div>
 
@@ -98,8 +117,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
             resetMessage={() => {}}
             value={serviceData.price.toString()}
           />
-          <div>
-            <label>Hora de Apertura:</label>
+          <FormField errorMessage="" label="Hora de Apertura">
             <Input
               type="time"
               handleInput={(value: string) =>
@@ -108,9 +126,8 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
               resetMessage={() => {}}
               value={serviceData.openHour}
             />
-          </div>
-          <div>
-            <label>Hora de Cierre:</label>
+          </FormField>
+          <FormField label="Hora de Cierre:" errorMessage="">
             <Input
               type="time"
               handleInput={(value: string) => {
@@ -119,7 +136,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose, onSave }) => {
               resetMessage={() => {}}
               value={serviceData.closeHour}
             />
-          </div>
+          </FormField>
           <div>
             <label>
               ¿Disponible?
