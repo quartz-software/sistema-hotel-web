@@ -16,14 +16,15 @@ const {
 export default class Seeder {
   static async Seed() {
     try {
-      await sequelize.sync({ force: true });
       await this.SeedEmployees();
       await this.SeedClients();
       await this.SeedRooms();
       await this.SeedServices();
       await this.SeedBookings();
       await this.SeedAdditionalServices();
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }
   static async SeedEmployees() {
     const usersAndEmployees = [

@@ -12,6 +12,7 @@ type Props = {
     | "number"
     | "file"
     | "date"
+    | "time"
     | "checkbox"
     | "radio";
   resetMessage: Function;
