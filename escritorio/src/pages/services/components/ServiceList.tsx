@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../../common/components/Button";
-import '../components/ServiceList.css';
+import "../components/ServiceList.css";
 
 interface ServiceListProps {
   services: Service[];
@@ -8,7 +8,11 @@ interface ServiceListProps {
   onEdit: (service: Service) => void;
 }
 
-const ServiceList: React.FC<ServiceListProps> = ({ services, onDelete, onEdit }) => {
+const ServiceList: React.FC<ServiceListProps> = ({
+  services,
+  onDelete,
+  onEdit,
+}) => {
   return (
     <div className="service-list">
       <table className="service-table">
@@ -27,17 +31,28 @@ const ServiceList: React.FC<ServiceListProps> = ({ services, onDelete, onEdit })
             <tr key={service.id}>
               <td>{service.name}</td>
               <td>{service.type}</td>
-              <td>{service.price} {service.currency.toUpperCase()}</td>
-              <td>{service.openHour} - {service.closeHour}</td>
-              <td className={`service-availability ${service.available ? 'available' : 'unavailable'}`}>
-              {service.available ? "Disponible" : "No Disponible"}
+              <td>
+                {service.price} {service.currency.toUpperCase()}
+              </td>
+              <td>
+                {service.openHour} - {service.closeHour}
+              </td>
+              <td
+                className={`service-availability ${
+                  service.available ? "available" : "unavailable"
+                }`}
+              >
+                {service.available ? "Disponible" : "No Disponible"}
               </td>
               <td className="service-actions">
                 <Button handleClick={() => onEdit(service)} disabled={false}>
-                  Editar
+                  E
                 </Button>
-                <Button handleClick={() => onDelete(service.id)} disabled={false}>
-                  Eliminar
+                <Button
+                  handleClick={() => onDelete(service.id)}
+                  disabled={false}
+                >
+                  E
                 </Button>
               </td>
             </tr>
