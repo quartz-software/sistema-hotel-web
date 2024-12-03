@@ -131,6 +131,16 @@ function defineRelationships() {
     as: "user",
   });
 
+  // Employee: userId
+  User.hasOne(Client, {
+    foreignKey: "userId",
+    as: "client",
+  });
+  Client.belongsTo(User, {
+    foreignKey: "userId",
+    as: "user",
+  });
+
   // AdditionalService: serviceId
   Service.hasMany(AdditionalService, {
     foreignKey: "serviceId",

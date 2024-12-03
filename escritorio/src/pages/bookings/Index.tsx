@@ -23,7 +23,6 @@ const Habitaciones = () => {
         }
       })
       .then((data) => {
-        console.log(data);
         setRoomsData(data);
       })
       .catch((error) => {

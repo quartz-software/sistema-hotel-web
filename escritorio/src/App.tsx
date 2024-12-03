@@ -5,6 +5,7 @@ import Layout from "./pages/common/Layout";
 import Home from "./pages/home/Home";
 import AddServices from "./pages/addservices/Index";
 import Bookings from "./pages/bookings/Index";
+import BookingForm from "./pages/bookings/BookingForm";
 import Login from "./pages/auth/Login";
 import Rooms from "./pages/rooms/Index";
 import Rates from "./pages/rates/Index";
@@ -82,7 +83,10 @@ function App() {
           />
           <Route path="home" element={<Home />} />
           <Route path="addservices" element={<AddServices />} />
-          <Route path="bookings" element={<Bookings />} />
+          <Route path="bookings">
+            <Route index element={<Bookings />} />
+            <Route path="create" element={<BookingForm />} />
+          </Route>
           <Route path="promotions" element={<Promotions />} />
           <Route path="rates" element={<Rates />} />
           <Route path="rooms" element={<Rooms />} />

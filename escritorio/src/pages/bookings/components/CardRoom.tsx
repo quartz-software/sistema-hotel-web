@@ -41,7 +41,7 @@ const CardRoom: FC<Props> = ({ room }) => {
       </div>
       <Button
         handleClick={function (): void {
-          nav("/reserva", { state: { room } });
+          nav("/bookings/create", { state: { room } });
         }}
         disabled={false}
       >

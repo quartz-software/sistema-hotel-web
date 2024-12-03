@@ -16,7 +16,7 @@ type Props = {
     | "radio";
   resetMessage: Function;
   autocomplete?: "email" | "current-password" | "new-password";
-  value: string | boolean;
+  value: string | boolean | number | Date;
 };
 
 const Input: FC<Props> = ({

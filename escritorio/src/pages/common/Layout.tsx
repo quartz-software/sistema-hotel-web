@@ -87,19 +87,20 @@ const Layout = () => {
     <div className="app_container">
       <nav className="navbar">
         <ul className="navbar__list">
-          {listItems.map((i) => {
+          {listItems.map((item, index) => {
             return (
-              i.show && (
+              item.show && (
                 <li
+                  key={index}
                   className={`navbar__item ${
-                    isActiveLink(i.path) ? "active" : ""
+                    isActiveLink(item.path) ? "active" : ""
                   }`}
                 >
-                  <Link className="navbar__link" to={i.path}>
+                  <Link className="navbar__link" to={item.path}>
                     <i>
-                      <FontAwesomeIcon icon={i.icon} />
+                      <FontAwesomeIcon icon={item.icon} />
                     </i>
-                    <span>{i.label}</span>
+                    <span>{item.label}</span>
                   </Link>
                 </li>
               )

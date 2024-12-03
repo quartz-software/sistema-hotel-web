@@ -17,8 +17,8 @@ const Booking = sequelize.define(
       allowNull: false,
       validate: {
         isInt: true,
-        min: 1
-      }
+        min: 1,
+      },
     },
     nChild: {
       type: DataTypes.INTEGER,
@@ -26,7 +26,7 @@ const Booking = sequelize.define(
       validate: {
         isInt: true,
         min: 0,
-      }
+      },
     },
     bookingDate: {
       type: DataTypes.DATE,
@@ -38,22 +38,22 @@ const Booking = sequelize.define(
       allowNull: false,
       validate: {
         notEmpty: true,
-      }
+      },
     },
     checkOut: {
       type: DataTypes.DATE,
       allowNull: false,
       validate: {
         notEmpty: true,
-      }
+      },
     },
     status: {
       type: DataTypes.STRING(30),
       allowNull: false,
       validate: {
         notEmpty: true,
-        isIn: [['in progress', 'cancelled', 'finished', 'pending']]
-      }
+        isIn: [["in progress", "cancelled", "finished", "pending"]],
+      },
     },
     totalPrice: {
       type: DataTypes.DECIMAL(10, 2),
@@ -61,31 +61,32 @@ const Booking = sequelize.define(
       validate: {
         isDecimal: true,
         min: 0.0,
-      }
+      },
     },
     bookingOrigin: {
       type: DataTypes.STRING(60),
       allowNull: false,
       validate: {
-        notEmpty: true
-      }
+        notEmpty: true,
+        isIn: [["external", "system"]],
+      },
     },
     employeeId: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
         model: "employees",
-        key: 'id'
-      }
+        key: "id",
+      },
     },
     clientId: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
         model: "clients",
-        key: 'id'
-      }
-    }
+        key: "id",
+      },
+    },
   },
   {
     tableName: "bookings",

@@ -9,9 +9,12 @@ export default class ClientController {
    */
   static async findAll(req, res) {
     try {
-      const clients = await Client.findAll();
+      const clients = await Client.findAll({
+        include: { model: User, as: "user" },
+      });
       res.status(200).json(clients);
     } catch (e) {
+      console.log(e);
       res.status(500).send();
     }
   }
