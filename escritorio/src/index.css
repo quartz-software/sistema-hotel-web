@@ -41,6 +41,25 @@ h6 {
   margin: 0;
 }
 
+textarea,
+select {
+  padding: 0.25rem;
+
+  border-radius: 0.3rem;
+  border: 0.1rem solid;
+  border-color: #8f8f8f;
+
+  font-size: 1rem;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: transparent;
+}
+
+textarea,
+select:focus {
+  border-color: #017db0;
+  outline: none;
+}
+
 button,
 a {
   cursor: pointer;
