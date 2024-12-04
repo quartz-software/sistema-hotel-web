@@ -3,17 +3,40 @@
 }
 
 .form--room {
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1em;
 }
 
-.form__div {
+.form__div--row {
+  grid-column: 1/3;
+}
+
+.div--msg-nd {
+  text-align: center;
+  height: 5rem;
+  align-content: center;
+  font-size: x-large;
+  font-weight: bold;
+  color: gray;
+}
+
+.promotion__select {
   display: flex;
-  flex-direction: column;
-  margin-right: 15rem;
+  width: 100%;
+  gap: 1rem;
+  align-items: center;
+}
+
+.promotion__select select {
+  width: 100%;
+}
+
+.form__title-imgs {
+  display: flex;
+  justify-content: space-between;
 }
 
 .form__btn {

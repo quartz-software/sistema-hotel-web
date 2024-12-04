@@ -3,7 +3,7 @@ import "./Input.css";
 
 type Props = {
   placeholder?: string;
-  handleInput: Function;
+  handleInput: (value: string | boolean | File) => void;
   type:
   | "text"
   | "password"
@@ -27,7 +27,7 @@ const Input: FC<Props> = ({
   autocomplete,
   value,
 }) => {
-  function handleResult(value: string | boolean) {
+  function handleResult(value: string | boolean | File) {
     resetMessage();
     handleInput(value);
   }
@@ -41,16 +41,21 @@ const Input: FC<Props> = ({
         const result = target.value;
         handleResult(result);
       }}
+
       type={type}
       checked={typeof value === "boolean" ? value : false}
       onChange={(e) => {
-        if (type !== "checkbox" && type !== "radio") return;
+        if (type !== "checkbox" && type !== "radio" && type !== "file") return;
+        if (type === "file" && e.target.files && e.target.files.length > 0) {
+          handleResult(e.target.files.item(0)!)
+          return
+        }
         const target = e.target as HTMLInputElement;
         const result = target.checked;
         handleResult(result);
       }}
       placeholder={placeholder ? placeholder : ""}
-      value={typeof value !== "string" ? "" : value}
+      {...type !== "file" ? { value: typeof value !== "string" ? "" : value } : {}}
     />
   );
 };
