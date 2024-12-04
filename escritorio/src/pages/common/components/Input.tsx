@@ -18,6 +18,8 @@ type Props = {
   resetMessage: Function;
   autocomplete?: "email" | "current-password" | "new-password";
   value: string | boolean;
+  min?: number;
+  max?: number;
 };
 
 const Input: FC<Props> = ({
@@ -27,6 +29,8 @@ const Input: FC<Props> = ({
   resetMessage,
   autocomplete,
   value,
+  min,
+  max,
 }) => {
   function handleResult(value: string | boolean) {
     resetMessage();
@@ -52,6 +56,8 @@ const Input: FC<Props> = ({
       }}
       placeholder={placeholder ? placeholder : ""}
       value={typeof value !== "string" ? "" : value}
+      {...(type === "number" && min !== undefined ? { min: min } : {})}
+      {...(type === "number" && max !== undefined ? { max: max } : {})}
     />
   );
 };
