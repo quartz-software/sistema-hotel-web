@@ -5,18 +5,21 @@ type Props = {
   placeholder?: string;
   handleInput: Function;
   type:
-    | "text"
-    | "password"
-    | "email"
-    | "tel"
-    | "number"
-    | "file"
-    | "date"
-    | "checkbox"
-    | "radio";
+  | "text"
+  | "password"
+  | "email"
+  | "tel"
+  | "number"
+  | "file"
+  | "date"
+  | "time"
+  | "checkbox"
+  | "radio";
   resetMessage: Function;
   autocomplete?: "email" | "current-password" | "new-password";
   value: string | boolean | number | Date;
+  min?: number;
+  max?: number;
 };
 
 const Input: FC<Props> = ({
@@ -26,6 +29,8 @@ const Input: FC<Props> = ({
   resetMessage,
   autocomplete,
   value,
+  min,
+  max,
 }) => {
   function handleResult(value: string | boolean) {
     resetMessage();
@@ -51,6 +56,8 @@ const Input: FC<Props> = ({
       }}
       placeholder={placeholder ? placeholder : ""}
       value={typeof value !== "string" ? "" : value}
+      {...(type === "number" && min !== undefined ? { min: min } : {})}
+      {...(type === "number" && max !== undefined ? { max: max } : {})}
     />
   );
 };

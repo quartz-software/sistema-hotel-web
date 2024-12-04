@@ -228,11 +228,11 @@ function defineRelationships() {
   });
 
   //Task: additionalServiceId
-  Task.hasOne(AdditionalService, {
+  AdditionalService.hasOne(Task, {
     foreignKey: "additionalServiceId",
     as: "additional_service",
   });
-  AdditionalService.belongsTo(Task, {
+  Task.belongsTo(AdditionalService, {
     foreignKey: "additionalServiceId",
     as: "task",
   });
