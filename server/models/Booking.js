@@ -77,6 +77,7 @@ const Booking = sequelize.define(
       allowNull: false,
       validate: {
         notEmpty: true,
+        isIn: [["external", "system"]],
       },
     },
     employeeId: {

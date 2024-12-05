@@ -6,7 +6,7 @@ const { Booking, Room, RoomImage, BookingRoom } = models;
 const calculateTotalPrice = async (rooms, checkIn, checkOut) => {
   const numOfDays =
     Math.floor(new Date(checkOut).getTime() - new Date(checkIn).getTime()) /
-      (1000 * 3600 * 24) +
+    (1000 * 3600 * 24) +
     1;
   const totalPrice = rooms.reduce(
     (total, room) => total + room.pricePerNight * numOfDays,
@@ -36,11 +36,14 @@ const validateBooking = async (
     );
   }
 
+  console.log(selectedRooms);
+
   // Validar si el número total de personas supera la capacidad de las habitaciones seleccionadas
   const totalCapacity = selectedRooms.reduce(
     (total, room) => total + room.capacity,
     0
   );
+  console.log(totalCapacity)
   if (nAdults + nChild > totalCapacity) {
     throw new Error(
       "El número total de personas supera la capacidad de las habitaciones seleccionadas."
@@ -155,7 +158,6 @@ export default class BookingController {
     try {
       const { id } = req.params;
       const { action } = req.body;
-
       // Verificar que el usuario esté autenticado
       if (!req.user) {
         return res.status(401).send("No autorizado. Usuario no autenticado.");
@@ -220,15 +222,17 @@ export default class BookingController {
    * @param {import("express").Response} res
    */
   static async create(req, res) {
+    let transaction
     try {
       // Validaciones de autenticación y roles
       if (!req.user) {
         return res.status(401).send("Usuario no autenticado.");
       }
 
-      if (!IsEqual(req.user.role, "client", "recepcionist")) {
+      if (!IsEqual(req.user.role, "client", "recepcionist", "admin")) {
         return res.status(401).send("Acceso no autorizado.");
       }
+      console.log(req.body);
 
       const { nAdults, nChild, checkIn, checkOut, rooms } = req.body;
 
@@ -274,6 +278,8 @@ export default class BookingController {
       }));
 
       await BookingRoom.bulkCreate(bookingRooms); // Insertar las relaciones
+
+      console.log("200");
 
       // Respuesta exitosa con los datos de la reserva
       return res.status(200).json(booking);

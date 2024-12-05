@@ -10,13 +10,17 @@
   border-radius: 0 0 8px 8px;
 
   border-top: solid 5px black;
+
+  /* Aplicar un box-shadow */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .room--card .tag {
   background-color: black;
   color: white;
-  padding: 1px 4px;
+  padding: 0.25em 0.5em;
   border-radius: 4px;
+  font-size: 0.8em;
 }
 
 .room--card > div {
@@ -33,34 +37,34 @@
   border-radius: 4px;
 }
 
-.room--card.disponible {
+.room--card.available {
   border-color: #4fd22e;
 }
 
-.disponible .tag {
+.available .tag {
   background-color: #4fd22e;
 }
 
-.room--card.limpieza {
+.room--card.cleaning {
   border-color: #017db0;
 }
 
-.limpieza .tag {
+.cleaning .tag {
   background-color: #017db0;
 }
 
-.room--card.reservada {
+.room--card.maintainance {
   border-color: #e3a327;
 }
 
-.reservada .tag {
+.maintainance .tag {
   background-color: #e3a327;
 }
 
-.room--card.ocupado {
+.room--card.occupied {
   border-color: #e32727;
 }
 
-.ocupado .tag {
+.occupied .tag {
   background-color: #e32727;
 }

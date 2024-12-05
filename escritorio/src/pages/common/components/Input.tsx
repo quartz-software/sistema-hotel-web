@@ -5,19 +5,19 @@ type Props = {
   placeholder?: string;
   handleInput: Function;
   type:
-    | "text"
-    | "password"
-    | "email"
-    | "tel"
-    | "number"
-    | "file"
-    | "date"
-    | "time"
-    | "checkbox"
-    | "radio";
+  | "text"
+  | "password"
+  | "email"
+  | "tel"
+  | "number"
+  | "file"
+  | "date"
+  | "time"
+  | "checkbox"
+  | "radio";
   resetMessage: Function;
   autocomplete?: "email" | "current-password" | "new-password";
-  value: string | boolean;
+  value: string | boolean | number | Date;
   min?: number;
   max?: number;
 };

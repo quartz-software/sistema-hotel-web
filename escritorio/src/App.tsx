@@ -7,6 +7,7 @@ import Layout from "./pages/common/Layout";
 import Home from "./pages/home/Home";
 import AddServices from "./pages/addservices/Index";
 import Bookings from "./pages/bookings/Index";
+import BookingForm from "./pages/bookings/BookingForm";
 import Login from "./pages/auth/Login";
 import Promotions from "./pages/promotions/Promotions";
 import Services from "./pages/services/Index";
@@ -44,7 +45,7 @@ function App() {
           setIsAuth(true);
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   /* 
@@ -86,7 +87,10 @@ function App() {
           />
           <Route path="home" element={<Home />} />
           <Route path="addservices" element={<AddServices />} />
-          <Route path="bookings" element={<Bookings />} />
+          <Route path="bookings">
+            <Route index element={<Bookings />} />
+            <Route path="create" element={<BookingForm />} />
+          </Route>
           <Route path="promotions">
             <Route index element={<Promotions />} />
             <Route path="edit" element={<PromotionsForm />} />
@@ -102,9 +106,9 @@ function App() {
           <Route path="services" element={<Services />} />
           <Route path="stock" element={<Stock />} />
           <Route path="tasks" element={<Tasks />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Route >
+      </Routes >
+    </BrowserRouter >
   );
 }
 
