@@ -34,12 +34,12 @@ const Layout = () => {
       label: "Servicios",
       show: isAdmin,
     },
-    {
+    /* {
       icon: faTasks,
       path: "/tasks",
       label: "Tareas",
       show: true,
-    },
+    }, */
     {
       icon: faDoorClosed,
       path: "/rooms",
@@ -58,12 +58,12 @@ const Layout = () => {
       label: "Tarifas",
       show: isAdmin,
     },
-    {
+    /* {
       icon: faPlusCircle,
       path: "/addservices",
       label: "Solicitudes",
       show: true,
-    },
+    }, */
     {
       icon: faCalendarCheck,
       path: "/bookings",
@@ -92,9 +92,8 @@ const Layout = () => {
               item.show && (
                 <li
                   key={index}
-                  className={`navbar__item ${
-                    isActiveLink(item.path) ? "active" : ""
-                  }`}
+                  className={`navbar__item ${isActiveLink(item.path) ? "active" : ""
+                    }`}
                 >
                   <Link className="navbar__link" to={item.path}>
                     <i>
