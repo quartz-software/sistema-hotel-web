@@ -1,0 +1,53 @@
+/* Estilos generales para ambas páginas */
+.error-page {
+  font-family: Arial, sans-serif; /* Fuente común para todo el texto */
+  height: 100vh; /* Asegura que la página ocupe toda la altura de la ventana */
+  display: flex; /* Usamos Flexbox para centrar contenido */
+  justify-content: center; /* Centrado horizontal */
+  align-items: center; /* Centrado vertical */
+  text-align: center; /* Alineación de texto centrada */
+  padding: 75px; /* Margen superior para el menú fijo */
+}
+
+.error-page .error-container {
+  padding: 20px;
+  background-color: #333;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 90%; /* Ajuste responsivo */
+  max-width: 600px; /* Máximo ancho */
+}
+
+.error-page .error-code {
+  font-size: 10rem; /* Código de error grande */
+  font-weight: bold; /* Negrita */
+  margin-bottom: 20px; /* Espacio inferior */
+}
+
+.error-page .error-message {
+  font-size: 2rem; /* Tamaño de texto más pequeño para el mensaje */
+  margin-bottom: 20px; /* Espacio inferior */
+  color: currentColor;
+}
+
+.error-page .error-description {
+  font-size: 1.2rem; /* Descripción más pequeña */
+  margin-bottom: 30px;
+}
+
+.error-page .error-link {
+  font-size: 1rem;
+  color: #3498db; /* Color azul para el enlace */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.error-page .error-link:hover {
+  text-decoration: underline;
+}
+
+@media (prefers-color-scheme: light) {
+  .error-page .error-container {
+    background-color: #fff;
+  }
+}

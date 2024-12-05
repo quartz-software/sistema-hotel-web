@@ -54,6 +54,8 @@ const Habitaciones = () => {
         return checkOutDate <= bookingCheckIn || checkInDate >= bookingCheckOut;
       })
     })
+    console.log(considences);
+
     return considences
 
 

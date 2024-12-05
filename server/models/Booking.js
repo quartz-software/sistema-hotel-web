@@ -52,7 +52,16 @@ const Booking = sequelize.define(
       allowNull: false,
       validate: {
         notEmpty: true,
-        isIn: [["in progress", "cancelled", "finished", "pending"]],
+        isIn: [
+          [
+            "confirmed",
+            "rejected",
+            "in progress",
+            "cancelled",
+            "finished",
+            "pending",
+          ],
+        ],
       },
     },
     totalPrice: {

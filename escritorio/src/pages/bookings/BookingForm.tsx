@@ -56,8 +56,8 @@ const BookingForm = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        nAdults: bookingData.nAdults,
-        nChild: bookingData.nChild,
+        nAdults: parseInt(bookingData.nAdults),
+        nChild: parseInt(bookingData.nChild),
         bookingDate: bookingData.bookingDate,
         checkIn: bookingData.checkIn,
         checkOut: bookingData.checkOut,
@@ -67,14 +67,14 @@ const BookingForm = () => {
         employeeId: bookingData.employeeId,
         clientId: bookingData.clientId,
         rooms: [
-          room.id,
+          parseInt(room.id),
         ]
       }),
     };
 
     fetch(url, cont)
       .then((res) => {
-        if (res.status == 201) {
+        if (res.status == 200) {
           nav("/bookings");
         }
       })
