@@ -1,0 +1,75 @@
+.booking-success-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.booking-details {
+  margin-top: 20px;
+}
+
+.booking-details h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.booking-details p {
+  font-size: 1.1rem;
+  margin: 5px 0;
+}
+
+.rooms ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.rooms li {
+  font-size: 1rem;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.accept-button,
+.reject-button {
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.accept-button {
+  background-color: green;
+  color: white;
+  border: none;
+}
+
+.reject-button {
+  background-color: red;
+  color: white;
+  border: none;
+}
+
+.accept-button:hover,
+.reject-button:hover {
+  opacity: 0.8;
+}
+
+.error-message {
+  color: red;
+  font-size: 1.2rem;
+  margin: 20px 0;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #888;
+}

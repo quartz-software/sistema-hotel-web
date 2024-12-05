@@ -42,7 +42,6 @@ export default class RoomController {
 
       console.log(room.images);
 
-
       res.status(200).json(room);
     } catch (e) {
       res.status(500).send();
@@ -129,37 +128,37 @@ export default class RoomController {
       if (!id) return res.status(400).send("Room ID is required.");
 
       const files = req.files;
-      const { roomNumber, type, pricePerNight, capacity, description, status } = req.body;
+      const { roomNumber, type, pricePerNight, capacity, description, status } =
+        req.body;
 
       const images = JSON.parse(req.body.images);
 
       const room = await Room.findByPk(id, {
         include: {
           model: RoomImage,
-          as: "images"
-        }
+          as: "images",
+        },
       });
-
-
 
       if (!room) return res.status(404).send("Room not found.");
       await room.update(
         { roomNumber, type, pricePerNight, capacity, description, status },
-        { where: { id } },
+        { where: { id } }
       );
 
       // Gestionar imágenes: eliminar las existentes no incluidas en la solicitud
       const currentImageIds = room.images.map((image) => image.id);
       const newImageIds = images.filter((img) => img.id).map((img) => img.id);
 
-      const imagesToDelete = currentImageIds.filter((id) => !newImageIds.includes(id));
+      const imagesToDelete = currentImageIds.filter(
+        (id) => !newImageIds.includes(id)
+      );
       await RoomImage.destroy({
         where: { id: imagesToDelete },
         transaction,
       });
       // Agregar o actualizar imágenes nuevas
       images.forEach(async (item) => {
-
         if (item.id == null) {
           room.images.push(
             await RoomImage.create({

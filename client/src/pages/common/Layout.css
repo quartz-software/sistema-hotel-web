@@ -11,7 +11,8 @@
   justify-content: space-between;
   padding: 1em 5em;
 
-  /* background-color: rgb(43, 43, 43); */
+  background-color: rgb(43, 43, 43);
+  color: white;
 }
 
 .navbar__menu {
@@ -27,13 +28,25 @@
 
   list-style: none;
 }
+.navbar__link {
+  color: white;
+}
+.navbar__link:hover {
+  color: #ccc;
+}
 
+.navbar__logo {
+  height: 100%;
+}
 
+.navbar__logo img {
+  display: inline-block;
+  height: 100%;
+}
 
 /* Esto es momentaneo hasta se creen botones */
 .btn--reserva {
-  border: 1px solid blue;
-  padding: .3em .6em;
+  padding: 0.3em 0.6em;
   border-radius: 6px;
   background-color: white;
 }
