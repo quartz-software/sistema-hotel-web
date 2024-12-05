@@ -30,9 +30,6 @@ const Stock = sequelize.define(
     price: {
       type: DataTypes.DECIMAL(6, 2),
       allowNull: true,
-      validate: {
-        notEmpty: true,
-      },
     },
     category: {
       type: DataTypes.STRING(50),

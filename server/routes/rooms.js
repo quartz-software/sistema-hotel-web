@@ -12,7 +12,7 @@ router.post(
 router.get("/:id", RoomController.findOne);
 router.put(
   "/:id",
-  configureMulter("images/").single("image"),
+  configureMulter("images/").array("images", 5),
   RoomController.update
 );
 router.delete("/:id", RoomController.delete);

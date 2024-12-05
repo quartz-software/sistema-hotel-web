@@ -24,6 +24,10 @@ const Task = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    observations: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
     dateCreate: {
       type: DataTypes.DATE,
       allowNull: false,

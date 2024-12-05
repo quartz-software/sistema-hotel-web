@@ -1,19 +1,23 @@
 import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 import Layout from "./pages/common/Layout";
 
 import Home from "./pages/home/Home";
 import AddServices from "./pages/addservices/Index";
 import Bookings from "./pages/bookings/Index";
 import Login from "./pages/auth/Login";
-import Rooms from "./pages/rooms/Index";
-import Rates from "./pages/rates/Index";
-import Promotions from "./pages/promotions/Index";
+import Promotions from "./pages/promotions/Promotions";
 import Services from "./pages/services/Index";
 import Stock from "./pages/stock/Index";
 import Tasks from "./pages/tasks/Index";
-import { useEffect, useState } from "react";
+import RoomRates from "./pages/RoomRate/RoomRates";
 import useUserRole from "./pages/common/hooks/useUserRole";
+import Rooms from "./pages/rooms/Index";
+import RoomRatesForm from "./pages/RoomRate/RoomRatesForm";
+import PromotionsForm from "./pages/promotions/PromotionsForm";
+import Habitaciones_formulario from "./pages/rooms/Habitaciones_formulario";
 
 function App() {
   const [isAuth, setIsAuth] = useState<boolean | null>(null);
@@ -83,9 +87,18 @@ function App() {
           <Route path="home" element={<Home />} />
           <Route path="addservices" element={<AddServices />} />
           <Route path="bookings" element={<Bookings />} />
-          <Route path="promotions" element={<Promotions />} />
-          <Route path="rates" element={<Rates />} />
-          <Route path="rooms" element={<Rooms />} />
+          <Route path="promotions">
+            <Route index element={<Promotions />} />
+            <Route path="edit" element={<PromotionsForm />} />
+          </Route>
+          <Route path="rates">
+            <Route index element={<RoomRates />} />
+            <Route path="edit" element={<RoomRatesForm />} />
+          </Route>
+          <Route path="rooms">
+            <Route index element={<Rooms />} />
+            <Route path="form" element={<Habitaciones_formulario />} />
+          </Route>
           <Route path="services" element={<Services />} />
           <Route path="stock" element={<Stock />} />
           <Route path="tasks" element={<Tasks />} />
