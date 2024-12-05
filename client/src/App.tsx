@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Bookings from "./pages/bookings/Index";
-import Services from "./pages/services/Services";
 import Layout from "./pages/common/Layout";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";

@@ -2,13 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import "./BookingForm.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAdd,
-  faCirclePlus,
-  faMinus,
-  faMinusCircle,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlus, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 
 type Room = {
   id: number;
