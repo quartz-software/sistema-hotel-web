@@ -32,13 +32,13 @@ const Input: FC<Props> = ({
   min,
   max,
 }) => {
-  function handleResult(value: string | boolean) {
+  function handleResult(value: string | boolean | number | File) {
     resetMessage();
     handleInput(value);
   }
   return (
     <input
-      autoComplete={autocomplete}
+      autoComplete={autocomplete ? autocomplete : ""}
       className="input"
       onInput={(e) => {
         if (type === "checkbox" || type === "radio") return;
@@ -49,13 +49,26 @@ const Input: FC<Props> = ({
       type={type}
       checked={typeof value === "boolean" ? value : false}
       onChange={(e) => {
-        if (type !== "checkbox" && type !== "radio") return;
+        if (type !== "checkbox" && type !== "radio" && type !== "file") return;
+        if (type === "file" && e.target.files && e.target.files.length > 0) {
+          handleResult(e.target.files.item(0)!);
+          return;
+        }
+        let result;
         const target = e.target as HTMLInputElement;
-        const result = target.checked;
+        if (type === "checkbox" || type === "radio") {
+          result = target.checked;
+        } else if (type === "number") {
+          result = target.value === "" ? 0 : parseFloat(target.value);
+        } else {
+          result = target.value;
+        }
         handleResult(result);
       }}
       placeholder={placeholder ? placeholder : ""}
-      value={typeof value !== "string" ? "" : value}
+      {...(type !== "file"
+        ? { value: typeof value !== "string" ? "" : value }
+        : {})}
       {...(type === "number" && min !== undefined ? { min: min } : {})}
       {...(type === "number" && max !== undefined ? { max: max } : {})}
     />

@@ -56,15 +56,17 @@ const ServiceList: React.FC<ServiceListProps> = ({
                 </span>
               </td>
               <td className="service-actions">
-                <Button handleClick={() => onEdit(service)} disabled={false}>
-                  <FontAwesomeIcon icon={faPen}></FontAwesomeIcon>
-                </Button>
-                <Button
-                  handleClick={() => onDelete(service.id)}
-                  disabled={false}
-                >
-                  <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
-                </Button>
+                <div>
+                  <Button handleClick={() => onEdit(service)} disabled={false}>
+                    <FontAwesomeIcon icon={faPen}></FontAwesomeIcon>
+                  </Button>
+                  <Button
+                    handleClick={() => onDelete(service.id)}
+                    disabled={false}
+                  >
+                    <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
+                  </Button>
+                </div>
               </td>
             </tr>
           ))}
