@@ -1,6 +1,6 @@
 import { where } from "sequelize";
 import { models, sequelize } from "../models/index.js";
-const { Room, RoomImage } = models;
+const { Room, RoomImage, Booking } = models;
 
 export default class RoomController {
   /**
@@ -12,13 +12,22 @@ export default class RoomController {
     try {
       const rooms = await Room.findAll({
         order: [["id", "ASC"]],
-        include: {
-          model: RoomImage,
-          as: "images",
-        },
+        include: [
+          {
+            model: RoomImage,
+            as: "images",
+          },
+          {
+            model: Booking,
+            as: "bookings",
+            through: { attributes: [] }
+          },
+        ]
       });
       res.status(200).json(rooms);
     } catch (e) {
+      console.log(e);
+
       res.status(500).send();
     }
   }
@@ -134,10 +143,12 @@ export default class RoomController {
       const images = JSON.parse(req.body.images);
 
       const room = await Room.findByPk(id, {
-        include: {
-          model: RoomImage,
-          as: "images"
-        }
+        include: [
+          {
+            model: RoomImage,
+            as: "images"
+          }
+        ]
       });
 
 

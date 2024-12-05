@@ -28,8 +28,8 @@ const BookingForm = () => {
     nAdults: 0,
     nChild: 0,
     bookingDate: Date.now(),
-    checkIn: new Date(),
-    checkOut: new Date(),
+    checkIn: new Date().toISOString().split('T')[0],
+    checkOut: new Date().toISOString().split('T')[0],
     status: "pending",
     totalPrice: 0.0,
     bookingOrigin: "",
@@ -41,7 +41,7 @@ const BookingForm = () => {
     const inicio = bookingData.checkIn;
     const fin = bookingData.checkOut;
 
-    const diferenciaEnMilisegundos = fin.getTime() - inicio.getTime();
+    const diferenciaEnMilisegundos = new Date(fin).getTime() - new Date(inicio).getTime();
 
     const diferenciaEnDias = diferenciaEnMilisegundos / (1000 * 60 * 60 * 24);
 
@@ -66,12 +66,15 @@ const BookingForm = () => {
         bookingOrigin: "system",
         employeeId: bookingData.employeeId,
         clientId: bookingData.clientId,
+        rooms: [
+          room.id,
+        ]
       }),
     };
 
     fetch(url, cont)
       .then((res) => {
-        if (res.status == 200) {
+        if (res.status == 201) {
           nav("/bookings");
         }
       })
@@ -160,9 +163,8 @@ const BookingForm = () => {
               >
                 {clientsData.map((client, index) => (
                   <option key={index} value={client.id}>
-                    {`${client.user?.dni}   |   ${client.user?.firstname} ${
-                      client.user?.lastname1
-                    } ${client.user?.lastname2 ?? ""}`}
+                    {`${client.user?.dni}   |   ${client.user?.firstname} ${client.user?.lastname1
+                      } ${client.user?.lastname2 ?? ""}`}
                   </option>
                 ))}
               </select>
@@ -190,7 +192,7 @@ const BookingForm = () => {
                 setBookingData({ ...bookingData, nAdults: value });
               }}
               value={bookingData.nAdults}
-              resetMessage={() => {}}
+              resetMessage={() => { }}
             />
           </FormField>
           <FormField label="NUMERO DE NIÑOS:" errorMessage=" ">
@@ -200,7 +202,7 @@ const BookingForm = () => {
                 setBookingData({ ...bookingData, nChild: value });
               }}
               value={bookingData.nChild}
-              resetMessage={() => {}}
+              resetMessage={() => { }}
             />
           </FormField>
         </div>
@@ -208,24 +210,24 @@ const BookingForm = () => {
           <FormField label="FECHA DE ENTRADA:" errorMessage=" ">
             <Input
               type="date"
-              handleInput={(value: Date) => {
+              handleInput={(value: string) => {
                 setBookingData({
                   ...bookingData,
-                  checkIn: new Date(value),
+                  checkIn: value,
                 });
                 console.log(value);
               }}
-              resetMessage={() => {}}
+              resetMessage={() => { }}
               value={bookingData.checkIn}
             />
           </FormField>
           <FormField label="FECHA DE SALIDA:" errorMessage=" ">
             <Input
               type="date"
-              handleInput={(value: Date) => {
+              handleInput={(value: string) => {
                 setBookingData({
                   ...bookingData,
-                  checkOut: new Date(value),
+                  checkOut: value,
                 });
               }}
               resetMessage={() => {
@@ -242,7 +244,7 @@ const BookingForm = () => {
               handleInput={(value: number) => {
                 setBookingData({ ...bookingData, totalPrice: value });
               }}
-              resetMessage={() => {}}
+              resetMessage={() => { }}
               value={bookingData.totalPrice}
             />
           </FormField>
@@ -253,13 +255,12 @@ const BookingForm = () => {
                 console.log(value);
               }}
               value={0}
-              resetMessage={() => {}}
+              resetMessage={() => { }}
             />
           </FormField>
         </div>
         <div className="div--form">
           <Button
-            disabled={false}
             handleClick={() => {
               postData();
             }}
@@ -267,7 +268,6 @@ const BookingForm = () => {
             Reservar
           </Button>
           <Button
-            disabled={false}
             handleClick={function (): void {
               nav("/bookings");
             }}

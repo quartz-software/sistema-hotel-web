@@ -1,4 +1,6 @@
-import { models } from "../models/index.js";
+import BookingRoom from "../models/BookingRoom.js";
+import { models, sequelize } from "../models/index.js";
+import Room from "../models/Room.js";
 const { Booking } = models;
 
 export default class BookingController {
@@ -37,11 +39,52 @@ export default class BookingController {
    * @param {import("express").Response} res
    */
   static async create(req, res) {
+    let transaction
     try {
-      const body = req.body;
-      const booking = await Booking.create(body);
-      res.status(201).json(booking);
+      transaction = await sequelize.transaction();
+      console.log(req.body);
+
+
+      const {
+        nAdults,
+        nChild,
+        bookingDate,
+        checkIn,
+        checkOut,
+        status,
+        totalPrice,
+        bookingOrigin,
+        employeeId,
+        clientId,
+        rooms,
+      } = req.body;
+
+      if (!Array.isArray(rooms)) {
+        return res.status(400).send();
+      }
+      const newBooking = await Booking.create({
+        nAdults,
+        nChild,
+        bookingDate,
+        checkIn,
+        checkOut,
+        status,
+        totalPrice,
+        bookingOrigin,
+        employeeId,
+        clientId,
+      });
+      const roomBookingId = newBooking.id
+      const RoomBookings = rooms.map(room => ({
+        bookingId: roomBookingId,
+        roomId: room,
+      }));
+      await BookingRoom.bulkCreate(RoomBookings, { transaction })
+      transaction.commit()
+      res.status(201).json(newBooking);
     } catch (e) {
+      console.log(e);
+
       res.status(500).send();
     }
   }

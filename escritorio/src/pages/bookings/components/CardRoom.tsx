@@ -4,15 +4,7 @@ import "./CardRoom.css";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
-  room: {
-    id: number;
-    roomNumber: string;
-    type: number;
-    status: string;
-    capacity: string;
-    pricePerNight: string;
-    description: string;
-  };
+  room: Room
 };
 
 const CardRoom: FC<Props> = ({ room }) => {
