@@ -23,10 +23,11 @@
   font-size: 14px;
   color: #cccccc;
 }
-.service-actions {
+.service-actions > div {
   display: flex;
-  gap: 15px;
+  align-items: center;
   justify-content: flex-start;
+  gap: 15px;
 }
 .service-actions button {
   height: 2rem;
@@ -43,7 +44,7 @@
   background-color: #014366;
 }
 .service-table td {
-  vertical-align: top;
+  vertical-align: middle;
 }
 .service-table th,
 .service-table td:nth-child(1) {

@@ -11,6 +11,7 @@ const {
   ServiceRoom,
   AdditionalService,
   Task,
+  Stock,
 } = models;
 
 export default class Seeder {
@@ -22,6 +23,7 @@ export default class Seeder {
       await this.SeedServices();
       await this.SeedBookings();
       await this.SeedAdditionalServices();
+      await this.SeedStock();
     } catch (error) {
       console.log(error);
     }
@@ -901,6 +903,222 @@ export default class Seeder {
     ];
 
     await Task.bulkCreate(tasks);
+  }
+  static async SeedStock() {
+    const stockData = [
+      {
+        name: "Apple",
+        quantity: 50,
+        price: 1.2,
+        category: "food",
+        supplyDate: "2024-12-01",
+      },
+      {
+        name: "Banana",
+        quantity: 30,
+        price: 0.8,
+        category: "food",
+        supplyDate: "2024-12-02",
+      },
+      {
+        name: "Carrot",
+        quantity: 70,
+        price: 0.5,
+        category: "food",
+        supplyDate: "2024-12-03",
+      },
+      {
+        name: "Tomato",
+        quantity: 90,
+        price: 1.1,
+        category: "food",
+        supplyDate: "2024-12-04",
+      },
+      {
+        name: "Potato",
+        quantity: 120,
+        price: 0.4,
+        category: "food",
+        supplyDate: "2024-12-05",
+      },
+      {
+        name: "Orange",
+        quantity: 60,
+        price: 1.5,
+        category: "food",
+        supplyDate: "2024-12-06",
+      },
+      {
+        name: "Soap",
+        quantity: 100,
+        price: 2.3,
+        category: "cleaning",
+        supplyDate: "2024-12-07",
+      },
+      {
+        name: "Detergent",
+        quantity: 80,
+        price: 4.5,
+        category: "cleaning",
+        supplyDate: "2024-12-08",
+      },
+      {
+        name: "Bleach",
+        quantity: 50,
+        price: 3.2,
+        category: "cleaning",
+        supplyDate: "2024-12-09",
+      },
+      {
+        name: "Floor Cleaner",
+        quantity: 70,
+        price: 5.0,
+        category: "cleaning",
+        supplyDate: "2024-12-10",
+      },
+      {
+        name: "Brush",
+        quantity: 40,
+        price: 2.0,
+        category: "cleaning",
+        supplyDate: "2024-12-11",
+      },
+      {
+        name: "Rice",
+        quantity: 300,
+        price: 0.9,
+        category: "food",
+        supplyDate: "2024-12-12",
+      },
+      {
+        name: "Pasta",
+        quantity: 150,
+        price: 1.1,
+        category: "food",
+        supplyDate: "2024-12-13",
+      },
+      {
+        name: "Cereal",
+        quantity: 200,
+        price: 3.8,
+        category: "food",
+        supplyDate: "2024-12-14",
+      },
+      {
+        name: "Screwdriver",
+        quantity: 60,
+        price: 6.5,
+        category: "maintenance",
+        supplyDate: "2024-12-15",
+      },
+      {
+        name: "Hammer",
+        quantity: 30,
+        price: 10.0,
+        category: "maintenance",
+        supplyDate: "2024-12-16",
+      },
+      {
+        name: "Drill",
+        quantity: 20,
+        price: 55.0,
+        category: "maintenance",
+        supplyDate: "2024-12-17",
+      },
+      {
+        name: "Nails",
+        quantity: 500,
+        price: 0.05,
+        category: "maintenance",
+        supplyDate: "2024-12-18",
+      },
+      {
+        name: "Screws",
+        quantity: 400,
+        price: 0.08,
+        category: "maintenance",
+        supplyDate: "2024-12-19",
+      },
+      {
+        name: "Glue",
+        quantity: 120,
+        price: 3.2,
+        category: "maintenance",
+        supplyDate: "2024-12-20",
+      },
+      {
+        name: "Yogurt",
+        quantity: 100,
+        price: 1.8,
+        category: "food",
+        supplyDate: "2024-12-21",
+      },
+      {
+        name: "Bread",
+        quantity: 80,
+        price: 1.25,
+        category: "food",
+        supplyDate: "2024-12-22",
+      },
+      {
+        name: "Butter",
+        quantity: 40,
+        price: 3.1,
+        category: "food",
+        supplyDate: "2024-12-23",
+      },
+      {
+        name: "Sugar",
+        quantity: 200,
+        price: 0.75,
+        category: "food",
+        supplyDate: "2024-12-24",
+      },
+      {
+        name: "Salt",
+        quantity: 250,
+        price: 0.3,
+        category: "food",
+        supplyDate: "2024-12-25",
+      },
+      {
+        name: "Pepper",
+        quantity: 100,
+        price: 2.1,
+        category: "food",
+        supplyDate: "2024-12-26",
+      },
+      {
+        name: "Oil",
+        quantity: 90,
+        price: 6.0,
+        category: "food",
+        supplyDate: "2024-12-27",
+      },
+      {
+        name: "Vinegar",
+        quantity: 80,
+        price: 2.5,
+        category: "food",
+        supplyDate: "2024-12-28",
+      },
+      {
+        name: "Water Bottle",
+        quantity: 500,
+        price: 0.8,
+        category: "food",
+        supplyDate: "2024-12-29",
+      },
+      {
+        name: "Juice",
+        quantity: 120,
+        price: 2.5,
+        category: "food",
+        supplyDate: "2024-12-30",
+      },
+    ];
+
+    await Stock.bulkCreate(stockData);
   }
 }
 

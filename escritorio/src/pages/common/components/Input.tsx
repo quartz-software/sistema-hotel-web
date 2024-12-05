@@ -32,7 +32,7 @@ const Input: FC<Props> = ({
   min,
   max,
 }) => {
-  function handleResult(value: string | boolean) {
+  function handleResult(value: string | boolean | number) {
     resetMessage();
     handleInput(value);
   }
@@ -49,9 +49,15 @@ const Input: FC<Props> = ({
       type={type}
       checked={typeof value === "boolean" ? value : false}
       onChange={(e) => {
-        if (type !== "checkbox" && type !== "radio") return;
+        let result;
         const target = e.target as HTMLInputElement;
-        const result = target.checked;
+        if (type === "checkbox" || type === "radio") {
+          result = target.checked;
+        } else if (type === "number") {
+          result = target.value === "" ? 0 : parseFloat(target.value);
+        } else {
+          result = target.value;
+        }
         handleResult(result);
       }}
       placeholder={placeholder ? placeholder : ""}

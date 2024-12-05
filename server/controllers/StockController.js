@@ -13,6 +13,7 @@ export default class StockController {
       res.status(200).send(stock);
     } catch (e) {
       res.status(500).send();
+      console.log(e);
     }
   }
   /**
@@ -40,8 +41,14 @@ export default class StockController {
    */
   static async create(req, res) {
     try {
-      const body = req.body;
-      const stock = await Stock.create(body);
+      const { name, quantity, price, category, supplyDate } = req.body;
+      const stock = await Stock.create({
+        name,
+        quantity,
+        price,
+        category,
+        supplyDate,
+      });
       res.status(201).json(stock);
     } catch (e) {
       res.status(500).send();
