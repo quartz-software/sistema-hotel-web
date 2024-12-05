@@ -11,6 +11,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  overflow-x: hidden;
 }
 * {
   box-sizing: border-box;
@@ -29,6 +31,13 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+}
+
+input,
+select,
+textarea {
+  background-color: #3a3a3a;
+  font-family: inherit;
 }
 
 p,
@@ -72,5 +81,10 @@ a {
   }
   a:hover {
     color: #747bff;
+  }
+  input,
+  select,
+  textarea {
+    background-color: white;
   }
 }

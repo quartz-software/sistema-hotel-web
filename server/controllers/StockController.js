@@ -13,6 +13,7 @@ export default class StockController {
       res.status(200).send(stock);
     } catch (e) {
       res.status(500).send();
+      console.log(e);
     }
   }
   /**
@@ -40,8 +41,18 @@ export default class StockController {
    */
   static async create(req, res) {
     try {
-      const body = req.body;
-      const stock = await Stock.create(body);
+      if (!user || !isEqual(user.role, "admin")) {
+        return res.status(403).json();
+      }
+
+      const { name, quantity, price, category, supplyDate } = req.body;
+      const stock = await Stock.create({
+        name,
+        quantity,
+        price,
+        category,
+        supplyDate,
+      });
       res.status(201).json(stock);
     } catch (e) {
       res.status(500).send();
@@ -54,11 +65,16 @@ export default class StockController {
    */
   static async update(req, res) {
     try {
+      if (!user || isEqual(user.role, "client")) {
+        return res.status(403).json();
+      }
       const id = req.params.id;
-      if (!id) return res.status(400).send();
-      const body = req.body;
-      if (!body) return res.status(404).send();
-      await Stock.update(body, { where: { id } });
+      if (!id || !req.body) return res.status(400).send();
+      const { name, quantity, price, category, supplyDate } = req.body;
+      await Stock.update(
+        { name, quantity, price, category, supplyDate },
+        { where: { id } }
+      );
       res.status(200).send();
     } catch (e) {
       res.status(500).send();
@@ -71,6 +87,9 @@ export default class StockController {
    */
   static async delete(req, res) {
     try {
+      if (!user || !isEqual(user.role, "admin")) {
+        return res.status(403).json();
+      }
       const id = req.params.id;
       if (!id) return res.status(400).send();
       await Stock.destroy({ where: { id } });
