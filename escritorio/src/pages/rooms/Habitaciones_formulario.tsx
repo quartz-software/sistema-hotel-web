@@ -40,7 +40,7 @@ const Habitaciones_formulario = () => {
     fetch(`/api/rooms/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        //console.log(data);
+        console.log(data);
         setRoomData({
           id: parseInt(id!),
           roomNumber: data.roomNumber,
@@ -64,9 +64,8 @@ const Habitaciones_formulario = () => {
     formData.append("pricePerNight", roomData.pricePerNight);
     formData.append("description", roomData.description);
 
-    const imageMetaData: { id?: number, index: number, name: string, type: string, url?: string }[] = [];
+    const imageMetaData: { id: number | null, index: number, name: string, type: string, url?: string }[] = [];
     roomData.images.forEach((image, index) => {
-      console.log(image);
 
       if (image.file) {
         formData.append("images", image.file);
@@ -77,14 +76,14 @@ const Habitaciones_formulario = () => {
         name: image.name,
         type: image.type,
         url: image.url,
-        id: image.id
+        id: image.id ? image.id : null
       })
     })
+
 
     formData.append("images", JSON.stringify(imageMetaData))
 
 
-    console.log(...formData)
     const id = roomData.id != -1 ? roomData.id : null;
     let url = `/api/rooms/${id ? id : ""}`;
 
@@ -189,7 +188,7 @@ const Habitaciones_formulario = () => {
           >
           </textarea>
         </FormField>
-        <div className="form__div--row">
+        <div>
           <h2>Promociones</h2>
           <div className="promotion__select">
             <select
