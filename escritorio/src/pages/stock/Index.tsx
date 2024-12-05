@@ -255,7 +255,7 @@ const Index = () => {
           <tbody>
             {stock.length == 0 ? (
               <tr>
-                <td style={{ textAlign: "center" }} colSpan={6}>
+                <td style={{ textAlign: "center" }} colSpan={7}>
                   No Existen registros
                 </td>
               </tr>
