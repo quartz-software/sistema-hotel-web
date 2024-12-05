@@ -3,22 +3,28 @@ import Button from "../../common/components/Button"
 import FormField from "../../common/components/FormField"
 import Input from "../../common/components/Input"
 
+import "./RoomImage.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faImage } from "@fortawesome/free-solid-svg-icons"
+
 type ImageRoom = {
   model: RoomImage,
-  onChange: (file: File) => void
+  onChange: (file: File) => void,
+  onDelete: () => void
 }
 
-const RoomImage: FC<ImageRoom> = ({ model, onChange }) => {
+const RoomImage: FC<ImageRoom> = ({ model, onChange, onDelete }) => {
   const [image, setImage] = useState(model)
-  const [imgSrc, setImgSrc] = useState(image.path ?? image.url)
+  const [imgSrc, setImgSrc] = useState(image.path ? `http://localhost:8080${image.path}` : "")
+
   return (
     <div className="div-image">
-      <FormField label="Nombre" errorMessage="">
+      {/* <FormField label="Nombre" errorMessage="" >
         <Input type="text"
           value={image.name}
           handleInput={(value: string) => { setImage({ ...image, name: value }) }}
           resetMessage={() => { }} />
-      </FormField>
+      </FormField> */}
       <FormField label="Tipo" errorMessage="">
         <select
           value={image.type}
@@ -39,18 +45,24 @@ const RoomImage: FC<ImageRoom> = ({ model, onChange }) => {
               const filereader = new FileReader()
               filereader.readAsDataURL(value)
               filereader.addEventListener("load", (e) => {
-                setImgSrc(e.target?.result)
+                setImgSrc(e.target?.result ? e.target.result.toString() : "")
               })
               setImage({ ...image, file: value })
             }}
             value={""}
             resetMessage={() => { }}
           />
-          <img src={imgSrc} alt="" />
+          {imgSrc == "" ?
+            <div className="div-image__divSI">
+              <FontAwesomeIcon icon={faImage} />
+              <span>Subir una Imagen</span>
+            </div> :
+            <img src={imgSrc} alt="" className="div-image__img" />
+          }
         </>
       </FormField>
       <Button handleClick={() => {
-        console.log(image);
+        onDelete()
       }}>
         Eliminar
       </Button>

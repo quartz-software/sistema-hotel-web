@@ -3,7 +3,7 @@ import "./Input.css";
 
 type Props = {
   placeholder?: string;
-  handleInput: (value: string | boolean | File) => void;
+  handleInput: Function;
   type:
   | "text"
   | "password"

@@ -30,8 +30,6 @@ const Index = () => {
         }
       })
       .then((data) => {
-        console.log(data);
-
         setRoomsData(data);
       })
       .catch((error) => {
@@ -48,8 +46,8 @@ const Index = () => {
       <div className="div--search">
         <FormField label="Buscar" errorMessage="">
           <Input
-            handleInput={() => {}}
-            resetMessage={() => {}}
+            handleInput={() => { }}
+            resetMessage={() => { }}
             placeholder="Buscar"
             type="text"
             value=""

@@ -6,11 +6,6 @@ import "./Habitaciones_formulario.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import RoomImage from "./components/RoomImage";
 
-type ImageRoom = {
-  id?: number,
-  name: string,
-  type: string
-}
 
 type Room = {
   id: number,
@@ -20,7 +15,7 @@ type Room = {
   status: string,
   capacity: number,
   description: string,
-  images: ImageRoom[]
+  images: RoomImage[]
 }
 
 const Habitaciones_formulario = () => {
@@ -31,15 +26,15 @@ const Habitaciones_formulario = () => {
   const [roomData, setRoomData] = useState<Room>({
     id: -1,
     roomNumber: "",
-    type: "",
+    type: "normal",
     pricePerNight: "",
-    status: "available",
+    status: "unavailable",
     capacity: 0,
     description: "",
     images: []
   });
 
-  const [RoomImagesFiels, setRoomImagesFiels] = useState<RoomImage[]>([])
+  //const [RoomImages, setRoomImages] = useState<RoomImage[]>([])
 
   function getData() {
     fetch(`/api/rooms/${id}`)
@@ -61,25 +56,42 @@ const Habitaciones_formulario = () => {
   }
 
   function postData() {
-    console.log(RoomImagesFiels)
-    return
+    const formData = new FormData();
+    formData.append("roomNumber", roomData.roomNumber);
+    formData.append("capacity", roomData.capacity.toString());
+    formData.append("status", roomData.status);
+    formData.append("type", roomData.type);
+    formData.append("pricePerNight", roomData.pricePerNight);
+    formData.append("description", roomData.description);
+
+    const imageMetaData: { id?: number, index: number, name: string, type: string, url?: string }[] = [];
+    roomData.images.forEach((image, index) => {
+      console.log(image);
+
+      if (image.file) {
+        formData.append("images", image.file);
+      }
+
+      imageMetaData.push({
+        index,
+        name: image.name,
+        type: image.type,
+        url: image.url,
+        id: image.id
+      })
+    })
+
+    formData.append("images", JSON.stringify(imageMetaData))
+
+
+    console.log(...formData)
     const id = roomData.id != -1 ? roomData.id : null;
     let url = `/api/rooms/${id ? id : ""}`;
 
     let cont = {
       method: id == null ? "POST" : "PUT",
 
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        roomNumber: roomData.roomNumber,
-        type: roomData.type,
-        pricePerNight: parseFloat(roomData.pricePerNight),
-        status: roomData.status,
-        capacity: roomData.capacity,
-        description: roomData.description,
-      }),
+      body: formData,
     };
 
     fetch(url, cont)
@@ -131,6 +143,7 @@ const Habitaciones_formulario = () => {
         </FormField>
         <FormField label="Estado" errorMessage="">
           <select
+            value={roomData.status}
             onChange={(e) => {
               setRoomData({ ...roomData, status: e.target.value });
             }}
@@ -145,6 +158,7 @@ const Habitaciones_formulario = () => {
 
         <FormField label="Tipo" errorMessage=" ">
           <select
+            value={roomData.type}
             onChange={(e) => {
               setRoomData({ ...roomData, type: e.target.value });
             }}
@@ -154,7 +168,7 @@ const Habitaciones_formulario = () => {
             <option value="premium">Premium</option>
           </select>
         </FormField>
-        <FormField label="Precio" errorMessage=" ">
+        <FormField label="Precio" errorMessage="">
           <Input
             type="number"
             placeholder="Precio"
@@ -194,25 +208,30 @@ const Habitaciones_formulario = () => {
           <div className="form__title-imgs">
             <h2>Imagenes</h2>
             <Button handleClick={() => {
-              //setRoomData({ ...roomData, images: [...roomData.images, { name: "", type: "normal" }] });
-              // setRoomImagesFiels([...RoomImagesFiels, <RoomImage model={{ name: "", type: "normal" }} setFile={undefined} />])
-              setRoomImagesFiels([...RoomImagesFiels, { name: "", path: undefined, type: "normal", url: undefined, file: undefined }])
-              console.log(RoomImagesFiels);
+              setRoomData({ ...roomData, images: [...roomData.images, { name: "", path: undefined, type: "normal", url: undefined, file: undefined }] })
             }}>
               Añadir
             </Button>
           </div>
           {
-            RoomImagesFiels.length == 0 ?
+            roomData.images.length == 0 ?
               <div className="div--msg-nd">No tiene imagenes</div> :
               <div className="div-images">
-                {RoomImagesFiels.map((item, index) => {
-                  return <RoomImage key={index} model={{ name: item.name, type: item.type, path: item.path, url: item.url, file: item.file }} onChange={(file) => {
-                    const acFields = [...RoomImagesFiels]
-                    acFields[index].file = file
-                    console.log(typeof file)
-                    setRoomImagesFiels(acFields)
-                  }}></RoomImage>
+                {roomData.images.map((item, index) => {
+                  return <RoomImage
+                    key={index}
+                    model={{ name: item.name, type: item.type, path: item.path, url: item.url, file: item.file }}
+                    onChange={(file) => {
+                      const acFields = [...roomData.images]
+                      acFields[index].file = file
+                      setRoomData({ ...roomData, images: acFields })
+                    }}
+                    onDelete={() => {
+                      const acFields = [...roomData.images]
+                      acFields.splice(index, 1)
+                      setRoomData({ ...roomData, images: acFields })
+                    }}
+                  ></RoomImage>
                 })}
               </div>
           }
@@ -229,8 +248,8 @@ const Habitaciones_formulario = () => {
         >
           Cancelar
         </Button>
-      </form>
-    </div>
+      </form >
+    </div >
   );
 };
 
